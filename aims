@@ -1,0 +1,28 @@
+1. rename fields to proper fields
+******
+2. ontology for property hierarchy-by just adding indentations
+3. weight allocations
+4. write to mongodb
+
+***************************************Format for partOf*************************************************
+Set_name(Total Population)
+    Category1:(Caste)
+        field1
+        field2
+    Category2:(Gender)
+        field1
+        field2
+    ...
+partOf(set_name,[field1,field2],category1)
+***************************************Format for Aggregate*************************************************
+New_field(Education)
+    New_field1 <function_name: optional>
+        weight1 field1 <value-map: optional;>
+        weight2 field2 <value-map: optional;>
+        weight3 field3 {'a':1,'b':0.5,'c':0.25}
+    (Sec Ed)new_field2:
+        field1
+        field2
+    ...
+func = default_aggregator([(weight1,field1,value_map),...],function_name)
+aggregate(New_field1,func)
