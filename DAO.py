@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 
+
 class CensusDAO:
     def __init__(self):
         self.client = MongoClient()
@@ -8,7 +9,8 @@ class CensusDAO:
 
     def writeMulitple(self,data):
         for datum in data:
-            self.coll.insert_one(datum)
+            self.coll.insert_one(datum.__dict__)
+
 
 if __name__=="__main__":
     dao = CensusDAO()
