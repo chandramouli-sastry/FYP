@@ -8,6 +8,11 @@ class CensusDAO:
         self.coll = self.db.dataset
 
     def writeMulitple(self,data):
+        """
+        writes multiple datum objects into mongodb
+        :param data: list of datum objects
+        :return:
+        """
         for datum in data:
             self.coll.insert_one(datum.__dict__)
 
