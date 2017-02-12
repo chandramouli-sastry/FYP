@@ -6,9 +6,10 @@ def calc_correlation (list1,list2):
 	print pearsonr(list1,list2)
 
 
-def getNewList(minR,maxR,passedlist):
+def getNewList(start,end,passedlist):
 	templist=[]
-	random_list=random.sample(range(1, 100), len(passedlist))
+	mapping=dict()
+	random_list = range(start, end)
 	for i in range(0,len(passedlist)):
 		if passedlist[i] in mapping:
 			templist.append(mapping[passedlist[i]])
@@ -43,7 +44,7 @@ def calculate_list(list1,list2,list1Flag,list2Flag):
 		print "both are number list"
 		calc_correlation(list1,list2)
 
-mapping=dict()
+
 def main():
 	list1 = raw_input().split() 
 	list2 = raw_input().split()
