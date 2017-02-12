@@ -2,6 +2,8 @@ import csv
 
 import pickle
 
+from DAO import CensusDAO
+
 mapping = eval(open("mapping.dict").read())
 
 
@@ -83,6 +85,7 @@ class OntologyBuilder:
         self.fields = fileReader.get_fields()
         self.ontology = ontology
         self.data = []
+        self.dao = CensusDAO()
         pass
 
     def aggregate(self, new_field, compute_function):
@@ -120,7 +123,7 @@ class OntologyBuilder:
             for new_field, aggregator in self.aggregators:
                 datum.__dict__[new_field] = aggregator(datum)
             self.data.append(datum)
-        dataManager.writeMultiple(self.data)
+        self.dao.writeMultiple(self.data)
 
     def saveOntology(self, file_name):
         with open("file_name", "wb"):
