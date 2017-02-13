@@ -46,6 +46,41 @@ def extract_contiguous_lists(all_lines):
         index += 1
     return lists
 
+def sum(datum,dependent_fields,weights,maps,new_field):
+    """
+    sum aggregate function..
+    :param datum: datum object
+    :param dependent_fields: list of fields(Strings) on which new field depend on
+    :param weights: dictionary of field:weight for every dependent field
+    :param maps: dictionary of dictionaries maps[dependentField] = map-->{'a':1,'b':2}
+    :param new_field: newField in string
+    :return:
+    """
+    if new_field not in datum:
+        datum[new_field]=0
+    for i in dependent_fields:
+        if i in maps:
+            datum[new_field]+=maps[i][datum[i]]*weights[i]
+        else:
+            datum[new_field]+=weights[i]*datum[i]
+    return datum
+
+def aggregator_wrapper(func,dependent_fields):
+    def temporary(datum,dependent_fields,weights,maps,new_field):
+        """
+            super aggregate function..
+            :param datum: datum object
+            :param dependent_fields: list of fields(Strings) on which new field depend on
+            :param weights: dictionary of field:weight for every dependent field
+            :param maps: dictionary of dictionaries maps[dependentField] = map-->{'a':1,'b':2}
+            :param new_field: newField in string
+            :return:
+        """
+        func(datum,dependent_fields,weights,maps,new_field)
+    temporary.dependents=dependent_fields
+    return temporary
+
+
 if __name__ == "__main__":
     f=open("Fields_IndentedFactor.txt")
     all_lines = f.readlines()
