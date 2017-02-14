@@ -17,16 +17,20 @@ def make_tree(nodes, parent_level = 0, start_index = 0):
         return {nodes[0][0]:children}
     return children
 
-def print_functions(tree):
+def print_functions_factor(tree):
     for set in tree:
         for categories in tree[set]:
             category = categories.keys()[0]
             parts = [i.keys()[0] for i in categories.values()[0]]
             for i in categories.values()[0]:
-                print_functions(i)
+                print_functions_factor(i)
             print "partOf('{}',{},'{}')".format(set,parts,category)
 
-def generate(list_lines):
+def print_function_aggregator(tree):
+    pass
+
+
+def generate(list_lines,print_functions):
     tuples = [(line,getLevel(line)) for line in list_lines]
     heights = sorted(list(set([i[1] for i in tuples])))
     tuples = [(i[0].strip(), heights.index(i[1])) for i in (tuples)]
@@ -63,7 +67,7 @@ def create_sum_function(dependent_fields,weights, maps, new_field):
             datum[new_field] = 0
         for i in dependent_fields:
             if i in maps:
-                datum[new_field] += maps[i][datum[i]] * weights[i]
+                datum[new_field] += maps[i].get(datum[i],datum[i]) * weights[i]
             else:
                 datum[new_field] += weights[i] * datum[i]
         return datum
@@ -76,5 +80,10 @@ if __name__ == "__main__":
     all_lines = f.readlines()
     lists = extract_contiguous_lists(all_lines)
     for i in lists:
-        generate(i)
+        generate(i,print_functions_factor)
 
+    g=open("Fields_IndentedAggregate.txt")
+    all_lines = g.readlines()
+    lists = extract_contiguous_lists(all_lines)
+    for i in lists:
+        generate(i,print_functions_aggregator)
