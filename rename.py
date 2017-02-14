@@ -21,34 +21,34 @@ print fields
 '''
 import pprint
 import csv
-f = open("/Users/cshamasastry/Documents/Spl Topic/Interestingness/input1.txt")
-f = csv.reader(f)
-line = next(f)
+
 # pprint.pprint(line[:50])
 # pprint.pprint(len(line))
-''''''
+
 import re
 pat = re.compile("\w+")
 word_re = re.compile("[aeiou].*?[^aeiou]")
 alt1 = re.compile("[^aeiou]")
 alt2 = re.compile(".*")
-def trim(word):
-    try:
-        return word[0]+word[1:(word_re.search(word[1:]) or alt1.search(word[1:])  or alt2.search(word[1:])).span()[1]+1]
-    except Exception as e:
-        print word
-        exit(-1)
-def rename(field_name):
-    #print field_name
+def shorten(field_name):
+    def trim(word):
+        try:
+            return word[0]+word[1:(word_re.search(word[1:]) or alt1.search(word[1:])  or alt2.search(word[1:])).span()[1]+1]
+        except Exception as e:
+            print word
+            exit(-1)
     list_words = pat.findall(field_name)
     list_words = map(trim,list_words)
     return "_".join(list_words)
 
-d = {}
-for i in line:
-    d[i] = rename(i)
-print len(d)
-with open("mapping.dict","wb") as f:
-    pprint.pprint(d,f)
+if __name__ == "__main__":
+    f = open("/Users/cshamasastry/Documents/Spl Topic/Interestingness/input1.txt")
+    f = csv.reader(f)
+    line = next(f)
+    d = {}
+    for i in line:
+        d[i] = shorten(i)
+    print len(d)
+    with open("mapping.dict","wb") as f:
+        pprint.pprint(d,f)
 
-''''''

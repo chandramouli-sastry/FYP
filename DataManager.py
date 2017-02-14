@@ -3,7 +3,7 @@ import csv
 import pickle
 
 from DAO import CensusDAO
-
+from rename import shorten
 mapping = eval(open("mapping.dict").read())
 
 
@@ -38,16 +38,25 @@ class DataManager:
 
 class Ontology:
     def __init__(self, map):
+        """
+        Contains Ontology
+        :param map: the actual Key to shortened Key mapping
+        """
         self.k2i = {}
         i = 0
         for key in map:
             self.k2i[key] = i
             self.k2i[map[key]] = i
             i += 1
-        self.matrix = [[0] * len(self.map) for i in range(len(map))]
+        self.tree = [[] for i in range(len(map))]
+
+    def new_field(self,new_field):
+        self.k2i[new_field] = len(self.tree)
+        self.k2i[shorten(new_field)] = len(self.tree)
+        self.tree.append([])
 
     def add(self, source, dest, cat):
-        self.map[self.k2i[source]][self.k2i[dest]] = (1, cat)
+        self.tree[self.k2i[source]].append([self.k2i[dest],cat])
         pass
 
 
@@ -102,6 +111,7 @@ class OntologyBuilder:
             raise Exception("DependencyException")
         self.fields.append(new_field)
         self.aggregators.append([new_field, compute_function])
+        self.ontology.new_field(new_field)
         self.partOf(new_field, list(dependent_fields), "subclass")
 
     def partOf(self, whole, parts, category):
@@ -114,7 +124,7 @@ class OntologyBuilder:
         for part in parts:
             self.ontology.add(whole, part, category)
 
-    def buildOntologyandPush(self, dataManager):
+    def buildOntologyandPush(self):
         while True:
             new_obj = self.fileReader.next_line()
             if new_obj == False:
