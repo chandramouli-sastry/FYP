@@ -27,7 +27,20 @@ def print_functions_factor(tree):
             print "partOf('{}',{},'{}')".format(set,parts,category)
 
 def print_function_aggregator(tree):
-    pass
+    root = tree.keys()[0]
+    sub_fields_list = list()
+    weights_dict = dict()
+    maps_dict = dict()
+    new_field = root.split(' ')[1]
+    for fields in tree[root]:
+        field = fields.keys()[0]
+        sub_fields_list.append(field.split(' ')[1])
+        weights_dict[field.split(' ')[1]] = field.split(' ')[0]
+        maps_dict[field.split(' ')[1]] = field.split(' ')[3]
+        print_function_aggregator(fields.values()[0])
+    if len(tree[root])>0:
+        print "aggregator = create_{}_function({},{},{},'{}')".format(root.split(' ')[2],sub_fields_list,weights_dict,maps_dict,new_field)
+        print "aggregate('{}',{})".format(new_field,'aggregator')
 
 
 def generate(list_lines,print_functions):
