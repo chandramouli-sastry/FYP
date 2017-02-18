@@ -14,10 +14,8 @@ class Datum:
 
     def __init__(self, dict):
         for i in dict:
-            if mapping[i] != '':
-                self.__dict__[mapping[i]] = dict[i]
+            self.__dict__[i] = dict[i]
         pass
-
 
 class DataManager:
     def __init__(self, ontology, source, dbPath):
@@ -75,13 +73,14 @@ class FileReader:
             obj = next(self.csvReader)
             while not (self.isValid(obj)):
                 obj = next(self.csvReader)
+            obj = {mapping[i]:obj[i] for i in obj if mapping[i]!=''}
             return obj
         except Exception as e:
             print(e)
             return False
 
     def get_fields(self):
-        return self.csvReader.fieldnames
+        return [mapping[i] for i in self.csvReader.fieldnames if mapping[i]!='']
 
 
 class OntologyBuilder:
@@ -131,7 +130,7 @@ class OntologyBuilder:
                 break
             datum = Datum(new_obj)
             for new_field, aggregator in self.aggregators:
-                datum.__dict__[new_field] = aggregator(datum)
+                datum.__dict__[new_field] = aggregator(datum.__dict__)
             self.data.append(datum)
         self.dao.writeMultiple(self.data)
 

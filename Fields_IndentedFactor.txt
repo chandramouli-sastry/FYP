@@ -34,20 +34,6 @@ Tot_Pop_of_Vil
             Gender
                 Tot_Sched_Trib_Mal_Pop_of_Vil
                 Tot_Sched_Trib_Fem_Pop_of_Vil
-Vil_Name
-    Education_Inst
-        Gov_Pr_Prim_School_Nur_LK_UK_Num
-        Gov_Prim_School_Num
-        Gov_Mid_School_Num
-        Gov_Sec_School_Num
-        Gov_Sen_Sec_School_Num
-        Gov_Ar_an_Scien_Deg_Col_Num
-    Hospitals
-        Com_Heal_Cen_Num
-        Prim_Heal_Cen_Num
-        Prim_Heal_Sub_Cen_Num
-        Mat_An_Chil_Wel_Cen_Num
-        TB_Clin_Num
 Gov_Pr_Prim_School_Nur_LK_UK_Stat
 Gov_Pr_Prim_School_Nur_LK_UK_Num
 Priv_Pr_Prim_School_Nur_LK_UK_Stat

@@ -7,7 +7,11 @@ class CensusDAO:
         self.db = self.client.Census
         self.coll = self.db.dataset
 
-    def writeMulitple(self,data):
+    def sampledRead(self, number = 10000, save = False):
+        pass
+
+
+    def writeMultiple(self,data):
         """
         writes multiple datum objects into mongodb
         :param data: list of datum objects
