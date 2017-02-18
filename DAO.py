@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-
+import pprint
 
 class CensusDAO:
     def __init__(self):
@@ -8,8 +8,7 @@ class CensusDAO:
         self.coll = self.db.dataset
 
     def sampledRead(self, number = 10000, save = False):
-        pass
-
+        pprint.pprint(([i for i in self.coll.aggregate([{ "$sample": { "size": 4 } },{ "$project": { "Vil_Nam": 1, "Primary_School":1 } }])]))
 
     def writeMultiple(self,data):
         """
@@ -23,8 +22,8 @@ class CensusDAO:
 
 if __name__=="__main__":
     dao = CensusDAO()
-    dao.writeMulitple([{"test":"testing"},{"test1":"testing2"}])
-    cur = dao.coll.find()
-    for i in cur:
-        print i
+    #dao.writeMultiple([{"test":"testing"},{"test1":"testing2"}])
+    dao.sampledRead()
+    # for i in cur:
+    #     print i
 
