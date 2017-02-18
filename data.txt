@@ -1,0 +1,28 @@
+1 Education sum {}
+	0.4 Primary_School sum {}
+		0.6 Gov_Prim_School_Num sum {"":0}
+		0.4 Priv_Prim_School_Num sum {"":0}
+		0.5 Near_Prim_School_Gov_1_Priv_2 sum {"1":2,"2":1,"":0}
+		0.5 Dist_Prim_School sum {"A":3,"B":2,"C":1,"":0}
+	0.3 Primary1_School sum {}
+		0.6 Gov_Prim_School_Num sum {"":0}
+		0.4 Priv_Prim_School_Num sum {"":0}
+		0.5 Near_Prim_School_Gov_1_Priv_2 sum {"1":2,"2":1,"":0}
+		0.5 Dist_Prim_School sum {"A":3,"B":2,"C":1,"":0}
+	0.2 Primary2_School sum {}
+		0.6 Gov_Prim_School_Num sum {"":0}
+		0.4 Priv_Prim_School_Num sum {"":0}
+		0.5 Near_Prim_School_Gov_1_Priv_2 sum {"1":2,"2":1,"":0}
+		0.5 Dist_Prim_School sum {"A":3,"B":2,"C":1,"":0}
+	0.1 Primary3_School sum {}
+		0.6 Gov_Prim_School_Num sum {"":0}
+		0.4 Priv_Prim_School_Num sum {"":0}
+		0.5 Near_Prim_School_Gov_1_Priv_2 sum {"1":2,"2":1,"":0}
+		0.5 Dist_Prim_School sum {"A":3,"B":2,"C":1,"":0}
+
+
+Intuition:
+	Govt and Priv Prim schools within village given higher weightage(Govt>Priv)
+	If nearest primary school outside of village is govt, then its better
+	If there are primary schools within the village, nearest primary school and distance will be empty fields.
+	If it's outside of village, the score is automatically downsampled.
