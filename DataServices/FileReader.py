@@ -1,25 +1,14 @@
 import csv
-
 import pickle
 
-from DAO import CensusDAO
-from rename import shorten
+from DataServices import Datum
+from DataServices.DAO import CensusDAO
+from Misc.rename import shorten
+
 mapping = eval(open("mapping.dict").read())
 
 
-class Datum:
-    """
-    Returns Datum Object which is suitable for doing ...
-    """
 
-    def __init__(self, dict):
-        """
-        TODO: convert values to appropriate types.
-        :param dict:
-        """
-        for i in dict:
-            self.__dict__[i] = dict[i]
-        pass
 
 class DataManager:
     def __init__(self, ontology, source, dbPath):
