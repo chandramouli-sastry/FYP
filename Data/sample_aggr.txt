@@ -1,5 +1,5 @@
 1 Primary_School sum {}
     0.6 Gov_Prim_School_Num sum {"":0,"N.A.":0}
     0.4 Priv_Prim_School_Num sum {"":0,"N.A.":0}
-    0.5 Near_Prim_School_Gov_1_Priv_2 sum {"1":2,"2":1,"":0,"N.A.":0}
-    0.5 Dist_Prim_School sum {"A":3,"B":2,"C":1,"":0,"N.A.":0}
+    0.5 Near_Prim_School_Gov_1_Priv_2 sum {"1":2,"2":1,"":0,"N.A.":0,"E_NA_2":0}
+    0.5 Dist_Prim_School sum {"A":3,"a":3,"B":2,"b":3,"C":1,"c":1,"":0,"N.A.":0}

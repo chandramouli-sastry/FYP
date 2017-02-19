@@ -68,39 +68,19 @@ def extract_contiguous_lists(all_lines):
         index += 1
     return lists
 
-
-
-def create_sum_function(dependent_fields,weights, maps, new_field):
-    """
-        sum aggregate function..
-        :param datum: datum object
-        :param dependent_fields: list of fields(Strings) on which new field depend on
-        :param weights: dictionary of field:weight for every dependent field
-        :param maps: dictionary of dictionaries maps[dependentField] = map-->{'a':1,'b':2}
-        :param new_field: newField in string
-        :return:
-    """
-    def sum(datum):
-        SUM = 0
-        for i in dependent_fields:
-            if i in maps:
-                SUM += float(maps[i].get(datum[i],datum[i])) * weights[i]
-            else:
-                SUM += weights[i] * eval(datum[i])
-        return SUM
-    sum.dependents=dependent_fields
-    return sum
-
-
-if __name__ == "__main__":
-    f=open("Fields_IndentedFactor.txt")
+def generateCode(indented_factor_file,indented_aggregate_file):
+    import sys
+    code = open("code.py","w")
+    sys.stdout = code
+    f=open(indented_factor_file)
     all_lines = f.readlines()
     lists = extract_contiguous_lists(all_lines)
     for i in lists:
         generate(i,print_functions_factor)
-
-    g=open("sample_aggr.txt")
+    g=open(indented_aggregate_file)
     all_lines = g.readlines()
     lists = extract_contiguous_lists(all_lines)
     for i in lists:
         generate(i,print_function_aggregator)
+    code.close()
+    sys.stdout = sys.__stdout__

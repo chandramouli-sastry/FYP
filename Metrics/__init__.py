@@ -1,4 +1,5 @@
 import Deviation
+
 """
 1. Pure Statistical... Field1..take all values... compute metric on the list of values-1 column: 4 metrics
 2. Semantic+Statistical Interestingness: statistics on tree... Education:Primary,Secondary...#subset,aggregation:across rows and columns..hold
