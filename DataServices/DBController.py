@@ -19,12 +19,29 @@ class CensusDB:
         :param data: list of datum objects
         :return:
         """
+        f = open("DEBUG.log", "wb")
         if cleanDB:
             self.db.dataset.drop()
             self.coll = self.db.dataset
         print len(data)
+        count = 0
+        thresh = 1
+        print "Writing to DB"
         for datum in data:
-            self.coll.insert_one(datum.__dict__)
+            try:
+                self.coll.insert_one(datum.__dict__)
+                count += 1
+                perc = count/float(len(data))*100
+                if perc>=thresh:
+                    print "{} perc completed".format(perc)
+                    thresh += 1
+            except Exception as e:
+                print e
+                f.write(str(datum.__dict__))
+        f.close()
+
+
+
 
 
 if __name__=="__main__":

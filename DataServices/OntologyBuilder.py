@@ -55,7 +55,7 @@ class OntologyBuilder:
                 datum.__dict__[new_field] = aggregator(datum.__dict__)
             self.data.append(datum)
             count += 1
-            if count%10000:
+            if count%10000==0:
                 print str(count)+" done"
         self.dao.writeMultiple(self.data,cleanDB)
 
