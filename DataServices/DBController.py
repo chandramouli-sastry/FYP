@@ -11,7 +11,8 @@ class CensusDB:
         self.coll = self.db.dataset
 
     def sampledRead(self, number = 10000, save = False):
-        DataBlock(list([i for i in self.coll.aggregate([{ "$sample": { "size": number } }])]),name="Resources/sample_{}.pkl".format(number))
+        #sampled read is for our experiments
+        DataBlock(list([i for i in self.coll.aggregate([{ "$sample": { "size": number } }])]),name="Resources/sample_{}.pkl".format(number)).save()
 
     def writeMultiple(self,data,cleanDB):
         """
