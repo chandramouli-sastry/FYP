@@ -26,24 +26,25 @@ def getNewList(start, end, passedlist):
 
 def calculate_list(list1, list2, list1Flag, list2Flag):
     lenlist1 = len(list1)
+    convert = lambda x: 0 if x=="" else float(x)
     if list1Flag and list2Flag:
         #print "Both are string lists"
         list1 = getNewList(1, lenlist1, list1)
         list2 = getNewList(1, lenlist1, list2)
         #calc_correlation(list1, list2)
     elif list1Flag:
-        list2 = map(int, list2)
+        list2 = map(convert, list2)
         #print "1 is a string list"
         list1 = getNewList(1, lenlist1, list1)
         #calc_correlation(list1, list2)
     elif list2Flag:
-        list1 = map(int, list1)
+        list1 = map(convert, list1)
         #print "2 is a string list"
         list2 = getNewList(1, lenlist1, list2)
         #calc_correlation(list1, list2)
     else:
-        list1 = map(int, list1)
-        list2 = map(int, list2)
+        list1 = map(convert, list1)
+        list2 = map(convert, list2)
         #print "both are number list"
     return calc_correlation(list1, list2)
 
@@ -52,13 +53,13 @@ def get_correlation(field_value_list1,field_value_list2):
     list1=field_value_list1
     list2=field_value_list2
     try:
-        int(list1[0])
+        float(list1[0])
     except ValueError:
         list1Flag = True
     else:
         list1Flag = False  # not a string
     try:
-        int(list2[0])
+        float(list2[0])
     except ValueError:
         list2Flag = True
     else:
