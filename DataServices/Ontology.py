@@ -6,6 +6,7 @@ class Ontology:
         """
         Contains Ontology
         :param map: the actual Key to shortened Key mapping
+        tree: [list[string] for each of the fields]; the corresponding inner list is the list of children
         """
         self.k2i = {}
         self.fields = map.values()
@@ -26,3 +27,13 @@ class Ontology:
     def add(self, source, dest, cat):
         self.tree[self.k2i[source]].append([self.k2i[dest],cat])
         pass
+
+    def get_descendants(self,ancestor):
+        my_children = self.tree[self.k2i[ancestor]]
+        my_descendants = []
+        for child in my_children:
+            my_descendants.extend(self.get_descendants(child))
+        return my_children+my_descendants
+
+    def is_descendant(self,ancestor,descendant):
+        return descendant in self.get_descendants(ancestor)
