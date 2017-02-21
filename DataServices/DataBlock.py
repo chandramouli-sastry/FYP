@@ -5,7 +5,11 @@ class DataBlock:
         self.name = name
 
     def extract(self, field_name):
-        values = [i[field_name] for i in self.list_dicts]
+        try:
+            values = [i[field_name] for i in self.list_dicts]
+        except Exception as e:
+            print e
+            print i
         return values
 
     def save(self):

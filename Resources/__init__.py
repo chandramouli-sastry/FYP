@@ -2,7 +2,13 @@ import pickle
 mapping = eval(open("Resources/mapping.dict").read())
 try:
     fields = pickle.load(open("Resources/fields.pkl"))
+    if "Dist_PI_Cod" in fields:
+        fields.remove("Dist_PI_Cod")
+    if "" in fields:
+        fields.remove("")
     new_fields = pickle.load(open("Resources/new_fields.pkl"))
+    numeric_fields = pickle.load(open("Resources/numeric_fields.pkl"))
+    non_numeric_fields = pickle.load(open("Resources/non_numeric_fields.pkl"))
     ontology = pickle.load(open("Resources/ontology.pkl"))
 except Exception as e:
     print "First Time Execution"

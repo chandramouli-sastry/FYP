@@ -20,7 +20,7 @@ class Graph:
         l = self.obtain_list_of_all_values()
         l.sort(reverse=True)
         length = len(l)
-        index = (percentile / 100.0) * length
+        index = int((percentile / 100.0) * length)
         return l[index]
 
     def get(self,field1,field2):
