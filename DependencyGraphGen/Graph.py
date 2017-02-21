@@ -1,3 +1,4 @@
+from Resources import numeric_fields
 class Graph:
     def __init__(self):
         '''
@@ -36,3 +37,6 @@ class Graph:
         for i,j in self.graph_ds:
             if self.get_value(i,j)>=thresh:
                 self.put(i,j)
+
+    # def get_numeric_correlation(self):
+    #     for field1,field2 in self.top_percentile_graph_ds.keys():

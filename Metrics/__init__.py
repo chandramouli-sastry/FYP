@@ -1,4 +1,4 @@
-import Deviation
+import Deviation, QuartileDeviation
 
 """
 1. Pure Statistical... Field1..take all values... compute metric on the list of values-1 column: 4 metrics
@@ -49,3 +49,4 @@ class Metric:
         return self.compute_func(values)
 
 Deviation = Metric(Deviation)
+QuartileDeviation = Metric(QuartileDeviation)

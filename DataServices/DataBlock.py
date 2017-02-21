@@ -1,4 +1,7 @@
 import pickle
+from multiprocessing import Pool
+
+
 class DataBlock:
     def __init__(self,_list, name):
         self.list_dicts = _list
@@ -12,6 +15,9 @@ class DataBlock:
             print i
         return values
 
+    def apply(self,function):
+        p = Pool(5)
+        return p.map(function,self.list_dicts)
     def save(self):
         with open(self.name,"wb") as f:
             pickle.dump(self,f)

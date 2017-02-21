@@ -1,5 +1,7 @@
 import pickle
 mapping = eval(open("Resources/mapping.dict").read())
+convert = lambda x: 0 if x=="" else float(x)
+
 try:
     fields = pickle.load(open("Resources/fields.pkl"))
     if "Dist_PI_Cod" in fields:

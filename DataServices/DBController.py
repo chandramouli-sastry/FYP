@@ -12,7 +12,11 @@ class CensusDB:
 
     def sampledRead(self, number = 10000, save = False):
         #sampled read is for our experiments
-        DataBlock(list([i for i in self.coll.aggregate([{ "$sample": { "size": number } }])]),name="Resources/sample_{}.pkl".format(number)).save()
+        datablock = DataBlock(list([i for i in self.coll.aggregate([{"$sample": {"size": number}}])]),
+                  name="Resources/sample_{}.pkl".format(number))
+        if save:
+            datablock.save()
+        return datablock
 
     def writeMultiple(self,data,cleanDB):
         """
@@ -40,9 +44,6 @@ class CensusDB:
                 print e
                 f.write(str(datum.__dict__))
         f.close()
-
-
-
 
 
 if __name__=="__main__":
