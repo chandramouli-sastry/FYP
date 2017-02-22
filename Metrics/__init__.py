@@ -4,6 +4,11 @@ import Deviation, QuartileDeviation
 1. Pure Statistical... Field1..take all values... compute metric on the list of values-1 column: 4 metrics
 2. Semantic+Statistical Interestingness: statistics on tree... Education:Primary,Secondary...#subset,aggregation:across rows and columns..hold
 3. Ratios: number of hospitals/households... property correlation graph...
+
+
+Phase 1: Generate different kinds of facts: 1, 2 or 3
+Phase 2: Combine same kinds of facts: based on similarity or uniqueness
+Phase 3: Combine across 1,2 and 3
 **********this was discussion phase 1*******
 the theory.. now, the practicals :P
 that is, what we just discussed...state=karnataka...

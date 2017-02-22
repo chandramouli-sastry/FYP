@@ -5,33 +5,75 @@ from DataServices.DBController import CensusDB
 from Resources import numeric_fields,convert
 from Metrics import QuartileDeviation
 
-
 class NumericRatioFact:
     def __init__(self):
         self.graph = pickle.load(open("Resources/graph.pkl"))
-        self.choose_fields()
+        self.fields = ["Tot_Fem_Pop_of_Vil","Tot_Mal_Pop_of_Vil"]
+        #self.choose_fields()
         self.max = 9999
         global compute_ratio
         def compute_ratio(object):
             denom = convert(object[self.fields[1]])
             if denom == 0:
-                return 9999
+                return self.max
             else:
-                return convert(object[self.fields[0]])/denom
+                return convert(object[self.fields[0]])/float(denom)
         self.compute_ratio = compute_ratio
         print "Initialization Done. Reading from DB..."
-        self.datablock = CensusDB().sampledRead(number=20000)
+        self.datablock = CensusDB().sampledRead(number=30000)
         print "DB Read Done. Computing Ratios..."
         self.generate_list()
         print "Computing Metric.."
         self.metric = QuartileDeviation.compute(self.list)
-        self.result = sorted(zip(self.metric,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True)
+        #filtering to get interesting results; sorted by value of interestingness
+        self.results = filter(lambda x: x[0]!=0,sorted(zip(self.metric,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True))
+        self.print_facts_augmented_with_similarity()
+
+    def is_similar(self, tuple1, tuple2):
+        metric1, ratio1, obj1 = tuple1
+        metric2, ratio2, obj2 = tuple2
+        if ratio1-0.1<=ratio2<=ratio1+0.1:
+            return True
+
+    def print_facts_augmented_with_similarity(self):
+        total_set = set(range(len(self.results)))
+        '''
+         [Vil1, Vil2 ...... Viln]; Vil0-Ref Village
+         Vil0 and compare with all of them and see if there is similarity; if there is, increment count of similarity
+         Vil0, Vil3,...k such villages
+         Vil0
+
+        '''
+        visited_set = set()
+        while visited_set != total_set:
+            to_visit = total_set-visited_set
+            index = list(to_visit)[0]
+            visited_set.add(index)
+            curr = self.results[index]
+            similarity_count = 0
+            for index,result in enumerate(self.results):
+                if index not in visited_set:
+                    if self.is_similar(curr,result):
+                        similarity_count += 1
+                        visited_set.add(index)
+            perc = similarity_count / float(len(self.results))*100
+            if perc > 0:
+                if curr[1] == self.max:
+                    print "{} perc of villages have {} {} and {} {}".format(perc,
+                                                                            curr[2][self.fields[0]], self.fields[0],
+                                                                            curr[2][self.fields[1]], self.fields[1])
+                else:
+                    print "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}".format(perc,
+                                                                            self.fields[0], self.fields[1],
+                                                                        curr[1], curr[2][self.fields[0]], self.fields[0],
+                                                                            curr[2][self.fields[1]], self.fields[1])
+
 
     def print_facts(self,number = 10):
         fields = self.fields
         print fields[0],fields[1]
         count = 0
-        for score,ratio,_dict in self.result:
+        for score,ratio,_dict in self.results:
             print score
             print _dict["Vil_Nam"]
             print _dict[fields[0]]
