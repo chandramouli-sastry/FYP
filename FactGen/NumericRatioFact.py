@@ -35,6 +35,12 @@ class NumericRatioFact:
         if ratio1-0.1<=ratio2<=ratio1+0.1:
             return True
 
+
+    def fuzzy_intersection(self):
+        list_similar = self.list_similar
+        for similar_items in list_similar:
+            pass
+
     def print_facts_augmented_with_similarity(self):
         total_set = set(range(len(self.results)))
         '''
@@ -44,18 +50,23 @@ class NumericRatioFact:
          Vil0
 
         '''
+        list_similar = []
         visited_set = set()
         while visited_set != total_set:
             to_visit = total_set-visited_set
             index = list(to_visit)[0]
             visited_set.add(index)
             curr = self.results[index]
+            list_similar.append(curr)
             similarity_count = 0
+            new_similar_set = set([curr])
             for index,result in enumerate(self.results):
                 if index not in visited_set:
                     if self.is_similar(curr,result):
                         similarity_count += 1
                         visited_set.add(index)
+                        new_similar_set.add(result)
+            list_similar.append(new_similar_set)
             perc = similarity_count / float(len(self.results))*100
             if perc > 0:
                 if curr[1] == self.max:
@@ -67,6 +78,7 @@ class NumericRatioFact:
                                                                             self.fields[0], self.fields[1],
                                                                         curr[1], curr[2][self.fields[0]], self.fields[0],
                                                                             curr[2][self.fields[1]], self.fields[1])
+        self.list_similar = list_similar
 
 
     def print_facts(self,number = 10):
