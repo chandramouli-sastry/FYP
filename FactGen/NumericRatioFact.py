@@ -1,9 +1,16 @@
+from __future__ import division
 import pickle
+import pprint
 import random
+from collections import Counter
+from multiprocessing import Pool
 
 from DataServices.DBController import CensusDB
-from Resources import numeric_fields,convert
+from Metrics import Entropy
+from Metrics import Grubbs
+from Resources import numeric_fields,convert, continuous_fields, discrete_fields
 from Metrics import QuartileDeviation
+
 
 class NumericRatioFact:
     def __init__(self):
@@ -20,11 +27,18 @@ class NumericRatioFact:
                 return convert(object[self.fields[0]])/float(denom)
         self.compute_ratio = compute_ratio
         print "Initialization Done. Reading from DB..."
-        self.datablock = CensusDB().sampledRead(number=30000)
+        self.db_instance = CensusDB()
+        self.datablock = self.db_instance.conditionRead(fields=self.fields)
         print "DB Read Done. Computing Ratios..."
         self.generate_list()
         print "Computing Metric.."
-        self.metric = QuartileDeviation.compute(self.list)
+        self.anomalies = set(Grubbs.compute(self.list))
+        self.metric = []
+        for i in self.list:
+            if i in self.anomalies:
+                self.metric.append(0)
+            else:
+                self.metric.append(1)
         #filtering to get interesting results; sorted by value of interestingness
         self.results = filter(lambda x: x[0]!=0,sorted(zip(self.metric,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True))
         self.print_facts_augmented_with_similarity()
@@ -35,11 +49,72 @@ class NumericRatioFact:
         if ratio1-0.1<=ratio2<=ratio1+0.1:
             return True
 
+    def global_perc(self,field):
+        self.db_instance.conditionRead()
+        pass
+
+    def local_perc(self):
+        pass
 
     def fuzzy_intersection(self):
-        list_similar = self.list_similar
-        for similar_items in list_similar:
-            pass
+        """
+        list_villages = [vil1, vil2.... vil100] -> ratio of male to female of 31.0
+        state_name:
+        {
+            Bihar: {"global_perc": , "local_perc": }
+            .
+            .
+            .
+        }
+        1. How many values of
+        """
+        # global intersection
+        # list_similar = self.list_similar
+        # partition_list = []
+        # print len(list_similar)
+        # for list_objects in list_similar:
+        #     def intersection(key):
+        #         """
+        #         :param key:
+        #         :return: partitions list_objects on values of key: {value: number of villages}
+        #          400 keys- partition... we must choose best keys... so we need some metric... we'll compute entropy
+        #          H(X) = sigma over x epsilon X (p(x)*log(p(x))
+        #          for every key, we'll get an entropy... Now, we'll apply interestingness measure on top of this!
+        #          hypothesis: if entropy is interesting, then that key will give us interesting facts..
+        #         """
+        #         values = map(lambda x: x[2][key], list_objects)
+        #         return Counter(values)
+        #     p = Pool(5)
+        #     partitions = p.map(intersection,discrete_fields)
+        #     entropies = map(lambda x:Entropy.compute(x.values()),partitions)
+        #     interestingness_partition = QuartileDeviation.compute(entropies)
+        #     results = zip(discrete_fields,partitions,interestingness_partition)
+        #     results = filter(lambda x:x[2]!=0,results)
+        #     curr = list_objects[0]
+        #     perc = len(list_objects) / float(len(self.results)) * 100
+        #     if curr[1] == self.max:
+        #         print "{} perc of villages have {} {} and {} {}.".format(perc,
+        #                                                                  curr[2][self.fields[0]], self.fields[0],
+        #                                                                  curr[2][self.fields[1]], self.fields[1])
+        #     else:
+        #         print "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}.".format(
+        #             perc,
+        #             self.fields[0], self.fields[1],
+        #             curr[1], curr[2][self.fields[0]], self.fields[0],
+        #             curr[2][self.fields[1]], self.fields[1])
+        #     for result in results:
+        #         field, partitions, interestingness_partition = result
+        #         total = sum(partitions.values())
+        #         temp_list = partitions.most_common()
+        #         max_value, max_count = temp_list[0]
+        #         min_value, min_count = temp_list[-1]
+        #         perc_1 = max_count/float(total)*100
+        #         if perc_1 > 90:
+        #             print "\tInterestingly, about {} perc of these villages have {} equal to {}.".format(perc_1,field,max_value)
+        #         # perc_1 = min_count/float(total)
+        #         # print "\tNotably, only {} perc of these villages have {} equal to {}.".format(perc_1,field,min_value)
+        #     #raw_input()
+        #     print "done"
 
     def print_facts_augmented_with_similarity(self):
         total_set = set(range(len(self.results)))
@@ -50,6 +125,7 @@ class NumericRatioFact:
          Vil0
 
         '''
+        f = open("DEBUG.log","wb")
         list_similar = []
         visited_set = set()
         while visited_set != total_set:
@@ -57,17 +133,16 @@ class NumericRatioFact:
             index = list(to_visit)[0]
             visited_set.add(index)
             curr = self.results[index]
-            list_similar.append(curr)
-            similarity_count = 0
-            new_similar_set = set([curr])
+            similarity_count = 1
+            new_similar_set = [curr]
             for index,result in enumerate(self.results):
                 if index not in visited_set:
                     if self.is_similar(curr,result):
                         similarity_count += 1
                         visited_set.add(index)
-                        new_similar_set.add(result)
+                        new_similar_set.append(result)
             list_similar.append(new_similar_set)
-            perc = similarity_count / float(len(self.results))*100
+            perc = similarity_count / float(len(self.datablock.list_dicts))*100
             if perc > 0:
                 if curr[1] == self.max:
                     print "{} perc of villages have {} {} and {} {}".format(perc,
@@ -78,6 +153,10 @@ class NumericRatioFact:
                                                                             self.fields[0], self.fields[1],
                                                                         curr[1], curr[2][self.fields[0]], self.fields[0],
                                                                             curr[2][self.fields[1]], self.fields[1])
+            f.write("======================\n")
+            f.write(pprint.pformat(new_similar_set, indent=4))
+            f.write("\n=======================\n")
+        f.close()
         self.list_similar = list_similar
 
 

@@ -1,6 +1,8 @@
 from __future__ import division
 def compute_Q1_Q2(array):
     temp = sorted(array)
+    mean = sum(array)/len(temp)
+
     return temp[int((0.25)*len(temp))],temp[int((0.75*len(temp)))]
 
 def compute(array):
@@ -13,5 +15,4 @@ def compute(array):
             result.append(i-Q2_value)
         else:
             result.append(0)
-
     return result

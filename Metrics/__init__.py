@@ -1,4 +1,4 @@
-import Deviation, QuartileDeviation
+import Deviation, QuartileDeviation, Entropy, Grubbs
 
 """
 1. Pure Statistical... Field1..take all values... compute metric on the list of values-1 column: 4 metrics
@@ -49,9 +49,14 @@ class Metric:
         return new_values
 
     def compute(self,values):
-        if type(values[0])==str:
-            values = self.quantify(values)
-        return self.compute_func(values)
+        try:
+            if type(values[0])==str:
+                values = self.quantify(values)
+            return self.compute_func(values)
+        except Exception as e:
+            print "here"
 
 Deviation = Metric(Deviation)
 QuartileDeviation = Metric(QuartileDeviation)
+Entropy = Metric(Entropy)
+Grubbs = Metric(Grubbs)
