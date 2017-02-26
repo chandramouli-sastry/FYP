@@ -18,14 +18,17 @@ class CensusDB:
             datablock.save()
         return datablock
 
-    def conditionRead(self,  fields= [], id = None):
+    def conditionRead(self,  fields= [], id = None, debug = False):
+
         id_dict = {} if id is None else {"_id": {"$in":id}}
         field_dict = {field:1 for field in fields}
         if len(field_dict)>0:
             field_dict["Vil_Nam"] = 1
             field_dict["Stat_Nam"] = 1
-
-        return DataBlock(list(self.coll.find(id_dict,field_dict)),"")
+        if debug:
+            return DataBlock(list(self.coll.find(id_dict,field_dict).limit(20000)),"")
+        else:
+            return DataBlock(list(self.coll.find(id_dict,field_dict)),"")
 
     def writeMultiple(self,data,cleanDB):
         """

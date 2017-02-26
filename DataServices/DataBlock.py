@@ -17,7 +17,9 @@ class DataBlock:
 
     def apply(self,function):
         p = Pool(5)
-        return p.map(function,self.list_dicts)
+        ret_list = p.map(function,self.list_dicts)
+        p.close()
+        return ret_list
 
     def save(self):
         with open(self.name,"wb") as f:

@@ -2,9 +2,10 @@ from __future__ import division
 import pickle
 import pprint
 import random
+from Properties.Properties import Properties
 from collections import Counter
 from multiprocessing import Pool
-
+import numpy as np
 from DataServices.DBController import CensusDB
 from Metrics import Entropy
 from Metrics import Grubbs
@@ -28,7 +29,7 @@ class NumericRatioFact:
         self.compute_ratio = compute_ratio
         print "Initialization Done. Reading from DB..."
         self.db_instance = CensusDB()
-        self.datablock = self.db_instance.conditionRead(fields=self.fields)
+        self.datablock = self.db_instance.conditionRead(fields=self.fields,debug=True)
         print "DB Read Done. Computing Ratios..."
         self.generate_list()
         print "Computing Metric.."
@@ -49,12 +50,6 @@ class NumericRatioFact:
         if ratio1-0.1<=ratio2<=ratio1+0.1:
             return True
 
-    def global_perc(self,field):
-        self.db_instance.conditionRead()
-        pass
-
-    def local_perc(self):
-        pass
 
     def fuzzy_intersection(self):
         """
@@ -79,8 +74,9 @@ class NumericRatioFact:
         list_similar = self.list_similar
         global global_local_multi
         def global_local(field,list_objects_r):
-            list_ids = [str(i["_id"]) for i in list_objects_r]
-            list_objects = self.db_instance.conditionRead([field])
+            list_ids = [str(i[2]["_id"]) for i in list_objects_r]
+            list_objects = CensusDB().conditionRead([field]).list_dicts
+            print "READ DONE"
             partitions = {}
             for obj in list_objects:
                 partitions[obj[field]] = partitions.get(obj[field],[])
@@ -98,13 +94,36 @@ class NumericRatioFact:
             return value_global_local
 
         def global_local_multi(field_list):
-            global_local(*field_list)
+            print field_list[0]
+            return global_local(*field_list)
 
         p = Pool(10)
 
         for list_objects in list_similar:
+            curr = list_objects[0]
+            perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
             args = [(field,list_objects) for field in discrete_fields]
             partitions = p.map(global_local_multi,args)
+            flattened = [[global_local_dict.values() for global_local_dict in partition.values()] for partition in partitions]
+            properties = [Properties(values_list).property for values_list in flattened]
+            interestingnesses = QuartileDeviation.compute(properties)
+            field_index =  np.argmax(interestingnesses)
+            value_global_local = partitions[field_index]
+            field = discrete_fields[field_index]
+            if curr[1] == self.max:
+                print "{} perc of villages have {} {} and {} {}.".format(perc,
+                                                                         curr[2][self.fields[0]], self.fields[0],
+                                                                         curr[2][self.fields[1]], self.fields[1])
+            else:
+                print "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}.".format(
+                    perc,
+                    self.fields[0], self.fields[1],
+                    curr[1], curr[2][self.fields[0]], self.fields[0],
+                    curr[2][self.fields[1]], self.fields[1])
+            print "\t",field
+            pprint.pprint(value_global_local,indent=2)
+
+
 
         p.close()
 
