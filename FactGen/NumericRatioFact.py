@@ -32,13 +32,13 @@ class NumericRatioFact:
         print "DB Read Done. Computing Ratios..."
         self.generate_list()
         print "Computing Metric.."
-        self.anomalies = set(Grubbs.compute(self.list))
-        self.metric = []
-        for i in self.list:
-            if i in self.anomalies:
-                self.metric.append(0)
-            else:
-                self.metric.append(1)
+        self.metric = (QuartileDeviation.compute(self.list))
+        # self.metric = []
+        # for i in self.list:
+        #     if i in self.anomalies:
+        #         self.metric.append(0)
+        #     else:
+        #         self.metric.append(1)
         #filtering to get interesting results; sorted by value of interestingness
         self.results = filter(lambda x: x[0]!=0,sorted(zip(self.metric,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True))
         self.print_facts_augmented_with_similarity()
@@ -68,6 +68,47 @@ class NumericRatioFact:
         }
         1. How many values of
         """
+
+        # For each list of villages
+        #   For each field
+        #       1. get global perc
+        #       2. get local perc
+        #   compute properties of each partition
+        #   choose interesting partition(s)
+        #   generate facts
+        list_similar = self.list_similar
+        global global_local_multi
+        def global_local(field,list_objects_r):
+            list_ids = [str(i["_id"]) for i in list_objects_r]
+            list_objects = self.db_instance.conditionRead([field])
+            partitions = {}
+            for obj in list_objects:
+                partitions[obj[field]] = partitions.get(obj[field],[])
+                partitions[obj[field]].append(obj)
+            value_global_local = {}
+            for value in partitions:
+                list_objects = partitions[value]
+                count = 0
+                for obj in list_objects:
+                    if str(obj["_id"]) in list_ids:
+                        count += 1
+                global_perc = count / float(len(list_objects))
+                local_perc = count / float(len(list_objects_r))
+                value_global_local[value] = {"global_perc":global_perc, "local_perc":local_perc}
+            return value_global_local
+
+        def global_local_multi(field_list):
+            global_local(*field_list)
+
+        p = Pool(10)
+
+        for list_objects in list_similar:
+            args = [(field,list_objects) for field in discrete_fields]
+            partitions = p.map(global_local_multi,args)
+
+        p.close()
+
+
         # global intersection
         # list_similar = self.list_similar
         # partition_list = []

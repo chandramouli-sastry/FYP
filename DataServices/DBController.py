@@ -19,13 +19,13 @@ class CensusDB:
         return datablock
 
     def conditionRead(self,  fields= [], id = None):
-        id_dict = {} if id is None else {"id":id}
-        cond_dict = {field:1 for field in fields}
-        if len(cond_dict)>0:
-            cond_dict["Vil_Nam"] = 1
-            cond_dict["Stat_Nam"] = 1
+        id_dict = {} if id is None else {"_id": {"$in":id}}
+        field_dict = {field:1 for field in fields}
+        if len(field_dict)>0:
+            field_dict["Vil_Nam"] = 1
+            field_dict["Stat_Nam"] = 1
 
-        return DataBlock(list(self.coll.find(id_dict,cond_dict)),"")
+        return DataBlock(list(self.coll.find(id_dict,field_dict)),"")
 
     def writeMultiple(self,data,cleanDB):
         """
