@@ -14,24 +14,24 @@ indented_aggregate_file = "Data/sample_aggr.txt"  # The indented file for genera
 
 # Initialize file reader and generate code for building ontology
 fileReader = FileReader(data_file,mapping)
-print "File Read into memory. "
+print("File Read into memory. ")
 ontology = Ontology(mapping)
 builder = OntologyBuilder(fileReader,ontology)
 generateCode(indented_factor_file,indented_aggregate_file)
-print "Code Generated. Building Ontology..."
+print("Code Generated. Building Ontology...")
 exec(open("code.py").read())
 exit()
-print "Ontology Built. Pushing to DB.."
+print("Ontology Built. Pushing to DB..")
 builder.buildOntologyandPush(cleanDB=True)
-print "DB Populated. Indexing Resources..."
+print("DB Populated. Indexing Resources...")
 
 # Update all resources that are needed
-with open("Resources/fields.pkl","wb") as f:
+with open("Resources/fields.pkl","w") as f:
     pickle.dump(ontology.fields,f)
 
-with open("Resources/new_fields.pkl","wb") as f:
+with open("Resources/new_fields.pkl","w") as f:
     pickle.dump(ontology.new_fields,f)
 
-with open("Resources/ontology.pkl","wb") as f:
+with open("Resources/ontology.pkl","w") as f:
     pickle.dump(ontology,f)
 

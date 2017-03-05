@@ -1,7 +1,9 @@
-from __future__ import division
 import pickle
 import pprint
 import random
+from concurrent.futures import ThreadPoolExecutor
+import json
+
 from Properties.Properties import Properties
 from collections import Counter
 from multiprocessing import Pool
@@ -11,37 +13,65 @@ from Metrics import Entropy
 from Metrics import Grubbs
 from Resources import numeric_fields,convert, continuous_fields, discrete_fields
 from Metrics import QuartileDeviation
+import copy
 
+########### Functions for Pool ###########
+def global_local(field, partitions, list_objects_r):
+    value_global_local = {}
+    try:
+        list_ids = [(i[2]["id"]) for i in list_objects_r]
+        for value in partitions:
+            list_objects = partitions[value]
+            count = len(set(list_objects) & set(list_ids))
+            global_perc = count / float(len(list_objects))
+            local_perc = count / float(len(list_objects_r))
+            value_global_local[value] = {"global_perc": global_perc, "local_perc": local_perc}
+    except Exception as e:
+        print((field, e))
+    return value_global_local
+
+
+def global_local_multi(field_list):
+    return global_local(*field_list)
+
+def flatten(partition):
+    l = []
+    for global_local_dict in list(partition.values()):
+        l.extend(list(global_local_dict.values()))
+    return l
+
+def get_property(values_list):
+    return Properties(values_list).property
+
+
+########### Class ###########
 
 class NumericRatioFact:
     def __init__(self):
-        self.graph = pickle.load(open("Resources/graph.pkl"))
+        self.graph = pickle.load(open("Resources/graph.pkl","rb"),encoding="latin1")
         self.fields = ["Tot_Fem_Pop_of_Vil","Tot_Mal_Pop_of_Vil"]
+        fields = copy.deepcopy(self.fields)
         #self.choose_fields()
         self.max = 9999
         global compute_ratio
         def compute_ratio(object):
-            denom = convert(object[self.fields[1]])
+            denom = convert(object[fields[1]])
             if denom == 0:
                 return self.max
             else:
-                return convert(object[self.fields[0]])/float(denom)
+                return convert(object[fields[0]])/float(denom)
         self.compute_ratio = compute_ratio
-        print "Initialization Done. Reading from DB..."
+        print("Initialization Done. Reading from DB...")
         self.db_instance = CensusDB()
         self.datablock = self.db_instance.conditionRead(fields=self.fields,debug=True)
-        print "DB Read Done. Computing Ratios..."
+        print("DB Read Done. Computing Ratios...")
         self.generate_list()
-        print "Computing Metric.."
+        print("Computing Metric..")
         self.metric = (QuartileDeviation.compute(self.list))
-        # self.metric = []
-        # for i in self.list:
-        #     if i in self.anomalies:
-        #         self.metric.append(0)
-        #     else:
-        #         self.metric.append(1)
+        print("Loading Partitions...")
+        self.partitions = json.load(open("Resources/partitions.json"))
         #filtering to get interesting results; sorted by value of interestingness
-        self.results = filter(lambda x: x[0]!=0,sorted(zip(self.metric,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True))
+        self.results = [x for x in sorted(zip(self.metric,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True) if x[0]!=0]
         self.print_facts_augmented_with_similarity()
 
     def is_similar(self, tuple1, tuple2):
@@ -52,17 +82,6 @@ class NumericRatioFact:
 
 
     def fuzzy_intersection(self):
-        """
-        list_villages = [vil1, vil2.... vil100] -> ratio of male to female of 31.0
-        state_name:
-        {
-            Bihar: {"global_perc": , "local_perc": }
-            .
-            .
-            .
-        }
-        1. How many values of
-        """
 
         # For each list of villages
         #   For each field
@@ -71,60 +90,38 @@ class NumericRatioFact:
         #   compute properties of each partition
         #   choose interesting partition(s)
         #   generate facts
-        list_similar = self.list_similar
-        global global_local_multi
-        def global_local(field,list_objects_r):
-            list_ids = [str(i[2]["_id"]) for i in list_objects_r]
-            list_objects = CensusDB().conditionRead([field]).list_dicts
-            print "READ DONE"
-            partitions = {}
-            for obj in list_objects:
-                partitions[obj[field]] = partitions.get(obj[field],[])
-                partitions[obj[field]].append(obj)
-            value_global_local = {}
-            for value in partitions:
-                list_objects = partitions[value]
-                count = 0
-                for obj in list_objects:
-                    if str(obj["_id"]) in list_ids:
-                        count += 1
-                global_perc = count / float(len(list_objects))
-                local_perc = count / float(len(list_objects_r))
-                value_global_local[value] = {"global_perc":global_perc, "local_perc":local_perc}
-            return value_global_local
+        list_similar = copy.deepcopy(self.list_similar)
 
-        def global_local_multi(field_list):
-            print field_list[0]
-            return global_local(*field_list)
 
-        p = Pool(10)
-
+        #p = Pool(10)
+        p = ThreadPoolExecutor(10)
+        f = open("Facts_op.txt","w")
         for list_objects in list_similar:
             curr = list_objects[0]
             perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
-            args = [(field,list_objects) for field in discrete_fields]
-            partitions = p.map(global_local_multi,args)
-            flattened = [[global_local_dict.values() for global_local_dict in partition.values()] for partition in partitions]
-            properties = [Properties(values_list).property for values_list in flattened]
+            args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
+            print(("Args Ready.", len(args)))
+            partitions_perc = list(p.map(global_local_multi,args))
+            print("Partitions got. Flattening...")
+            flattened = list(p.map(flatten, partitions_perc))
+            print("Flattening Done. Getting Properties...")
+            properties = list(p.map(get_property, flattened))
             interestingnesses = QuartileDeviation.compute(properties)
-            field_index =  np.argmax(interestingnesses)
-            value_global_local = partitions[field_index]
-            field = discrete_fields[field_index]
+            max_index = np.argmax(interestingnesses)
+            value_global_local = partitions_perc[max_index]
+            field = args[max_index]
             if curr[1] == self.max:
-                print "{} perc of villages have {} {} and {} {}.".format(perc,
-                                                                         curr[2][self.fields[0]], self.fields[0],
-                                                                         curr[2][self.fields[1]], self.fields[1])
+                f.write( "{} perc of villages have {} {} and {} {}.\n".format(perc,
+                                                                         convert(curr[2][self.fields[0]]), self.fields[0],
+                                                                         convert(curr[2][self.fields[1]]), self.fields[1]))
             else:
-                print "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}.".format(
+                f.write( "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}\n.".format(
                     perc,
                     self.fields[0], self.fields[1],
                     curr[1], curr[2][self.fields[0]], self.fields[0],
-                    curr[2][self.fields[1]], self.fields[1])
-            print "\t",field
+                    curr[2][self.fields[1]], self.fields[1]))
+            print(("\t",field))
             pprint.pprint(value_global_local,indent=2)
-
-
-
         p.close()
 
 
@@ -185,7 +182,7 @@ class NumericRatioFact:
          Vil0
 
         '''
-        f = open("DEBUG.log","wb")
+        f = open("DEBUG.log","w")
         list_similar = []
         visited_set = set()
         while visited_set != total_set:
@@ -205,14 +202,14 @@ class NumericRatioFact:
             perc = similarity_count / float(len(self.datablock.list_dicts))*100
             if perc > 0:
                 if curr[1] == self.max:
-                    print "{} perc of villages have {} {} and {} {}".format(perc,
+                    print(("{} perc of villages have {} {} and {} {}".format(perc,
                                                                             curr[2][self.fields[0]], self.fields[0],
-                                                                            curr[2][self.fields[1]], self.fields[1])
+                                                                            curr[2][self.fields[1]], self.fields[1])))
                 else:
-                    print "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}".format(perc,
+                    print(("{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}".format(perc,
                                                                             self.fields[0], self.fields[1],
                                                                         curr[1], curr[2][self.fields[0]], self.fields[0],
-                                                                            curr[2][self.fields[1]], self.fields[1])
+                                                                            curr[2][self.fields[1]], self.fields[1])))
             f.write("======================\n")
             f.write(pprint.pformat(new_similar_set, indent=4))
             f.write("\n=======================\n")
@@ -222,13 +219,13 @@ class NumericRatioFact:
 
     def print_facts(self,number = 10):
         fields = self.fields
-        print fields[0],fields[1]
+        print((fields[0],fields[1]))
         count = 0
         for score,ratio,_dict in self.results:
-            print score
-            print _dict["Vil_Nam"]
-            print _dict[fields[0]]
-            print _dict[fields[1]]
+            print(score)
+            print((_dict["Vil_Nam"]))
+            print((_dict[fields[0]]))
+            print((_dict[fields[1]]))
             count += 1
             if count==number:
                 break

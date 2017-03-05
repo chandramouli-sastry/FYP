@@ -1,6 +1,6 @@
-from Graph import Graph
+from .Graph import Graph
 from Resources import mapping
-from obtain_listcorrelation import get_correlation
+from .obtain_listcorrelation import get_correlation
 
 def is_not_related(field1,field2,ontology):
     '''

@@ -1,5 +1,5 @@
 # mapping = eval(open("mapping.dict").read())
-# f = open("Fields_IndentedFactor.txt","wb")
+# f = open("Fields_IndentedFactor.txt","w")
 # for i in open("fields.txt"):
 #     toWrite = mapping[i[i.rindex(";")+1:].strip()] if ";" in i else mapping[i.strip()]
 #     if toWrite!="":
@@ -21,9 +21,9 @@ import pickle
 #                 numeric_list.append(field_name)
 #         except ValueError:
 #             non_numeric_list.append(field_name)
-#     with open("Resources/numeric_fields.pkl","wb") as f:
+#     with open("Resources/numeric_fields.pkl","w") as f:
 #         pickle.dump(numeric_list,f)
-#     with open("Resources/non_numeric_fields.pkl","wb") as f:
+#     with open("Resources/non_numeric_fields.pkl","w") as f:
 #         pickle.dump(non_numeric_list,f)
 
 def continuous_fields():
@@ -34,14 +34,14 @@ def continuous_fields():
         try:
             line,type = line.strip().split()
         except Exception as e:
-            print "here",e,line
+            print(("here",e,line))
         if type.lower()=="c":
             continuous_list.append(line.strip())
         else:
             discrete_list.append(line.strip())
-    with open("../Resources/continuous_fields.pkl","wb") as f:
+    with open("../Resources/continuous_fields.pkl","w") as f:
         pickle.dump(continuous_list,f)
-    with open("../Resources/discrete_fields.pkl","wb") as f:
+    with open("../Resources/discrete_fields.pkl","w") as f:
         pickle.dump(discrete_list,f)
 
 continuous_fields()

@@ -9,7 +9,7 @@ class Ontology:
         tree: [list[string] for each of the fields]; the corresponding inner list is the list of children
         """
         self.k2i = {}
-        self.fields = map.values()
+        self.fields = list(map.values())
         self.new_fields = []
         i = 0
         for key in map:

@@ -57,9 +57,9 @@ class FileReader:
 
         for index,_set in enumerate(sets):
             if len(_set) <= 10:
-                print self.fields[index]
+                print((self.fields[index]))
                 for value in _set:
-                    print "\t"+value
+                    print(("\t"+value))
 
     def get_fields(self):
         return [i for i in self.fields if i!='']

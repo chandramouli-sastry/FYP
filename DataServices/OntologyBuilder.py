@@ -56,9 +56,9 @@ class OntologyBuilder:
             self.data.append(datum)
             count += 1
             if count%10000==0:
-                print str(count)+" done"
+                print((str(count)+" done"))
         self.dao.writeMultiple(self.data,cleanDB)
 
     def saveOntology(self, file_name):
-        with open("file_name", "wb"):
+        with open("file_name", "w"):
             pickle.dump(self.ontology)

@@ -1,4 +1,4 @@
-from __future__ import division
+
 def compute_Q1_Q2(array):
     temp = sorted(array)
     mean = sum(array)/len(temp)

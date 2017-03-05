@@ -1,4 +1,4 @@
-from __future__ import division
+
 import math
 def compute(array):
     sum_array = sum(array)

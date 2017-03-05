@@ -20,11 +20,11 @@ def make_tree(nodes, parent_level = 0, start_index = 0):
 def print_functions_factor(tree):
     for set in tree:
         for categories in tree[set]:
-            category = categories.keys()[0]
-            parts = [i.keys()[0] for i in categories.values()[0]]
-            for i in categories.values()[0]:
+            category = list(categories.keys())[0]
+            parts = [list(i.keys())[0] for i in list(categories.values())[0]]
+            for i in list(categories.values())[0]:
                 print_functions_factor(i)
-            print "builder.partOf('{}',{},'{}')".format(set,parts,category)
+            print(("builder.partOf('{}',{},'{}')".format(set,parts,category)))
 
 def print_function_aggregator(tree):
     """
@@ -32,20 +32,20 @@ def print_function_aggregator(tree):
     :param tree:
     :return:
     """
-    root = tree.keys()[0]
+    root = list(tree.keys())[0]
     sub_fields_list = list()
     weights_dict = dict()
     maps_dict = dict()
     new_field = root.lstrip().split(' ')[1]
     for field_subtree in tree[root]:
-        field = field_subtree.keys()[0].lstrip()
+        field = list(field_subtree.keys())[0].lstrip()
         sub_fields_list.append(field.split(' ')[1])
         weights_dict[field.split(' ')[1]] = eval(field.split(' ')[0])
         maps_dict[field.split(' ')[1]] = eval(field.split(' ')[3])
         print_function_aggregator(field_subtree)
     if len(tree[root])>0:
-        print "aggregator = create_{}_function({},{},{},'{}')".format(root.split(' ')[2],sub_fields_list,weights_dict,maps_dict,new_field)
-        print "builder.aggregate('{}',{})".format(new_field,'aggregator')
+        print(("aggregator = create_{}_function({},{},{},'{}')".format(root.split(' ')[2],sub_fields_list,weights_dict,maps_dict,new_field)))
+        print(("builder.aggregate('{}',{})".format(new_field,'aggregator')))
 
 
 def generate(list_lines,print_functions):

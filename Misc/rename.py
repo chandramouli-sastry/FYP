@@ -35,10 +35,10 @@ def shorten(field_name):
         try:
             return word[0]+word[1:(word_re.search(word[1:]) or alt1.search(word[1:])  or alt2.search(word[1:])).span()[1]+1]
         except Exception as e:
-            print word
+            print(word)
             exit(-1)
     list_words = pat.findall(field_name)
-    list_words = map(trim,list_words)
+    list_words = list(map(trim,list_words))
     return "_".join(list_words)
 
 if __name__ == "__main__":
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     d = {}
     for i in line:
         d[i] = shorten(i)
-    print len(d)
-    with open("mapping.dict","wb") as f:
+    print((len(d)))
+    with open("mapping.dict","w") as f:
         pprint.pprint(d,f)
 

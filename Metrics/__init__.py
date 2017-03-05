@@ -1,4 +1,4 @@
-import Deviation, QuartileDeviation, Entropy, Grubbs
+from . import Deviation, QuartileDeviation, Entropy, Grubbs
 
 """
 1. Pure Statistical... Field1..take all values... compute metric on the list of values-1 column: 4 metrics
@@ -43,7 +43,7 @@ class Metric:
         self.compute_func = module.compute
 
     def quantify(self,values):
-        set_values = zip(set(values),range(len(set(values))))
+        set_values = list(zip(set(values),list(range(len(set(values))))))
         map = {i:v for i,v in set_values}
         new_values = [map[i] for i in values]
         return new_values
@@ -54,7 +54,7 @@ class Metric:
                 values = self.quantify(values)
             return self.compute_func(values)
         except Exception as e:
-            print "here"
+            print("here")
 
 Deviation = Metric(Deviation)
 QuartileDeviation = Metric(QuartileDeviation)

@@ -1,4 +1,4 @@
-from __future__ import division
+
 import types
 import math
 
@@ -9,7 +9,7 @@ class Properties:
     def __init__(self,list_values):
         functions = []
         for i in self.__dict__:
-            if type(i) == types.FunctionType:
+            if type(i) == types.FunctionType and i.startswith("compute"):
                 functions.append(i)
         properties = []
         for func in functions:
@@ -17,7 +17,7 @@ class Properties:
         self.property = self.norm(properties)
 
     def norm(self,properties):
-        return (sum(map(lambda x:x**2, properties))) ** 0.5
+        return (sum([x**2 for x in properties])) ** 0.5
 
     def _compute_mean(self,list_values):
         return sum(list_values)/float(len(list_values))

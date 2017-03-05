@@ -23,10 +23,12 @@ class CensusDB:
         id_dict = {} if id is None else {"_id": {"$in":id}}
         field_dict = {field:1 for field in fields}
         if len(field_dict)>0:
+            field_dict["id"] = 1
+        if debug and len(field_dict)>0:
             field_dict["Vil_Nam"] = 1
             field_dict["Stat_Nam"] = 1
         if debug:
-            return DataBlock(list(self.coll.find(id_dict,field_dict).limit(20000)),"")
+            return DataBlock(list(self.coll.find(id_dict,field_dict).limit(200)),"")
         else:
             return DataBlock(list(self.coll.find(id_dict,field_dict)),"")
 
@@ -36,24 +38,24 @@ class CensusDB:
         :param data: list of datum objects
         :return:
         """
-        f = open("DEBUG.log", "wb")
+        f = open("DEBUG.log", "w")
         if cleanDB:
             self.db.dataset.drop()
             self.coll = self.db.dataset
-        print len(data)
+        print((len(data)))
         count = 0
         thresh = 1
-        print "Writing to DB"
+        print("Writing to DB")
         for datum in data:
             try:
                 self.coll.insert_one(datum.__dict__)
                 count += 1
                 perc = count/float(len(data))*100
                 if perc>=thresh:
-                    print "{} perc completed".format(perc)
+                    print(("{} perc completed".format(perc)))
                     thresh += 1
             except Exception as e:
-                print e
+                print(e)
                 f.write(str(datum.__dict__))
         f.close()
 

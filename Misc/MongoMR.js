@@ -5,8 +5,7 @@
 field = "Gram_Pan_Cod";
 db.dataset.mapReduce(
     function(){
-        var id= this._id.toString();
-        id = id.slice(id.indexOf('"')+1,id.lastIndexOf('"'));
+        var id= this.id;
         emit(this[field],id);
     },
     function(key,values)
@@ -19,10 +18,9 @@ db.dataset.mapReduce(
             "field": field
         },
 
-        "finalize" : function(key,reducedVal) {
-            return reducedVal.split(",");
+        "finalize" : function(key,reducedVal){
+            return reducedVal.split(",").map(function(x){return x*1});
         }
-
     });
 /*
 list of documents:

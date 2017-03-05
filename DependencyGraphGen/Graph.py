@@ -15,7 +15,7 @@ class Graph:
         self.graph_ds[(field2,field1)] = value
 
     def obtain_list_of_all_values(self):
-        return self.graph_ds.values()
+        return list(self.graph_ds.values())
 
     def obtain_top_percentile_threshold(self, percentile):
         l = self.obtain_list_of_all_values()
