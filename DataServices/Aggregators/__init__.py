@@ -9,7 +9,7 @@ def create_sum_function(dependent_fields,weights, maps, new_field):
         :return:
     """
     def sum(datum):
-        f=open("DEBUG.log","wb")
+        f=open("DEBUG.log","w")
         f.write(str({i:datum[i] for i in dependent_fields}))
         f.close()
         SUM = 0

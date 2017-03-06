@@ -1,6 +1,7 @@
 import pickle
 import pprint
 import random
+from concurrent.futures import ProcessPoolExecutor
 from concurrent.futures import ThreadPoolExecutor
 import json
 
@@ -19,10 +20,10 @@ import copy
 def global_local(field, partitions, list_objects_r):
     value_global_local = {}
     try:
-        list_ids = [(i[2]["id"]) for i in list_objects_r]
+        list_ids = set([(i[2]["id"]) for i in list_objects_r])
         for value in partitions:
             list_objects = partitions[value]
-            count = len(set(list_objects) & set(list_ids))
+            count = len(set(list_objects) & list_ids)
             global_perc = count / float(len(list_objects))
             local_perc = count / float(len(list_objects_r))
             value_global_local[value] = {"global_perc": global_perc, "local_perc": local_perc}
@@ -63,7 +64,7 @@ class NumericRatioFact:
         self.compute_ratio = compute_ratio
         print("Initialization Done. Reading from DB...")
         self.db_instance = CensusDB()
-        self.datablock = self.db_instance.conditionRead(fields=self.fields,debug=True)
+        self.datablock = self.db_instance.conditionRead(fields=self.fields,debug=False)
         print("DB Read Done. Computing Ratios...")
         self.generate_list()
         print("Computing Metric..")
@@ -94,35 +95,54 @@ class NumericRatioFact:
 
 
         #p = Pool(10)
-        p = ThreadPoolExecutor(10)
-        f = open("Facts_op.txt","w")
+        p = ProcessPoolExecutor(10)
+        l = []
+        f = open("Resources/Facts_data.json","w")
         for list_objects in list_similar:
+            fact_dict = {}
             curr = list_objects[0]
-            perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
             args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
             print(("Args Ready.", len(args)))
-            partitions_perc = list(p.map(global_local_multi,args))
+            partitions_perc = []
+            count = 0
+            thresh = 1
+            for arg in args:
+                partitions_perc.append(global_local_multi(arg))
+                # count += 1
+                # perc = count/len(args)*100
+                # if perc>thresh:
+                #     print(perc)
+                #     thresh += 1
+            perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
             print("Partitions got. Flattening...")
-            flattened = list(p.map(flatten, partitions_perc))
+            flattened = list(map(flatten, partitions_perc))
             print("Flattening Done. Getting Properties...")
-            properties = list(p.map(get_property, flattened))
+            properties = list(map(get_property, flattened))
             interestingnesses = QuartileDeviation.compute(properties)
             max_index = np.argmax(interestingnesses)
             value_global_local = partitions_perc[max_index]
-            field = args[max_index]
+            field = args[max_index][0]
+            fact_dict["data"] = [(self.fields[0],convert(curr[2][self.fields[0]])),(self.fields[1],convert(curr[2][self.fields[1]])),curr[1]]
+            fact_dict["perc"] = perc
+            fact_dict["value_global_local"] = value_global_local
+            fact_dict["partition_field"] = field
             if curr[1] == self.max:
-                f.write( "{} perc of villages have {} {} and {} {}.\n".format(perc,
+                print( "{} perc of villages have {} {} and {} {}.\n".format(perc,
                                                                          convert(curr[2][self.fields[0]]), self.fields[0],
                                                                          convert(curr[2][self.fields[1]]), self.fields[1]))
             else:
-                f.write( "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}\n.".format(
+                print( "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}.\n".format(
                     perc,
                     self.fields[0], self.fields[1],
                     curr[1], curr[2][self.fields[0]], self.fields[0],
                     curr[2][self.fields[1]], self.fields[1]))
-            print(("\t",field))
+            print("Field :\t",field)
+            l.append(fact_dict)
             pprint.pprint(value_global_local,indent=2)
-        p.close()
+        f.write(json.dumps(l))
+        f.close()
+        print("####DONE####")
+        p.shutdown()
 
 
         # global intersection
