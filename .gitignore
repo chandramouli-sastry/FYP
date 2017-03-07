@@ -1,4 +1,5 @@
 .idea
-.pyc
+*.pyc
 Data/*
-.pkl
+*.pkl
+*.json
