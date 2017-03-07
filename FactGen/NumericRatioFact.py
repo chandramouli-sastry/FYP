@@ -50,7 +50,8 @@ def get_property(values_list):
 class NumericRatioFact:
     def __init__(self):
         self.graph = pickle.load(open("Resources/graph.pkl","rb"),encoding="latin1")
-        self.fields = ["Tot_Fem_Pop_of_Vil","Tot_Mal_Pop_of_Vil"]
+        #self.fields = ["Tot_Fem_Pop_of_Vil","Tot_Mal_Pop_of_Vil"]
+        self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
         fields = copy.deepcopy(self.fields)
         #self.choose_fields()
         self.max = 9999
