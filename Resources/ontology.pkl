@@ -764,50 +764,49 @@ aS'Hos_Allop_Par_Med_Staf_In_Pos_Num'
 p381
 aS'Sel_Hel_Group_SH_Stat'
 p382
-aS'Dist_PI_Cod'
-p383
+ag185
 aS'Per_Pas_an_Other_Graz_Lan_Ar_in_Hec'
-p384
+p383
 aS'Pub_Dis_System_PD_Shop_Stat'
-p385
+p384
 aS'Gov_Man_Instit_Num'
-p386
+p385
 aS'Dist_Ar_an_Scien_Deg_Col'
-p387
+p386
 aS'ATM_Stat'
-p388
+p387
 aS'Priv_Ar_an_Scien_Deg_Col_Num'
-p389
+p388
 aS'Priv_Med_Col_Num'
-p390
+p389
 aS'No_System_Gar_on_road_street_Stat'
-p391
+p390
 aS'Near_Vil_Tow_Nam_hav_Voc_Train_School_IT'
-p392
+p391
 aS'Hos_Alter_Med_Doc_Tot_Stren_Num'
-p393
+p392
 aS'Pow_Sup_For_Al_User_Stat'
-p394
+p393
 aS'Gov_Man_Instit_Stat'
-p395
+p394
 aS'Non_Gov_Med_fac_Med_Shop_Num'
-p396
+p395
 aS'Dist_Wat_Boun_Mac'
-p397
+p396
 aS'Dist_Grav_kuc_Road'
-p398
+p397
 aS'Nut_Cen_IC_Stat'
-p399
+p398
 asS'k2i'
-p400
-(dp401
+p399
+(dp400
 g141
 I280
 sS'Nearest Village/Town Name having Senior Secondary School'
-p402
+p401
 I321
 sS'Major District Road (Status A(1)/NA(2))'
-p403
+p402
 I0
 sg280
 I276
@@ -816,32 +815,30 @@ I288
 sg299
 I296
 sS'Maternity And Child Welfare Centre Doctors In Position (Numbers)'
-p404
+p403
 I1
 sg203
 I199
 sS'Distance to Railway Station'
-p405
+p404
 I201
 sS'Private Middle  School (Status A(1)/NA(2))'
-p406
+p405
 I2
 sS'TB Clinic Para Medical Para Medical Staff In Position (Numbers)'
-p407
+p406
 I3
 sS'Distance to School For Disabled'
-p408
+p407
 I199
 sS'Nearest Town Name'
-p409
+p408
 I5
 sS'Distance to Private Courier Facility'
-p410
+p409
 I6
-sg383
-I380
 sS'Private Engineering College (Status A(1)/NA(2))'
-p411
+p410
 I7
 sg67
 I63
@@ -850,20 +847,20 @@ I293
 sg195
 I191
 sS'Reference Year'
-p412
+p411
 I8
 sg312
 I309
 sS'Government School For Disabled (Numbers)'
-p413
+p412
 I9
 sg338
 I335
 sS'Distance to Mobile Phone Coverage'
-p414
+p413
 I10
 sS'Village Name'
-p415
+p414
 I11
 sg138
 I134
@@ -874,59 +871,59 @@ I218
 sg165
 I161
 sS'Uncovered  Well (Status A(1)/NA(2))'
-p416
+p415
 I13
 sg340
 I337
 sS'Foothpath (Status A(1)/NA(2))'
-p417
+p416
 I14
 sS'Private Management Institute (Numbers)'
-p418
+p417
 I15
 sS'Village Pin Code (Status A(1)/NA(2))'
-p419
+p418
 I338
 sS'Carts Drivens by Animals (Status A(1)/NA(2))'
-p420
+p419
 I16
 sg185
-I181
+I380
 sg223
 I219
 sg287
 I284
 sS'Tractors (Status A(1)/NA(2))'
-p421
+p420
 I17
 sS'Govt  Arts and Science Degree College (Numbers)'
-p422
+p421
 I18
 sg241
 I237
 sg162
 I158
 sS'Tank/Pond/Lake Functioning All round the year (Status A(1)/NA(2))'
-p423
+p422
 I19
 sS'Power Supply For Domestic Use Summer (April-Sept.) per day (in Hours)'
-p424
+p423
 I20
 sS'Private Non Formal Training Centre (Status A(1)/NA(2))'
-p425
+p424
 I21
 sg380
 I377
 sS'Distance to Cinema/Video Hall'
-p426
+p425
 I22
 sg356
 I353
 sS'Total Households'
-p427
+p426
 I323
 sS'Nearest Village/Town Name having Others'
-p428
+p427
 I23
 sg255
 I251
@@ -939,42 +936,42 @@ I294
 sg128
 I124
 sS'CD Block Name'
-p429
+p428
 I25
 sg284
 I281
 sS'Hospiltal Alternative Medicine Para Medical  Staff Total Strength (Numbers)'
-p430
+p429
 I26
 sS'Govt  Middle School (Numbers)'
-p431
+p430
 I27
 sg283
 I279
 sS'District Head Quarter  (Name)'
-p432
+p431
 I325
 sS'Power Supply For All Users (Status A(1)/NA(2))'
-p433
+p432
 I391
 sg363
 I360
 sS'Distance to Pre-Primary School'
-p434
+p433
 I29
 sS'Handicrafts Commodities (Second)'
-p435
+p434
 I30
 sg130
 I126
 sS'Distance to Private Engineering College'
-p436
+p435
 I326
 sS'Primary  Health Centre Para Medical Staff In Position (Numbers)'
-p437
+p436
 I31
 sS'Primary Health Centre (Numbers)'
-p438
+p437
 I32
 sg56
 I52
@@ -983,80 +980,80 @@ I135
 sg371
 I368
 sS'Uncovered  Well Functioning All round the year (Status A(1)/NA(2))'
-p439
+p438
 I33
 sg228
 I224
 sg155
 I151
 sS'Distance to Primary Health Centre'
-p440
+p439
 I34
 sS'Non Government Medical facilities Medical Prctitioner with MBBS Degree (Numbers)'
-p441
+p440
 I35
 sS'Power Supply For Domestic Use  (Status A(1)/NA(2))'
-p442
+p441
 I36
 sS'Distance to State Highway'
-p443
+p442
 I37
 sS'Public Library (Status A(1)/NA(2))'
-p444
+p443
 I38
 sg375
 I372
 sg374
 I371
 sS'Public Bus Service (Status A(1)/NA(2))'
-p445
+p444
 I39
 sS'Private Polytechnic (Status A(1)/NA(2))'
-p446
+p445
 I41
 sg11
 I7
 sS'Private Secondary School (Status A(1)/NA(2))'
-p447
+p446
 I42
 sg183
 I179
 sS'Sports Field (Status A(1)/NA(2))'
-p448
+p447
 I329
 sS'River/Canal (Status A(1)/NA(2))'
-p449
+p448
 I328
 sS'Wells/Tube Wells Area (in Hectares)'
-p450
+p449
 I44
 sS'Post And Telegraph Office (Status A(1)/NA(2))'
-p451
+p450
 I45
 sg277
 I273
 sS'Distance to Veterinary Hospital'
-p452
+p451
 I286
 sg217
 I213
 sS'Distance to Sports Field'
-p453
+p452
 I46
 sS'Mobile Health Clinic Doctors Total Strength (Numbers)'
-p454
+p453
 I47
 sS'Nearest Arts and Science Degree College (Govt(1)/Private(2))'
-p455
+p454
 I48
 sS'Other District Road (Status A(1)/NA(2))'
-p456
+p455
 I49
 sS'Net Area Sown (in Hectares)'
-p457
+p456
 I50
 sS'Nearest Village/Town Name having School For Disabled'
-p458
+p457
 I51
 sg10
 I6
@@ -1065,31 +1062,31 @@ I278
 sg357
 I354
 sS'Navigable Waterways (River/Canal) (Status A(1)/NA(2))'
-p459
+p458
 I52
 sS'Community Health Centre Doctors In Position (Numbers)'
-p460
+p459
 I136
 sg77
 I73
-sg388
+sg387
 I385
 sg372
 I369
 sg370
 I367
 sS'Private Engineering College (Numbers)'
-p461
+p460
 I55
 sg205
 I201
 sS'Nearest Facility Distance (in Km)'
-p462
+p461
 I56
 sg235
 I231
 sS'Nearest Statutory Town within the State/UT (Distance in km)'
-p463
+p462
 I57
 sg271
 I267
@@ -1100,82 +1097,82 @@ I117
 sg80
 I76
 sS'Govt Engineering College (Status A(1)/NA(2))'
-p464
+p463
 I58
 sg295
 I292
 sg348
 I345
 sS'Private Primary School (Status A(1)/NA(2))'
-p465
+p464
 I59
 sg259
 I255
 sg373
 I370
 sS'Distance to Birth and Death Registration Office'
-p466
+p465
 I60
 sg53
 I49
 sg331
 I328
 sS'Hospital Allopathic (Numbers)'
-p467
+p466
 I61
 sS'Distance to Cycle-pulled Rickshaws   (manual driven)'
-p468
+p467
 I73
 sS'Nearest Village/Town Name having Private Engineering College'
-p469
+p468
 I62
 sg354
 I351
 sS'Manufacturers Commodities (Third)'
-p470
+p469
 I63
 sS'Culturable Waste Land Area (in Hectares)'
-p471
+p470
 I64
 sS'Prim'
-p472
+p471
 I397
 sS'Distance to Black Topped (pucca) Road'
-p473
+p472
 I66
 sS'Nearest Medicine College (Govt(1)/Private(2))'
-p474
+p473
 I67
 sg188
 I184
 sg351
 I348
 sS'Private Middle School (Numbers)'
-p475
+p474
 I68
 sS'Distance to Nutritional Centres-ICDS'
-p476
+p475
 I69
 sS'Distance to Commercial Bank'
-p477
+p476
 I70
 sS'Dispensary Para Medical Staff In Position (Numbers)'
-p478
+p477
 I71
 sS'Tap Water Untreated Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p479
+p478
 I336
 sg327
 I324
 sS'Distance to Auto/Modified Autos'
-p480
+p479
 I72
 sg91
 I87
 sg122
 I118
 sS'Distance to Mobile Health Clinic'
-p481
+p480
 I74
 sg336
 I333
@@ -1186,123 +1183,123 @@ I238
 sg14
 I10
 sS'Whether Drain water is discharged directly into water bodies or to sewar plant (For Water Bodies-1/Sewar Plants-2)'
-p482
+p481
 I75
 sS'Black Topped (pucca) Road (Status A(1)/NA(2))'
-p483
+p482
 I76
 sS'Distance to Cooperative Bank'
-p484
+p483
 I83
 sS'Distance to Senior Secondary School'
-p485
+p484
 I340
 sg234
 I230
 sS'Distance to Hospital Alternative Medicine'
-p486
+p485
 I78
 sg99
 I95
 sg32
 I28
 sS'Gram Panchayat Code'
-p487
+p486
 I342
 sg119
 I115
 sS'Statutory Town Outside the State/UT, if nearest one is not within the State/UT (Name)'
-p488
+p487
 I79
 sS'Open Pucca Drainage Uncovered (Status A(1)/NA(2))'
-p489
+p488
 I219
 sg168
 I164
 sg257
 I253
 sS'Maternity And Child Welfare Centre Para Medical Staff In Position (Numbers)'
-p490
+p489
 I81
 sS'Area Irrigated by Source (in Hectares)'
-p491
+p490
 I82
 sS'Nearest School For Disabled (Govt(1)/Private(2))'
-p492
+p491
 I77
 sg107
 I103
 sS'Total Scheduled Tribes  Female Population of Village'
-p493
+p492
 I84
 sg308
 I305
 sS'Gram Panchayat Name'
-p494
+p493
 I85
 sg378
 I375
 sg359
 I356
 sS'Family Welfare Centre Doctors In Position (Numbers)'
-p495
+p494
 I86
 sg180
 I176
 sS'Private Senior Secondary School (Status A(1)/NA(2))'
-p496
+p495
 I87
 sg369
 I366
 sg88
 I84
 sS'Total Geographical Area (in Hectares)'
-p497
+p496
 I88
 sg181
 I177
 sS'Distance to Polytechnic'
-p498
+p497
 I89
 sS'Birth and Death Registration Office (Status A(1)/NA(2))'
-p499
+p498
 I90
 sg260
 I256
 sg307
 I304
 sS'Hospital Allopathic Doctors Total Strength (Numbers)'
-p500
+p499
 I91
 sg256
 I252
 sS'Sea/River/Ferry Service (Status A(1)/NA(2))'
-p501
+p500
 I92
 sS'Govt Senior Secondary School (Status A(1)/NA(2))'
-p502
+p501
 I93
 sg355
 I352
 sS'Community Health Centre Doctors Total Strength (Numbers)'
-p503
+p502
 I94
 sS'Tap Water Untreated (Status A(1)/NA(2))'
-p504
+p503
 I95
 sS'Post Office (Status A(1)/NA(2))'
-p505
+p504
 I96
 sS'Commercial Bank (Status A(1)/NA(2))'
-p506
+p505
 I97
 sS'National Highway (Status A(1)/NA(2))'
-p507
+p506
 I98
 sg103
 I99
 sS'Family Welfare Centre (Numbers)'
-p508
+p507
 I99
 sg278
 I274
@@ -1311,26 +1308,26 @@ I123
 sg132
 I128
 sS'Private Medicine  College (Status A(1)/NA(2))'
-p509
+p508
 I100
 sS'Nearest Village/Town Name having Secondary School'
-p510
+p509
 I101
 sg178
 I174
 sS'Distance to Hospital Allopathic'
-p511
+p510
 I102
 sg367
 I364
 sS'Rural Production mart or Sanitary hardware outlet availability near the village (Status A(1)/NA(2))'
-p512
+p511
 I103
 sS'Distance to Assembly Polling Station'
-p513
+p512
 I104
 sS'Nearest Village/Town Name having Primary School'
-p514
+p513
 I105
 sg7
 I3
@@ -1339,15 +1336,15 @@ I197
 sg52
 I48
 sS'Govt Vocational Training School/ITI (Numbers)'
-p515
+p514
 I106
 sS'Hand Pump Functioning All round the year (Status A(1)/NA(2))'
-p516
+p515
 I107
 sg153
 I149
 sS'Govt  Secondary School (Numbers)'
-p517
+p516
 I108
 sg311
 I308
@@ -1368,67 +1365,67 @@ I130
 sg298
 I295
 sS'Distance to Nutritional Centres-Anganwadi Centre'
-p518
+p517
 I109
 sS'Community Toilet Complex (including Bath) for General Public (Status A(1)/NA(2))'
-p519
+p518
 I110
 sg66
 I62
 sg290
 I287
 sS'Govt Senior Secondary School (Numbers)'
-p520
+p519
 I111
 sg113
 I109
 sS'Govt  Arts and Science Degree College (Status A(1)/NA(2))'
-p521
+p520
 I112
 sS'Spring (Status A(1)/NA(2))'
-p522
+p521
 I113
 sg58
 I54
 sS'Distance to Public Reading Room'
-p523
+p522
 I114
 sS'Private Secondary  School (Numbers)'
-p524
+p523
 I115
 sS'Tap Water-Treated Functioning All round the year (Status A(1)/NA(2))'
-p525
+p524
 I116
 sS'Distance to Private Bus Service'
-p526
+p525
 I117
 sS'Tank/Pond/Lake (Status A(1)/NA(2))'
-p527
+p526
 I118
 sS'Dispensary Doctors Total Strength (Numbers)'
-p528
+p527
 I119
 sg81
 I77
 sg361
 I358
 sS'Tap Water Untreated Functioning All round the year (Status A(1)/NA(2))'
-p529
+p528
 I120
 sS'PIN Code'
-p530
+p529
 I121
-sg394
+sg393
 I391
 sg170
 I166
 sS'Family Welfare Centre Para Medical  Staff Total Strength (Numbers)'
-p531
+p530
 I226
 sg101
 I97
 sS'Nearest Management Institute (Govt(1)/Private(2))'
-p532
+p531
 I152
 sg191
 I187
@@ -1439,27 +1436,27 @@ I302
 sg365
 I362
 sS'Distance to Family Welfare'
-p533
+p532
 I124
 sg368
 I365
 sS'Agricultural Credit Societies (Status A(1)/NA(2))'
-p534
+p533
 I24
 sg352
 I349
 sg46
 I42
 sS'District Name'
-p535
+p534
 I126
 sS'Distance to Internet Cafes / Common Service Centre (CSC)'
-p536
+p535
 I127
 sg316
 I313
 sS'Distance to Medicine College'
-p537
+p536
 I80
 sg126
 I122
@@ -1468,10 +1465,10 @@ I0
 sg179
 I175
 sS'Distance to Carts Drivens by Animals'
-p538
+p537
 I129
 sS'Tap Water-Treated (Status A(1)/NA(2))'
-p539
+p538
 I333
 sg167
 I163
@@ -1480,48 +1477,48 @@ I31
 sg173
 I169
 sS'Veterinary Hospital Para Medical  Staff Total Strength (Numbers)'
-p540
+p539
 I130
 sg63
 I59
 sS'Government Others (Numbers)'
-p541
+p540
 I131
 sS'Total Scheduled Castes  Female Population of Village'
-p542
+p541
 I132
 sS'Government School For Disabled (Status A(1)/NA(2))'
-p543
+p542
 I133
 sS'Nearest Senior Secondary School (Govt(1)/Private(2))'
-p544
+p543
 I134
 sS'River/Canal Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p545
+p544
 I135
 sS'Taxi  (Status A(1)/NA(2))'
-p546
+p545
 I125
 sS'CD Block Code'
-p547
+p546
 I137
 sS'Distance to Community Health Centre'
-p548
+p547
 I138
 sg93
 I89
 sS'Distance to Daily Newspaper Supply'
-p549
+p548
 I139
 sg262
 I258
 sg232
 I228
 sS'Non Government Medical facilities Charitable (Numbers)'
-p550
+p549
 I140
 sS'Power Supply For All Users Summer (April-Sept.) per day (in Hours)'
-p551
+p550
 I141
 sg51
 I47
@@ -1530,38 +1527,38 @@ I286
 sg129
 I125
 sS'Government Others (Status A(1)/NA(2))'
-p552
+p551
 I142
 sS'Private Polytechnic (Numbers)'
-p553
+p552
 I143
 sS'Distance to Telephone (landlines)'
-p554
+p553
 I144
 sS'Veterinary Hospital (Numbers)'
-p555
+p554
 I145
 sS'Nearest Statutory Town within the State/UT (Name)'
-p556
+p555
 I353
 sS'Distance to Dispensary'
-p557
+p556
 I146
 sS'Non Government Medical facilities Others (Numbers)'
-p558
+p557
 I147
 sS'Primary_School'
-p559
+p558
 I397
 sg100
 I96
 sS'Nearest Polytechnic (Govt(1)/Private(2))'
-p560
+p559
 I148
 sg21
 I17
 sS'Nearest Statutory Town  (Name)'
-p561
+p560
 I149
 sg249
 I245
@@ -1570,48 +1567,48 @@ I311
 sg83
 I79
 sS'Distance to Major District Road'
-p562
+p561
 I331
 sS'Nearest Village/Town Name having Middle School'
-p563
+p562
 I150
 sg82
 I78
 sg109
 I105
 sS'Govt Medicine College (Status A(1)/NA(2))'
-p564
+p563
 I232
 sg137
 I133
 sg377
 I374
 sS'Mobile Health Clinic (Numbers)'
-p565
+p564
 I123
 sS'Village Code'
-p566
+p565
 I153
 sS'Others Functioning All round the year (Status A(1)/NA(2))'
-p567
+p566
 I154
 sg219
 I215
 sS'Non Government Medical facilities Out Patient (Numbers)'
-p568
+p567
 I155
 sS'Power Supply For All Users Winter (Oct.-March) per day (in Hours)'
-p569
+p568
 I156
 sS'Handicrafts  Commodities (Third)'
-p570
+p569
 I157
 sg163
 I159
 sg218
 I214
 sS'Distance to Community Centre with/without TV'
-p571
+p570
 I158
 sg353
 I350
@@ -1622,19 +1619,19 @@ I331
 sg214
 I210
 sS'Primary Heallth Sub Centre Para Medical  Staff Total Strength (Numbers)'
-p572
+p571
 I54
 sS'Sub Post Office (Status A(1)/NA(2))'
-p573
+p572
 I159
 sg322
 I319
 sg303
 I300
 sS'Power Supply For Agriculture Use Winter (Oct.-March)per day (in Hours)'
-p574
+p573
 I160
-sg393
+sg392
 I390
 sg171
 I167
@@ -1642,29 +1639,29 @@ sg339
 I336
 sg174
 I170
-sg386
+sg385
 I383
 sg184
 I180
 sS'All Weather Road (Status A(1)/NA(2))'
-p575
+p574
 I162
 sg159
 I155
 sS'TB Clinic (Numbers)'
-p576
+p575
 I163
 sS'Nearest Private Engineering College (Govt(1)/Private(2))'
-p577
+p576
 I164
 sS'Dispensary (Numbers)'
-p578
+p577
 I165
 sS'Dispensary Para Medical  Staff Total Strength (Numbers)'
-p579
+p578
 I166
 sS'Nearest Village/Town Name having Arts and Science Degree College'
-p580
+p579
 I167
 sg382
 I379
@@ -1673,48 +1670,48 @@ I21
 sg50
 I46
 sS'Hospiltal Alternative Medicine Para Medical Staff In Position (Numbers)'
-p581
+p580
 I168
 sg106
 I102
 sg236
 I232
 sS'Others Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p582
+p581
 I367
 sg347
 I344
 sS'Agricultural Commodities (First)'
-p583
+p582
 I169
 sS'Distance to Vans'
-p584
+p583
 I170
 sS'Private Others (Status A(1)/NA(2))'
-p585
+p584
 I171
 sg74
 I70
 sS'River/Canal Functioning All round the year (Status A(1)/NA(2))'
-p586
+p585
 I172
 sS'Veterinary Hospital Para Medical Staff In Position (Numbers)'
-p587
+p586
 I173
 sS'Tanks/Lakes Area (in Hectares)'
-p588
+p587
 I174
 sg169
 I165
 sg209
 I205
 sS'Distance to Public Bus Service'
-p589
+p588
 I237
 sg300
 I297
 sS'Sub District Code'
-p590
+p589
 I175
 sg321
 I318
@@ -1727,61 +1724,61 @@ I22
 sg116
 I112
 sS'Agricultural Commodities (Third)'
-p591
+p590
 I176
 sS'Distance to Public Distribution System (PDS) Shop'
-p592
+p591
 I177
 sS'Community Health Centre Para Medical Staff In Position (Numbers)'
-p593
+p592
 I178
 sS'Govt Pre-Primary School (Nursery/LKG/UKG) (Status A(1)/NA(2))'
-p594
+p593
 I297
 sS'Hand Pump (Status A(1)/NA(2))'
-p595
+p594
 I180
 sg263
 I259
 sg108
 I104
 sS'Distance to'
-p596
+p595
 I181
 sS'Nutritional Centres-Anganwadi Centre (Status A(1)/NA(2))'
-p597
+p596
 I182
 sg366
 I363
 sS'Distance to All Weather Road'
-p598
+p597
 I238
 sS'Nearest Statutory Town (Distance in km)'
-p599
+p598
 I183
 sS'Power Supply For Agriculture Use (Status A(1)/NA(2))'
-p600
+p599
 I184
 sg306
 I303
 sg49
 I45
 sS'Canals Area (in Hectares)'
-p601
+p600
 I185
 sS'No  Drainage (Status A(1)/NA(2))'
-p602
+p601
 I186
 sS'Public Reading Room (Status A(1)/NA(2))'
-p603
+p602
 I187
 sS'Tube Wells/Borehole Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p604
+p603
 I188
 sg210
 I206
 sS'Forest Area (in Hectares)'
-p605
+p604
 I189
 sg272
 I268
@@ -1790,12 +1787,12 @@ I116
 sg212
 I208
 sS'Barren & Un-cultivable Land Area (in Hectares)'
-p606
+p605
 I191
 sg72
 I68
 sS'Maternity And Child Welfare Centre Doctors Total Strength (Numbers)'
-p607
+p606
 I192
 sg251
 I247
@@ -1805,170 +1802,170 @@ sg317
 I314
 sg193
 I189
-sg389
+sg388
 I386
 sS'Land Under Miscellaneous Tree Crops etc. Area (in Hectares)'
-p608
+p607
 I193
 sg304
 I301
 sg102
 I98
 sS'Tube Wells/Borehole (Status A(1)/NA(2))'
-p609
+p608
 I194
 sg160
 I156
 sS'Community Toilet Complex (excluding Bath) for General Public (Status A(1)/NA(2))'
-p610
+p609
 I196
 sS'Govt Vocational Training School/ITI (Status A(1)/NA(2))'
-p611
+p610
 I197
 sS'Private Bus Service (Status A(1)/NA(2))'
-p612
+p611
 I198
 sS'Hospiltal Alternative Medicine (Numbers)'
-p613
+p612
 I4
 sS'Nearest Secondary School (Govt(1)/Private(2))'
-p614
+p613
 I200
 sg189
 I185
 sS'Primary Heallth Sub Centre Doctors Total Strength (Numbers)'
-p615
+p614
 I202
 sS'Sub District Head Quarter (Distance in km)'
-p616
+p615
 I203
-sg391
+sg390
 I388
 sS'Community waste disposal system after house to house collection (Status A(1)/NA(2))'
-p617
+p616
 I204
 sS'Non Government Medical facilities In And Out Patient (Numbers)'
-p618
+p617
 I205
 sS'Open Drainage (Status A(1)/NA(2))'
-p619
+p618
 I206
 sS'Power Supply For Domestic Use Winter (Oct.-March) per day (in Hours)'
-p620
+p619
 I207
 sg71
 I67
 sS'ASHA (Status A(1)/NA(2))'
-p621
+p620
 I208
 sS'Statutory Town Outside the State/UT distance, if nearest one is not within the State/UT (Distance in km)'
-p622
+p621
 I209
 sS'Distance to Weekly Haat'
-p623
+p622
 I210
 sg172
 I168
 sS'Public Call Office /Mobile (PCO) (Status A(1)/NA(2))'
-p624
+p623
 I211
 sS'Private Courier Facility (Status A(1)/NA(2))'
-p625
+p624
 I212
 sS'Cooperative Bank (Status A(1)/NA(2))'
-p626
+p625
 I213
 sS'Tap Water-Treated Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p627
+p626
 I214
 sS'Covered Well (Status A(1)/NA(2))'
-p628
+p627
 I215
 sg264
 I260
 sS'Govt Primary School (Numbers)'
-p629
+p628
 I216
 sS'Distance to Cycle-pulled Rickshaws (machine driven)'
-p630
+p629
 I217
 sS'Govt Secondary School (Status A(1)/NA(2))'
-p631
+p630
 I218
 sg20
 I16
 sS'Mobile Phone Coverage (Status A(1)/NA(2))'
-p632
+p631
 I220
 sS'Spring Functioning All round the year (Status A(1)/NA(2))'
-p633
+p632
 I221
 sg258
 I254
-sg392
+sg391
 I389
 sg87
 I83
 sS'Cinema/Video Hall (Status A(1)/NA(2))'
-p634
+p633
 I222
 sS'Total Scheduled Tribes  Male Population of Village'
-p635
+p634
 I223
 sg208
 I204
 sS'Nearest Vocational Training School/ITI (Govt(1)/Private(2))'
-p636
+p635
 I224
 sg23
 I19
 sS'Distance to Post Office'
-p637
+p636
 I225
 sS'Community Health Centre (Numbers)'
-p638
+p637
 I122
 sS'Govt Medicine  College (Numbers)'
-p639
+p638
 I227
 sS'Auto/Modified Autos (Status A(1)/NA(2))'
-p640
+p639
 I228
 sS'Total Unirrigated Land Area (in Hectares)'
-p641
+p640
 I229
 sg37
 I33
 sg341
 I338
 sS'Rural Production Centres or Sanitary hardware outlet availability near the village (Status A(1)/NA(2))'
-p642
+p641
 I230
 sg246
 I242
 sg345
 I342
 sS'Total Population of Village'
-p643
+p642
 I231
 sS'Govt  Pre - Primary School (Nursery/LKG/UKG) (Numbers)'
-p644
+p643
 I151
 sg73
 I69
 sS'Power Supply For Commercial Use (Status A(1)/NA(2))'
-p645
+p644
 I233
 sS'Nearest Village/Town Name having Pre - Primary School'
-p646
+p645
 I234
 sS'Distance to Middle School'
-p647
+p646
 I235
 sg238
 I234
 sS'Distance to Sea/River/Ferry Service'
-p648
+p647
 I236
 sg85
 I81
@@ -1985,18 +1982,18 @@ I72
 sg86
 I82
 sS'Distance to Maternity And Child Welfare Centre'
-p649
+p648
 I239
 sS'Sub District Head Quarter (Name)'
-p650
+p649
 I240
 sS'Waterfall Area (in Hectares)'
-p651
+p650
 I241
 sg211
 I207
 sS'Telephone (landlines) (Status A(1)/NA(2))'
-p652
+p651
 I242
 sg146
 I142
@@ -2007,14 +2004,14 @@ I178
 sg200
 I196
 sS'Nearest Others (Govt(1)/Private(2))'
-p653
+p652
 I245
 sg140
 I136
 sg192
 I188
 sS'Distance to Secondary School'
-p654
+p653
 I246
 sg75
 I71
@@ -2025,55 +2022,55 @@ I30
 sg38
 I34
 sS'Non Government Medical facilities Medical Prctitioner with other Degree (Numbers)'
-p655
+p654
 I247
 sg164
 I160
 sg13
 I9
 sS'Primary  Health Centre Para Medical  Staff Total Strength (Numbers)'
-p656
+p655
 I248
 sS'Sub District Name'
-p657
+p656
 I249
 sg275
 I271
 sg57
 I53
 sS'Distance to Navigable Waterways (River/Canal)'
-p658
+p657
 I374
 sS'Hand Pump Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p659
+p658
 I250
 sS'Maternity And Child Welfare Centre Para Medical  Staff Total Strength (Numbers)'
-p660
+p659
 I251
 sS'Other Source (specify) Area (in Hectares)'
-p661
+p660
 I252
 sS'TB Clinic Para Medical Para Medical  Staff Total Strength (Numbers)'
-p662
+p661
 I253
 sg9
 I5
 sg323
 I320
 sS'Veterinary Hospital Doctors Total Strength (Numbers)'
-p663
+p662
 I254
 sg250
 I246
 sg281
 I277
 sS'Distance to Other District Road'
-p664
+p663
 I255
 sg166
 I162
 sS'Distance to Agricultural Marketing Society'
-p665
+p664
 I256
 sg330
 I327
@@ -2086,61 +2083,61 @@ I132
 sg65
 I61
 sS'Sports Club/Recreation Centre (Status A(1)/NA(2))'
-p666
+p665
 I313
 sg69
 I65
-sg384
+sg383
 I381
-sg395
+sg394
 I392
 sS'Private Others (Numbers)'
-p667
+p666
 I260
 sS'Community Bio-gas or recycle of waste for production use (Status A(1)/NA(2))'
-p668
+p667
 I261
 sS'Private Vocational Training School/ITI (Status A(1)/NA(2))'
-p669
+p668
 I262
 sS'Private Vocational Training School/ITI (Numbers)'
-p670
+p669
 I369
 sg233
 I229
-sg399
+sg398
 I396
 sg230
 I226
 sS'Mobile Health Clinic Doctors In Position (Numbers)'
-p671
+p670
 I264
 sg220
 I216
 sS'Assembly Polling Station (Status A(1)/NA(2))'
-p672
+p671
 I265
 sg24
 I20
 sg42
 I38
 sS'Distance to Taxi'
-p673
+p672
 I266
 sS'Government Non Formal Training Centre (Numbers)'
-p674
+p673
 I267
 sg33
 I29
 sg196
 I192
 sS'Family Welfare Centre Doctors Total Strength (Numbers)'
-p675
+p674
 I270
 sg237
 I233
 sS'Private  Primary School (Numbers)'
-p676
+p675
 I272
 sg104
 I100
@@ -2155,7 +2152,7 @@ I249
 sg332
 I329
 sS'Govt Polytechnic (Status A(1)/NA(2))'
-p677
+p676
 I273
 sg288
 I285
@@ -2164,10 +2161,10 @@ I373
 sg96
 I92
 sS'Distance to Pin Code'
-p678
+p677
 I380
 sS'Non Government Medical facilities Traditional Practitioner and Faith  Healer (Numbers)'
-p679
+p678
 I275
 sg213
 I209
@@ -2176,62 +2173,62 @@ I152
 sg176
 I172
 sS'Daily Newspaper Supply (Status A(1)/NA(2))'
-p680
+p679
 I276
 sS'Mobile Health Clinic Para Medical Staff In Position(Numbers)'
-p681
+p680
 I277
 sg360
 I357
 sg61
 I57
 sS'Railway Station (Status A(1)/NA(2))'
-p682
+p681
 I278
 sS'State Name'
-p683
+p682
 I339
 sg29
 I25
 sS'Nearest Pre - Primary School (Nursery/LKG/UKG) Status (Govt(1)/Private(2))'
-p684
+p683
 I279
 sg157
 I153
 sg343
 I340
 sS'District Code'
-p685
+p684
 I280
 sS'Nearest Village/Town Name having Polytechnic'
-p686
+p685
 I281
 sS'Distance to Self - Help Group (SHG)'
-p687
+p686
 I282
 sS'Area under Non-Agricultural Uses (in Hectares)'
-p688
+p687
 I283
 sS'Permanent Pastures and Other Grazing Land Area (in Hectares)'
-p689
+p688
 I381
 sS'Primary Health Centre  Doctors Total Strength (Numbers)'
-p690
+p689
 I285
 sg17
 I13
 sg12
 I8
 sS'Primary Heallth Sub Centre Doctors In Position (Numbers)'
-p691
+p690
 I287
 sS'District Head Quarter  (Distance in km)'
-p692
+p691
 I288
 sg216
 I212
 sS'Distance to Public Library'
-p693
+p692
 I289
 sg92
 I88
@@ -2240,7 +2237,7 @@ I91
 sg114
 I110
 sS'Govt Middle  School (Status A(1)/NA(2))'
-p694
+p693
 I291
 sg269
 I265
@@ -2256,43 +2253,43 @@ sg270
 I266
 sg346
 I343
-sg397
+sg396
 I394
 sg45
 I41
 sg335
 I332
 sS'Hospital Allopathic Para Medical  Staff Total Strength (Numbers)'
-p695
+p694
 I292
 sg254
 I250
 sS'Distance to Post And Telegraph Office'
-p696
+p695
 I293
 sS'Distance to Vocational Training School/ITI'
-p697
+p696
 I294
 sg68
 I64
 sg154
 I150
 sS'Open Pucca Drainage Covered with Tiles Slabs (Status A(1)/NA(2))'
-p698
+p697
 I295
 sS'Open Kuccha Drainage (Status A(1)/NA(2))'
-p699
+p698
 I296
 sg294
 I291
 sS'Total Female Population of Village'
-p700
+p699
 I179
 sS'Distance to Non Formal Training Centre'
-p701
+p700
 I358
 sS'Is the Area Covered under Total Sanitation Campaign (TSC)? (Status A(1)/NA(2))'
-p702
+p701
 I298
 sg47
 I43
@@ -2307,7 +2304,7 @@ I139
 sg215
 I211
 sS'Nearest Primary School (Govt(1)/Private(2))'
-p703
+p702
 I257
 sg31
 I27
@@ -2316,28 +2313,28 @@ I183
 sg381
 I378
 sS'Veterinary Hospital Doctors In Position (Numbers)'
-p704
+p703
 I300
 sg147
 I143
 sS'Mandis/Regular Market (Status A(1)/NA(2))'
-p705
+p704
 I301
 sS'Uncovered  Well Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p706
+p705
 I302
 sS'Power Supply For Commercial Use Summer (April-Sept.) per day (in Hours)'
-p707
+p706
 I303
 sg55
 I51
 sS'Govt Management Institute (Numbers)'
-p708
+p707
 I383
 sg248
 I244
 sS'Distance to Sub Post Office'
-p709
+p708
 I244
 sg344
 I341
@@ -2346,21 +2343,21 @@ I198
 sg15
 I11
 sS'Distance to Public Call Office /Mobile (PCO)'
-p710
+p709
 I305
 sS'TB Clinic Doctors Total Strength (Numbers)'
-p711
+p710
 I306
 sg110
 I106
 sS'Dispensary Doctors In Position (Numbers)'
-p712
+p711
 I307
 sS'Private School For Disabled ( Status A(1)/NA(2))'
-p713
+p712
 I308
 sS'Covered Well Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p714
+p713
 I309
 sg70
 I66
@@ -2368,32 +2365,32 @@ sg265
 I261
 sg342
 I339
-sg385
+sg384
 I382
 sS'Covered Well Functioning All round the year (Status A(1)/NA(2))'
-p715
+p714
 I314
 sg54
 I50
 sg62
 I58
 sS'Power Supply For Agriculture Use Summer (April-Sept.) per day (in Hours)'
-p716
+p715
 I311
 sS'Private Non Formal Training Centre (Numbers)'
-p717
+p716
 I312
 sg197
 I193
 sS'Distance to Others'
-p718
+p717
 I310
 sg5
 I1
 sg27
 I23
 sS'Power Supply For Commercial Use Winter (Oct.-March) per day (in Hours)'
-p719
+p718
 I315
 sg135
 I131
@@ -2404,7 +2401,7 @@ I40
 sg131
 I127
 sS'Non Government Medical facilities Medical Practitioner with no  Degree (Numbers)'
-p720
+p719
 I317
 sg145
 I141
@@ -2413,16 +2410,16 @@ I321
 sg328
 I325
 sS'Govt Engineering College (Numbers)'
-p721
+p720
 I318
 sS'Nutritional Centres-Others (Status A(1)/NA(2))'
-p722
+p721
 I343
 sS'Distance to Management Institute'
-p723
+p722
 I319
 sS'Total Scheduled Castes  Male Population of Village'
-p724
+p723
 I320
 sg252
 I248
@@ -2435,86 +2432,86 @@ I140
 sg225
 I221
 sS'Handicrafts Commodities (First)'
-p725
+p724
 I316
 sS'Mobile Health Clinic Para Medical  Staff Total Strength (Numbers)'
-p726
+p725
 I128
 sS'Nearest Village/Town Name having Non Formal Training Centre'
-p727
+p726
 I322
 sg286
 I283
 sg84
 I80
 sS'State Code'
-p728
+p727
 I324
 sS'Tank/Pond/Lake Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p729
+p728
 I304
 sS'Manufacturers Commodities (First)'
-p730
+p729
 I28
 sg149
 I145
 sS'Nearest Village/Town Name having Management Institute'
-p731
+p730
 I327
 sg117
 I113
 sS'Manufacturers Commodities (Second)'
-p732
+p731
 I65
 sg59
 I55
 sS'Total Scheduled Castes Population of Village'
-p733
+p732
 I43
 sS'Hospital Allopathic Doctors In Position (Numbers)'
-p734
+p733
 I263
 sg94
 I90
 sg379
 I376
 sS'Distance to TB Clinic'
-p735
+p734
 I330
 sS'TB Clinic Doctors In Position (Numbers)'
-p736
+p735
 I53
 sg358
 I355
 sg231
 I227
 sS'Distance to Sports Club/Recreation Centre'
-p737
+p736
 I332
 sg279
 I275
 sg89
 I85
 sS'Fallows Land other than Current Fallows Area (in Hectares)'
-p738
+p737
 I334
 sS'Government Non Formal Training Centre (Status A(1)/NA(2))'
-p739
+p738
 I335
 sg60
 I56
 sS'Distance to Tractors'
-p740
+p739
 I337
 sS'Private Pre - Primary School (Nursery/LKG/UKG) (Numbers)'
-p741
+p740
 I190
 sg36
 I32
 sg90
 I86
 sS'Cycle-pulled Rickshaws   (manual driven) (Status A(1)/NA(2))'
-p742
+p741
 I341
 sg6
 I2
@@ -2525,7 +2522,7 @@ I235
 sg64
 I60
 sS'State Highway (Status A(1)/NA(2))'
-p743
+p742
 I344
 sg273
 I269
@@ -2534,7 +2531,7 @@ I262
 sg186
 I182
 sS'Nearest Town Distance from Village (in Km.)'
-p744
+p743
 I345
 sg18
 I14
@@ -2543,37 +2540,37 @@ I119
 sg276
 I272
 sS'Cycle-pulled Rickshaws (machine driven) (Status A(1)/NA(2))'
-p745
+p744
 I346
 sg40
 I36
 sS'Spring Functioning in Summer months (April-September) (Status A(1)/NA(2))'
-p746
+p745
 I347
 sg362
 I359
 sS'Hospiltal Alternative Medicine Doctors In Position (Numbers)'
-p747
+p746
 I348
 sS'Distance to National Highway'
-p748
+p747
 I349
 sS'Distance to Gravel (kuchha) Roads'
-p749
+p748
 I395
 sS'Community Health Centre Para Medical  Staff Total Strength (Numbers)'
-p750
+p749
 I350
 sS'Distance to ASHA'
-p751
+p750
 I269
 sg364
 I361
 sS'Others (Status A(1)/NA(2))'
-p752
+p751
 I351
 sS'Total Male Population of Village'
-p753
+p752
 I352
 sg221
 I217
@@ -2582,62 +2579,62 @@ I315
 sg206
 I202
 sS'Distance to Primary Health Sub Centre'
-p754
+p753
 I354
 sS'Private School For Disabled (Numbers)'
-p755
+p754
 I355
 sg112
 I108
 sS'Private Senior Secondary  School (Numbers)'
-p756
+p755
 I356
 sg204
 I200
 sS'Agricultural Commodities (Second)'
-p757
+p756
 I357
 sS'Distance to Nutritional Centres-Others'
-p758
+p757
 I161
 sg315
 I312
 sg118
 I114
 sS'Gravel (kuchha) Roads (Status A(1)/NA(2))'
-p759
+p758
 I259
 sS'Vans (Status A(1)/NA(2))'
-p760
+p759
 I359
 sS'Nearest Village/Town Name having Medicine College'
-p761
+p760
 I360
 sg325
 I322
 sS'Tube Wells/Borehole Functioning All round the year (Status A(1)/NA(2))'
-p762
+p761
 I361
 sS'Water Bounded Macadam (Status A(1)/NA(2))'
-p763
+p762
 I243
 sS'Primary Health  Centre Doctors In Position (Numbers)'
-p764
+p763
 I362
 sS'Private Pre - Primary School (Nursery/LKG/UKG) (Status A(1)/NA(2))'
-p765
+p764
 I363
 sS'Distance to Primary School'
-p766
+p765
 I364
 sS'Primary Heallth Sub Centre (Numbers)'
-p767
+p766
 I268
 sS'Private Management Institute (Status A(1)/NA(2))'
-p768
+p767
 I365
 sS'Distance to Water Bounded Macadam'
-p769
+p768
 I394
 sg243
 I239
@@ -2646,114 +2643,114 @@ I243
 sg261
 I257
 sS'Primary Heallth Sub Centre Para Medical Staff In Position (Numbers)'
-p770
+p769
 I368
 sg115
 I111
 sS'Weekly Haat (Status A(1)/NA(2))'
-p771
+p770
 I12
 sS'Distance to Mandis/Regular Market'
-p772
+p771
 I370
 sg158
 I154
 sS'Private  Arts and Science Degree College (Status A(1)/NA(2))'
-p773
+p772
 I371
 sg319
 I316
 sg326
 I323
 sS'Internet Cafes / Common Service Centre (CSC) (Status A(1)/NA(2))'
-p774
+p773
 I271
 sS'Closed Drainage (Status A(1)/NA(2))'
-p775
+p774
 I372
 sg329
 I326
 sg19
 I15
 sS'Total Scheduled Tribes Population of Village'
-p776
+p775
 I373
 sg274
 I270
 sS'Govt Polytechnic (Numbers)'
-p777
+p776
 I375
 sS'Maternity And Child Welfare Centre (Numbers)'
-p778
+p777
 I376
-sg398
+sg397
 I395
 sS'Distance to Foothpath'
-p779
+p778
 I377
 sS'Non Government Medical facilities Medicine Shop (Numbers)'
-p780
+p779
 I393
 sS'Hospital Allopathic Para Medical Staff In Position (Numbers)'
-p781
+p780
 I378
 sS'Self - Help Group (SHG) (Status A(1)/NA(2))'
-p782
+p781
 I379
 sS'Nearest Middle School (Govt(1)/Private(2))'
-p783
+p782
 I299
 sS'Community Centre with/without TV (Status A(1)/NA(2))'
-p784
+p783
 I274
 sg151
 I147
 sg161
 I157
 sS'Family Welfare Centre Para Medical Staff In Position (Numbers)'
-p785
+p784
 I284
 sS'Public Distribution System (PDS) Shop (Status A(1)/NA(2))'
-p786
+p785
 I382
 sS'Nearest Non Formal Training Centre (Govt(1)/Private(2))'
-p787
+p786
 I290
 sS'Distance to Arts and Science Degree College'
-p788
+p787
 I384
 sg190
 I186
 sS'Private  Arts and Science Degree College (Numbers)'
-p789
+p788
 I386
 sg350
 I347
 sS'Private Medicine College (Numbers)'
-p790
+p789
 I387
 sg111
 I107
 sg105
 I101
 sS'No System (Garbage on road/street) (Status A(1)/NA(2))'
-p791
+p790
 I388
 sg240
 I236
 sg39
 I35
 sS'Nearest Village/Town Name having Vocational Training School/ITI'
-p792
+p791
 I389
 sS'Hospiltal Alternative Medicine Doctors Total Strength (Numbers)'
-p793
+p792
 I390
 sS'ATM (Status A(1)/NA(2))'
-p794
+p793
 I385
 sS'Current Fallows Area (in Hectares)'
-p795
+p794
 I40
 sg133
 I129
@@ -2764,40 +2761,41 @@ I306
 sg302
 I299
 sS'Govt Primary School (Status A(1)/NA(2))'
-p796
+p795
 I195
 sS'Govt Management Institute (Status A(1)/NA(2))'
-p797
+p796
 I392
-sg387
+sg386
 I384
-sg390
+sg389
 I387
 sg285
 I282
-sg396
+sg395
 I393
 sS'Agricultural Marketing Society (Status A(1)/NA(2))'
-p798
+p797
 I258
 sg124
 I120
 sS'Distance to Agricultural Credit Societies'
-p799
+p798
 I366
 sg337
 I334
 sS'Nutritional Centres-ICDS (Status A(1)/NA(2))'
-p800
+p799
 I396
 ssS'new_fields'
-p801
-(lp802
-g559
+p800
+(lp801
+g558
 asS'tree'
-p803
+p802
+(lp803
 (lp804
-(lp805
+a(lp805
 a(lp806
 a(lp807
 a(lp808
@@ -2840,15 +2838,15 @@ a(lp844
 a(lp845
 a(lp846
 a(lp847
-a(lp848
-(lp849
+(lp848
 g323
 aS'Gender'
-p850
-aa(lp851
+p849
+aa(lp850
 g136
-ag850
-aaa(lp852
+ag849
+aaa(lp851
+a(lp852
 a(lp853
 a(lp854
 a(lp855
@@ -3035,21 +3033,21 @@ a(lp1035
 a(lp1036
 a(lp1037
 a(lp1038
-a(lp1039
-(lp1040
+(lp1039
 g355
-ag850
-aa(lp1041
+ag849
+aa(lp1040
 g183
-ag850
-aa(lp1042
+ag849
+aa(lp1041
 g47
 aS'Caste'
-p1043
-aa(lp1044
+p1042
+aa(lp1043
 g376
-ag1043
-aaa(lp1045
+ag1042
+aaa(lp1044
+a(lp1045
 a(lp1046
 a(lp1047
 a(lp1048
@@ -3190,14 +3188,14 @@ a(lp1182
 a(lp1183
 a(lp1184
 a(lp1185
-a(lp1186
-(lp1187
+(lp1186
 g227
-ag850
-aa(lp1188
+ag849
+aa(lp1187
 g88
-ag850
-aaa(lp1189
+ag849
+aaa(lp1188
+a(lp1189
 a(lp1190
 a(lp1191
 a(lp1192
@@ -3220,18 +3218,17 @@ a(lp1208
 a(lp1209
 a(lp1210
 a(lp1211
-a(lp1212
-(lp1213
+(lp1212
 g276
 aS'subclass'
-p1214
-aa(lp1215
+p1213
+aa(lp1214
 g220
-ag1214
-aa(lp1216
+ag1213
+aa(lp1215
 g367
-ag1214
-aa(lp1217
+ag1213
+aa(lp1216
 g261
-ag1214
+ag1213
 aaasb.

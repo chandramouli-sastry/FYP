@@ -120,26 +120,30 @@ class NumericRatioFact:
             print("Flattening Done. Getting Properties...")
             properties = list(map(get_property, flattened))
             interestingnesses = QuartileDeviation.compute(properties)
-            max_index = np.argmax(interestingnesses)
-            value_global_local = partitions_perc[max_index]
-            field = args[max_index][0]
-            fact_dict["data"] = [(self.fields[0],convert(curr[2][self.fields[0]])),(self.fields[1],convert(curr[2][self.fields[1]])),curr[1]]
-            fact_dict["perc"] = perc
-            fact_dict["value_global_local"] = value_global_local
-            fact_dict["partition_field"] = field
-            if curr[1] == self.max:
-                print( "{} perc of villages have {} {} and {} {}.\n".format(perc,
-                                                                         convert(curr[2][self.fields[0]]), self.fields[0],
-                                                                         convert(curr[2][self.fields[1]]), self.fields[1]))
-            else:
-                print( "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}.\n".format(
-                    perc,
-                    self.fields[0], self.fields[1],
-                    curr[1], curr[2][self.fields[0]], self.fields[0],
-                    curr[2][self.fields[1]], self.fields[1]))
-            print("Field :\t",field)
-            l.append(fact_dict)
-            pprint.pprint(value_global_local,indent=2)
+            max_indices = np.argpartition(interestingnesses, -2)[-2:]
+
+            max_indices[np.argsort(interestingnesses[max_indices])]
+
+            for max_index in max_indices:
+                value_global_local = partitions_perc[max_index]
+                field = args[max_index][0]
+                fact_dict["data"] = [(self.fields[0],convert(curr[2][self.fields[0]])),(self.fields[1],convert(curr[2][self.fields[1]])),curr[1]]
+                fact_dict["perc"] = perc
+                fact_dict["value_global_local"] = value_global_local
+                fact_dict["partition_field"] = field
+                if curr[1] == self.max:
+                    print( "{} perc of villages have {} {} and {} {}.\n".format(perc,
+                                                                             convert(curr[2][self.fields[0]]), self.fields[0],
+                                                                             convert(curr[2][self.fields[1]]), self.fields[1]))
+                else:
+                    print( "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}.\n".format(
+                        perc,
+                        self.fields[0], self.fields[1],
+                        curr[1], curr[2][self.fields[0]], self.fields[0],
+                        curr[2][self.fields[1]], self.fields[1]))
+                print("Field :\t",field)
+                l.append(fact_dict)
+                pprint.pprint(value_global_local,indent=2)
         f.write(json.dumps(l))
         f.close()
         print("####DONE####")
