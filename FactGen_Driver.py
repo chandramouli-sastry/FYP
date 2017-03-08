@@ -1,4 +1,7 @@
 import pickle
+from Properties.Properties import Properties
+# l=[4,3,5,1,2]
+# Properties(l)
 
 from FactGen.NumericRatioFact import NumericRatioFact
 

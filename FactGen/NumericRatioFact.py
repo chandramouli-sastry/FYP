@@ -50,8 +50,8 @@ def get_property(values_list):
 class NumericRatioFact:
     def __init__(self):
         self.graph = pickle.load(open("Resources/graph.pkl","rb"),encoding="latin1")
-        #self.fields = ["Tot_Fem_Pop_of_Vil","Tot_Mal_Pop_of_Vil"]
-        self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
+        self.fields = ["Tot_Fem_Pop_of_Vil","Tot_Mal_Pop_of_Vil"]
+        #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
         fields = copy.deepcopy(self.fields)
         #self.choose_fields()
         self.max = 9999
@@ -120,9 +120,9 @@ class NumericRatioFact:
             print("Flattening Done. Getting Properties...")
             properties = list(map(get_property, flattened))
             interestingnesses = QuartileDeviation.compute(properties)
-            max_indices = np.argpartition(interestingnesses, -2)[-2:]
+            max_indices = [np.argmax(interestingnesses)]#np.argpartition(interestingnesses, -2)[-2:]
 
-            max_indices[np.argsort(interestingnesses[max_indices])]
+            #max_indices[np.argsort(interestingnesses[max_indices])]
 
             for max_index in max_indices:
                 value_global_local = partitions_perc[max_index]

@@ -1,19 +1,19 @@
 
 import types
 import math
-
+from collections import Counter
 
 
 class Properties:
 
     def __init__(self,list_values):
         functions = []
-        for i in self.__dict__:
-            if type(i) == types.FunctionType and i.startswith("compute"):
+        for i in Properties.__dict__:
+            if type(Properties.__dict__[i]) == types.FunctionType and i.startswith("compute"):
                 functions.append(i)
         properties = []
         for func in functions:
-            properties.append(self.__dict__[func](list_values))
+            properties.append(Properties.__dict__[func](self,list_values))
         self.property = self.norm(properties)
 
     def norm(self,properties):
@@ -22,9 +22,35 @@ class Properties:
     def _compute_mean(self,list_values):
         return sum(list_values)/float(len(list_values))
 
+    def bin_search(self,list_,value):
+        low , high = 0, len(list_)
+        while low<=high:
+            mid = (low+high)//2
+            if list_[mid][0]<= value <= list_[mid][1] :
+                return list_[mid]
+            elif list_[mid][0] < value:
+                low = mid + 1
+            else:
+                high=mid -1
+
+    def _discretize(self,list_values):
+        _min = math.floor(min(list_values))
+        _max = math.ceil(max(list_values))
+        num_partitions = 100
+        step = (_max - _min) / num_partitions
+        start = _min
+        counts = {(start + i*step, start + (i + 1) * step):0 for i in range(num_partitions)}
+        keys = sorted(counts.keys())
+        for element in list_values:
+            range_ = self.bin_search(keys, element)
+            counts[range_] +=1
+        return counts
+
+
     def compute_entropy(self,list_values):
+        list_values = self._discretize(list_values).values()
         sum_array = sum(list_values)
-        result = sum([i / sum_array * math.log(i / sum_array) for i in list_values])
+        result = sum([i / sum_array * math.log(i / sum_array) for i in list_values if i!=0])
         return result
 
     def compute_variance(self,list_values):
