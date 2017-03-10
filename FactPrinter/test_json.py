@@ -38,16 +38,8 @@ def global_perc_trend_statistics(perc_range_dict,field1,field2,trend_ratio,parti
 				value_gp_list.append(tup[1])
 			avg_percentage=get_average_percentage(value_gp_list)
 
-
 			print "Approximately "+str(avg_percentage)+"% villages in the states of "+str(state_list)+" have the " \
 			"ratio between "+field1+" and "+field2+" as "+str(trend_ratio)
-
-
-			#print str(avg_percentage)+" : "+str(state_list)+" "+str(value_gp_list)
-			#Approximately (x%) villages in the states of A,B,C
-			# have the ratio between f1 and f2 as 'ratio'
-
-
 
 def global_perc_based_trend_generator(data_dict,field1,field2,partition_field,total_no_trends):
 	#Q : Which states / How many states have x% of their villages following the ratio trend ?
