@@ -4,18 +4,19 @@ from pprint import pprint
 from QuartileCalculation import *
 from PercentageRangeDict import *
 from testdata import *
+from functools import reduce
 
 #-------------------------------------------------------------------------------------------
-data = u'data'
-perc = u'perc'
-partition_field = u'partition_field'
-values_lg = u'value_global_local'
-global_perc=u'global_perc'
-local_perc=u'local_perc'
+data = 'data'
+perc = 'perc'
+partition_field = 'partition_field'
+values_lg = 'value_global_local'
+global_perc='global_perc'
+local_perc='local_perc'
 #-------------------------------------------------------------------------------------------
 
 def separator():
-	print "-------------------------------------------------------------------------"
+	print("-------------------------------------------------------------------------")
 
 def precedent_generator(value,quartile1,quartile3):
 	if value>quartile3:
@@ -38,8 +39,8 @@ def global_perc_trend_statistics(perc_range_dict,field1,field2,trend_ratio,parti
 				value_gp_list.append(tup[1])
 			avg_percentage=get_average_percentage(value_gp_list)
 
-			print "Approximately "+str(avg_percentage)+"% villages in the states of "+str(state_list)+" have the " \
-			"ratio between "+field1+" and "+field2+" as "+str(trend_ratio)
+			print("Approximately "+str(avg_percentage)+"% villages in the states of "+str(state_list)+" have the " \
+			"ratio between "+field1+" and "+field2+" as "+str(trend_ratio))
 
 def global_perc_based_trend_generator(data_dict,field1,field2,partition_field,total_no_trends):
 	#Q : Which states / How many states have x% of their villages following the ratio trend ?
@@ -70,9 +71,9 @@ def basic_perc_based_trend_generate(data_dict,field1,field2,total_no_trends):
 
 	for trend_no in range(0,len(data_dict)):
 		trend_ratio=float(data_dict[trend_no][data][2])
-		print (precedent_generator(trend_perc_dict[trend_no], q1, q3) + str(
+		print((precedent_generator(trend_perc_dict[trend_no], q1, q3) + str(
 				round(trend_perc_dict[trend_no], 4)) + "% villages have "+field1
-				   + " = "+str(data_dict[trend_no][data][0][1])+" and "+ field2 +" = "+str(data_dict[trend_no][data][1][1]) +".")
+				   + " = "+str(data_dict[trend_no][data][0][1])+" and "+ field2 +" = "+str(data_dict[trend_no][data][1][1]) +"."))
 		#Print Ratio instead of numbers
 		"""
 		print (precedent_generator(trend_perc_dict[trend_no],q1,q3) + str(round(trend_perc_dict[trend_no],4)) + "% villages have a ratio of " + str(
@@ -98,9 +99,9 @@ def compare_factors_based_trend_generate(data_dict,field1,field2,total_no_trends
 	factor1=str(factor1)
 	factor2=str(factor2)
 	equality_factor=str(equality_factor)
-	print "Out of "+str(total_no_trends)+" trends, "+field1+" dominates "+field2+" "+factor1+" times!"
-	print "Out of " + str(total_no_trends) + " trends, " + field2 + " dominates " + field1 + " " + factor2 + " times!"
-	print "Out of "+str(total_no_trends)+" trends, "+field1+" and "+field2+" were equal "+equality_factor+" number of times"
+	print("Out of "+str(total_no_trends)+" trends, "+field1+" dominates "+field2+" "+factor1+" times!")
+	print("Out of " + str(total_no_trends) + " trends, " + field2 + " dominates " + field1 + " " + factor2 + " times!")
+	print("Out of "+str(total_no_trends)+" trends, "+field1+" and "+field2+" were equal "+equality_factor+" number of times")
 
 def ratio_partition_based_trend_generator(data_dict, field1, field2, partition, total_no_trends):
 	#how to partition when the end point is not known ?
@@ -109,7 +110,7 @@ def ratio_partition_based_trend_generator(data_dict, field1, field2, partition, 
 
 def run_test():
 
-	with open('C:\Users\deb\Desktop\FYP\Resources\Facts_data-MaleFemale.json') as data_file:
+	with open('C:\\Users\deb\Desktop\FYP\Resources\Facts_data-MaleFemale.json') as data_file:
 		data_dict = json.load(data_file)
 	#pprint(data_dict)
 

@@ -94,7 +94,7 @@ def mode(dataPoints):
 	dataAndOcc = _getOccurencies(dataPoints)
 
 	maxOccurence = max(dataAndOcc.values())
-	return [k for k, v in dataAndOcc.items() if v == maxOccurence]
+	return [k for k, v in list(dataAndOcc.items()) if v == maxOccurence]
 
 
 # === Measures of spread ===
@@ -194,12 +194,12 @@ def summary(dataPoints):
 		raise StatsError('no data points passed')
 
 	print ("Summary statistics")
-	print ("Min      : ", min(dataPoints))
-	print ("Lower Qu.: ", quartiles(dataPoints)[0])
-	print ("Median   : ", median(dataPoints))
-	print ("Mean     : ", mean(dataPoints))
-	print ("Upper Qu.: ", quartiles(dataPoints)[1])
-	print ("Max      : ", max(dataPoints))
+	print(("Min      : ", min(dataPoints)))
+	print(("Lower Qu.: ", quartiles(dataPoints)[0]))
+	print(("Median   : ", median(dataPoints)))
+	print(("Mean     : ", mean(dataPoints)))
+	print(("Upper Qu.: ", quartiles(dataPoints)[1]))
+	print(("Max      : ", max(dataPoints)))
 	return "That's all"  # this avoids printing None
 
 
