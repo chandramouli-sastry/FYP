@@ -22,5 +22,5 @@ class DataBlock:
         return ret_list
 
     def save(self):
-        with open(self.name,"w") as f:
+        with open(self.name,"wb") as f:
             pickle.dump(self,f)

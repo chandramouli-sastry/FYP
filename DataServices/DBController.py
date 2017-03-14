@@ -10,10 +10,15 @@ class CensusDB:
         self.db = self.client.Census
         self.coll = self.db.dataset
 
-    def sampledRead(self, number = 10000, save = False):
+    def sampledRead(self, number = 10000, save = False, fields= []):
         #sampled read is for our experiments
-        datablock = DataBlock(list([i for i in self.coll.aggregate([{"$sample": {"size": number}}])]),
-                  name="Resources/sample_{}.pkl".format(number))
+        field_dict = {field: 1 for field in fields}
+        if len(field_dict)>0:
+            datablock = DataBlock(list([i for i in self.coll.aggregate([{"$sample": {"size": number}},{"$project": field_dict}],allowDiskUse=True)]),name="Resources/sample_{}.pkl".format(number))
+        else:
+            datablock = DataBlock(
+                list([i for i in self.coll.aggregate([{"$sample": {"size": number}}])]),
+                name="Resources/sample_{}.pkl".format(number))
         if save:
             datablock.save()
         return datablock

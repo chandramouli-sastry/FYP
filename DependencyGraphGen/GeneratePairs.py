@@ -15,6 +15,10 @@ def is_not_related(field1,field2,ontology):
 def gen_graph(numeric_fields, non_numeric_fields, ontology, datablock):
     g = Graph()
     total_fields = numeric_fields + non_numeric_fields
+    count = 0
+    thresh = 1
+    total = len(total_fields)*(len(total_fields)-1)/2
+    print(total)
     for i in total_fields:
         field_list_i = datablock.extract(i)
         if len(set(field_list_i)) == 1:
@@ -26,6 +30,11 @@ def gen_graph(numeric_fields, non_numeric_fields, ontology, datablock):
             if len(set(field_list_j)) == 1:
                 continue
             if i!=j:
+                count += 1
+                perc = count/total*100
+                if perc>thresh:
+                    thresh+=1
+                    print(perc)
                 if is_not_related(i,j,ontology):
                     g.put_value(i,j,value = get_correlation(field_list_i,field_list_j))
     g.compute_top_percentile_graph(10)
