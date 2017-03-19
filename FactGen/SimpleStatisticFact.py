@@ -4,7 +4,7 @@ import random
 from concurrent.futures import ProcessPoolExecutor
 from concurrent.futures import ThreadPoolExecutor
 import json
-
+from collections import Counter
 from Properties.Properties import Properties
 from collections import Counter
 from multiprocessing import Pool
@@ -44,23 +44,36 @@ def flatten(partition):
 def get_property(values_list):
     return Properties(values_list).property
 
+def perc_filter(l,perc=0.9):
+    thresh = sorted(list(set(l)))[int(perc*len(set(l)))]
+    for ind,val in enumerate(l):
+        if val<thresh:
+            l[ind] = 0
 
 ########### Class ###########
 
-class NumericSimpleFact:
+class SimpleStatisticFact:
     def __init__(self):
         self.graph = pickle.load(open("Resources/graph.pkl","rb"),encoding="latin1")
-        self.field = "Tot_Mal_Pop_of_Vil"
+        self.field = "Near_Vil_Tow_Nam_hav_Prim_School"
+        self.ignore = ["","N.A."]
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
         field = copy.deepcopy(self.field)
         #self.choose_fields()
         print("Initialization Done. Reading from DB...")
         self.db_instance = CensusDB()
         self.datablock = self.db_instance.conditionRead(fields=[self.field],debug=False)
-        print("DB Read Done. Computing Ratios...")
+        print("DB Read Done. Mapping Atomic Fact...")
         self.generate_list()
         print("Computing Metric..")
-        self.metric = (QuartileDeviation.compute(self.list))
+        if self.field in numeric_fields:
+            self.metric = (QuartileDeviation.compute(self.list))
+        else:
+            counter = Counter(self.list)
+            l = list((counter.values())) #gets counts of each of the discrete value
+            temp_metric = (QuartileDeviation.compute(l))
+            self.metric = [temp_metric[l.index(counter[i])] for i in self.list]
+        perc_filter(self.metric)
         print("Loading Partitions...")
         self.partitions = json.load(open("Resources/partitions.json"))
         #filtering to get interesting results; sorted by value of interestingness
@@ -68,10 +81,13 @@ class NumericSimpleFact:
         self.print_facts_augmented_with_similarity()
 
     def is_similar(self, tuple1, tuple2):
-        metric1, ratio1, obj1 = tuple1
-        metric2, ratio2, obj2 = tuple2
-        if ratio1-0.1<=ratio2<=ratio1+0.1:
-            return True
+        metric1, atom1, obj1 = tuple1
+        metric2, atom2, obj2 = tuple2
+        if self.field in numeric_fields:
+            if 0.9*atom1<=atom2<=1.1*atom1:
+                return True
+        else:
+            return atom1 == atom2
 
 
     def fuzzy_intersection(self):
@@ -84,8 +100,7 @@ class NumericSimpleFact:
         #   choose interesting partition(s)
         #   generate facts
         list_similar = copy.deepcopy(self.list_similar)
-
-
+        discrete_fields.remove("Vil_Nam")
         #p = Pool(10)
         p = ProcessPoolExecutor(10)
         l = []
@@ -118,23 +133,17 @@ class NumericSimpleFact:
             for max_index in max_indices:
                 value_global_local = partitions_perc[max_index]
                 field = args[max_index][0]
-                fact_dict["data"] = [(self.fields[0],convert(curr[2][self.fields[0]])),(self.fields[1],convert(curr[2][self.fields[1]])),curr[1]]
+                fact_dict["data"] = [(self.field,(curr[2][self.field])),curr[1]]
                 fact_dict["perc"] = perc
                 fact_dict["value_global_local"] = value_global_local
                 fact_dict["partition_field"] = field
-                if curr[1] == self.max:
-                    print( "{} perc of villages have {} {} and {} {}.\n".format(perc,
-                                                                             convert(curr[2][self.fields[0]]), self.fields[0],
-                                                                             convert(curr[2][self.fields[1]]), self.fields[1]))
-                else:
-                    print( "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}.\n".format(
-                        perc,
-                        self.fields[0], self.fields[1],
-                        curr[1], curr[2][self.fields[0]], self.fields[0],
-                        curr[2][self.fields[1]], self.fields[1]))
+                print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc, len(list_objects),
+                                                                                               self.field,
+                                                                                               curr[1])))
                 print("Field :\t",field)
                 l.append(fact_dict)
-                pprint.pprint(value_global_local,indent=2)
+                temp_dict = {i:value_global_local[i] for i in value_global_local if value_global_local[i]["global_perc"]}
+                pprint.pprint(temp_dict,indent=2)
         f.write(json.dumps(l))
         f.close()
         print("####DONE####")
@@ -216,13 +225,7 @@ class NumericSimpleFact:
                         new_similar_set.append(result)
             list_similar.append(new_similar_set)
             perc = similarity_count / float(len(self.datablock.list_dicts))*100
-            if perc > 0:
-                if curr[1] == self.max:
-                    print(("{} perc of villages have {} {}".format(perc,
-                                                                            curr[2][self.field], self.field,
-                                                                            )))
-                else:
-                    print(("{} perc of villages have {} equal to {}".format(perc,
+            print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc,similarity_count,
                                                                             self.field,
                                                                         curr[1])))
             f.write("======================\n")
@@ -251,3 +254,4 @@ class NumericSimpleFact:
 
     def generate_list(self):
         self.list = self.datablock.extract(self.field)
+        self.list = list(filter(lambda x:x.strip() not in self.ignore, self.list))
