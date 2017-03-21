@@ -1,0 +1,1002 @@
+Gov_Pr_Prim_School_Nur_LK_UK_Stat
+	Govt Pre-Primary School (Nursery/LKG/UKG) (Status A(1)/NA(2))
+	1
+	2
+Priv_Pr_Prim_School_Nur_LK_UK_Stat
+	1
+	Private Pre - Primary School (Nursery/LKG/UKG) (Status A(1)/NA(2))
+	2
+Near_Pr_Prim_School_Nur_LK_UK_Stat_Gov_1_Priv_2
+	1
+	0
+	3
+	2
+	Nearest Facility Status (Govt(1)/Private(2))
+	E_NA_1
+Gov_Prim_School_Stat
+	Govt Primary School (Status A(1)/NA(2))
+	1
+	2
+Priv_Prim_School_Stat
+	1
+	0
+	Private Primary School (Status A(1)/NA(2))
+	2
+Near_Prim_School_Gov_1_Priv_2
+	1
+	0
+	2
+	Nearest Facility Status (Govt(1)/Private(2))
+	E_NA_2
+Gov_Mid_School_Stat
+	1
+	2
+	Govt Middle  School (Status A(1)/NA(2))
+Priv_Mid_School_Stat
+	1
+	0
+	2
+	Private Middle  School (Status A(1)/NA(2))
+Near_Mid_School_Gov_1_Priv_2
+	1
+	0
+	3
+	2
+	Nearest Facility Status (Govt(1)/Private(2))
+	E_NA_3
+Gov_Sec_School_Stat
+	1
+	Govt Secondary School (Status A(1)/NA(2))
+	2
+	3
+Priv_Sec_School_Stat
+	1
+	0
+	2
+	Private Secondary School (Status A(1)/NA(2))
+Gov_Sen_Sec_School_Stat
+	1
+	2
+	Govt Senior Secondary School (Status A(1)/NA(2))
+Priv_Sen_Sec_School_Stat
+	1
+	2
+	Private Senior Secondary School (Status A(1)/NA(2))
+Near_Sen_Sec_School_Gov_1_Priv_2
+	1
+	0
+	2
+	E_NA_5
+	Nearest Facility Status (Govt(1)/Private(2))
+Gov_Ar_an_Scien_Deg_Col_Stat
+	1
+	2
+	Govt  Arts and Science Degree College (Status A(1)/NA(2))
+Gov_Ar_an_Scien_Deg_Col_Num
+	1
+	0
+	3
+	2
+	5
+	4
+	Govt  Arts and Science Degree College (Numbers)
+	21
+Priv_Ar_an_Scien_Deg_Col_Stat
+	Private  Arts and Science Degree College (Status A(1)/NA(2))
+	1
+	2
+Priv_Ar_an_Scien_Deg_Col_Num
+	1
+	0
+	3
+	2
+	Private  Arts and Science Degree College (Numbers)
+	4
+	11
+	5
+Near_Ar_an_Scien_Deg_Col_Gov_1_Priv_2
+	1
+	0
+	2
+	9
+	Nearest Facility Status (Govt(1)/Private(2))
+	E_NA_6
+Gov_Engin_Col_Stat
+	1
+	2
+	Govt Engineering College (Status A(1)/NA(2))
+Gov_Engin_Col_Num
+	1
+	0
+	2
+	4
+	Govt Engineering College (Numbers)
+Priv_Engin_Col_Stat
+	1
+	2
+	Private Engineering College (Status A(1)/NA(2))
+Priv_Engin_Col_Num
+	1
+	0
+	3
+	2
+	5
+	4
+	7
+	6
+	Private Engineering College (Numbers)
+Near_Priv_Engin_Col_Gov_1_Priv_2
+	1
+	0
+	2
+	Nearest Facility Status (Govt(1)/Private(2))
+	E_NA_7
+Gov_Med_Col_Stat
+	1
+	120
+	117
+	2
+	Govt Medicine College (Status A(1)/NA(2))
+	112
+	116
+	119
+	124
+Gov_Med_Col_Num
+	Govt Medicine  College (Numbers)
+	0
+	3
+	2
+	4
+	11
+	1
+Priv_Med_Col_Stat
+	1
+	2
+	Private Medicine  College (Status A(1)/NA(2))
+Priv_Med_Col_Num
+	1
+	0
+	3
+	2
+	4
+	6
+	Private Medicine College (Numbers)
+Near_Med_Col_Gov_1_Priv_2
+	1
+	0
+	2
+	E_NA_8
+	Nearest Facility Status (Govt(1)/Private(2))
+Gov_Man_Instit_Stat
+	Govt Management Institute (Status A(1)/NA(2))
+	1
+	2
+Gov_Man_Instit_Num
+	1
+	0
+	2
+	Govt Management Institute (Numbers)
+Priv_Man_Instit_Stat
+	1
+	Private Management Institute (Status A(1)/NA(2))
+	2
+Priv_Man_Instit_Num
+	1
+	0
+	3
+	2
+	7
+	Private Management Institute (Numbers)
+	6
+	4
+Near_Man_Instit_Gov_1_Priv_2
+	1
+	0
+	3
+	2
+	E_NA_9
+	Nearest Facility Status (Govt(1)/Private(2))
+Gov_Pol_Stat
+	1
+	Govt Polytechnic (Status A(1)/NA(2))
+	2
+Gov_Pol_Num
+	1
+	0
+	2
+	11
+	Govt Polytechnic (Numbers)
+Priv_Pol_Stat
+	1
+	2
+	Private Polytechnic (Status A(1)/NA(2))
+Priv_Pol_Num
+	1
+	0
+	3
+	2
+	Private Polytechnic (Numbers)
+Near_Pol_Gov_1_Priv_2
+	1
+	0
+	2
+	GUWAHATI
+	E_NA_10
+	11
+	Nearest Facility Status (Govt(1)/Private(2))
+Gov_Voc_Train_School_IT_Stat
+	1
+	2
+	Govt Vocational Training School/ITI (Status A(1)/NA(2))
+Gov_Voc_Train_School_IT_Num
+	1
+	0
+	3
+	2
+	Govt Vocational Training School/ITI (Numbers)
+	10
+	13
+	4
+Priv_Voc_Train_School_IT_Stat
+	1
+	2
+	Private Vocational Training School/ITI (Status A(1)/NA(2))
+Priv_Voc_Train_School_IT_Num
+	1
+	0
+	3
+	2
+	5
+	4
+	7
+	8
+	Private Vocational Training School/ITI (Numbers)
+Near_Voc_Train_School_IT_Gov_1_Priv_2
+	1
+	0
+	3
+	2
+	E_NA_11
+	Nearest Facility Status (Govt(1)/Private(2))
+Gov_Non_For_Train_Cen_Stat
+	1
+	Government Non Formal Training Centre (Status A(1)/NA(2))
+	2
+Priv_Non_For_Train_Cen_Stat
+	1
+	Private Non Formal Training Centre (Status A(1)/NA(2))
+	2
+Priv_Non_For_Train_Cen_Num
+	1
+	0
+	3
+	2
+	5
+	4
+	7
+	Private Non Formal Training Centre (Numbers)
+	40
+Near_Non_For_Train_Cen_Gov_1_Priv_2
+	1
+	0
+	2
+	E_NA_12
+	Nearest Facility Status (Govt(1)/Private(2))
+Gov_School_For_Dis_Stat
+	1
+	2
+	Government School For Disabled (Status A(1)/NA(2))
+Gov_School_For_Dis_Num
+	1
+	0
+	3
+	2
+	4
+	7
+	10
+	Government School For Disabled (Numbers)
+Priv_School_For_Dis_Stat
+	1
+	2
+	Private School For Disabled ( Status A(1)/NA(2))
+Priv_School_For_Dis_Num
+	1
+	0
+	3
+	2
+	5
+	10
+	Private School For Disabled (Numbers)
+Near_School_For_Dis_Gov_1_Priv_2
+	1
+	0
+	3
+	2
+	E_NA_13
+	Nearest Facility Status (Govt(1)/Private(2))
+Gov_Other_Stat
+	1
+	Government Others (Status A(1)/NA(2))
+	2
+Priv_Other_Stat
+	1
+	Private Others (Status A(1)/NA(2))
+	2
+Near_Other_Gov_1_Priv_2
+	1
+	0
+	E_NA_14
+	2
+	22
+	Nearest Facility Status (Govt(1)/Private(2))
+	3
+Dist_Other
+	a
+	c
+	b
+	123
+	28
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+	40
+	N.A.
+Prim_Heal_Cen_Num
+	1
+	0
+	3
+	2
+	Primary Health Centre (Numbers)
+	Phc_Num
+	10
+	4
+TB_Clin_Num
+	1
+	0
+	TB Clinic (Numbers)
+	2
+	5
+	4
+	Tb_Num
+	3
+Dist_Mob_Heal_Clin
+	a
+	60
+	c
+	b
+	0
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+Tap_Wat_Treat_Stat
+	1
+	0
+	WWat_A_NA
+	2
+	Tap Water-Treated (Status A(1)/NA(2))
+Tap_Wat_Treat_Fun_Al_roun_th_year_Stat
+	1
+	0
+	2
+	Tap Water-Treated Functioning All round the year (Status A(1)/NA(2))
+	WWat_Fun
+Tap_Wat_Treat_Fun_in_Sum_mon_April_Sep_Stat
+	1
+	0
+	2
+	WWat_Sum
+	Tap Water-Treated Functioning in Summer months (April-September) (Status A(1)/NA(2))
+Tap_Wat_Untreat_Stat
+	Tap Water Untreated (Status A(1)/NA(2))
+	1
+	2
+	WWat_Ut_A_NA
+Tap_Wat_Untreat_Fun_Al_roun_th_year_Stat
+	1
+	0
+	WWat_Ut_Fun
+	2
+	Tap Water Untreated Functioning All round the year (Status A(1)/NA(2))
+Tap_Wat_Untreat_Fun_in_Sum_mon_April_Sep_Stat
+	1
+	0
+	2
+	Tap Water Untreated Functioning in Summer months (April-September) (Status A(1)/NA(2))
+	WWat_Ut_Sum
+Cov_Wel_Stat
+	1
+	2
+	WCvwell_A_NA
+	Covered Well (Status A(1)/NA(2))
+Cov_Wel_Fun_Al_yr_Stat
+	1
+	0
+	2
+	WCvwell_Fun
+	Covered Well Functioning All round the year (Status A(1)/NA(2))
+Cov_Wel_Fun_in_Sum_Stat
+	1
+	0
+	Covered Well Functioning in Summer months (April-September) (Status A(1)/NA(2))
+	2
+	WCvwell_Sum
+Uncov_Wel_Stat
+	1
+	2
+	WUvwell_A_NA
+	Uncovered  Well (Status A(1)/NA(2))
+Uncov_Wel_Fun_Al_roun_th_year_Stat
+	1
+	0
+	2
+	WUvwell_Fun
+	Uncovered  Well Functioning All round the year (Status A(1)/NA(2))
+Uncov_Wel_Fun_in_Sum_mon_April_Sep_Stat
+	1
+	0
+	2
+	WUvwell_Sum
+	Uncovered  Well Functioning in Summer months (April-September) (Status A(1)/NA(2))
+Han_Pum_Stat
+	1
+	2
+	Hand Pump (Status A(1)/NA(2))
+	WHp_A_NA
+Han_Pum_Fun_Al_roun_th_year_Stat
+	1
+	0
+	2
+	Hand Pump Functioning All round the year (Status A(1)/NA(2))
+	WHp_Fun
+Han_Pum_Fun_in_Sum_mon_April_Sep_Stat
+	1
+	0
+	2
+	Hand Pump Functioning in Summer months (April-September) (Status A(1)/NA(2))
+	WHp_Sum
+Tub_Wel_Bor_Stat
+	1
+	WTb_A_NA
+	2
+	Tube Wells/Borehole (Status A(1)/NA(2))
+Tub_Wel_Bor_Fun_Al_roun_th_year_Stat
+	Tube Wells/Borehole Functioning All round the year (Status A(1)/NA(2))
+	0
+	2
+	WTb_Fun
+	1
+Tub_Wel_Bor_Fun_in_Sum_mon_April_Sep_Stat
+	1
+	0
+	2
+	Tube Wells/Borehole Functioning in Summer months (April-September) (Status A(1)/NA(2))
+	WTb_Sum
+Sprin_Stat
+	Spring (Status A(1)/NA(2))
+	1
+	2
+	WSpr_A_NA
+Sprin_Fun_Al_roun_th_year_Stat
+	1
+	0
+	2
+	Spring Functioning All round the year (Status A(1)/NA(2))
+	WSpr_Fun
+Sprin_Fun_in_Sum_mon_April_Sep_Stat
+	1
+	0
+	2
+	WSpr_Sum
+	Spring Functioning in Summer months (April-September) (Status A(1)/NA(2))
+Riv_Can_Stat
+	1
+	2
+	River/Canal (Status A(1)/NA(2))
+	WRiv_A_NA
+Riv_Can_Fun_Al_roun_th_year_Stat
+	1
+	0
+	2
+	WRiv_Fun
+	River/Canal Functioning All round the year (Status A(1)/NA(2))
+Riv_Can_Fun_in_Sum_mon_April_Sep_Stat
+	1
+	0
+	WRiv_Sum
+	2
+	River/Canal Functioning in Summer months (April-September) (Status A(1)/NA(2))
+	`2
+Tan_Pon_Lak_Stat
+	1
+	2
+	Tank/Pond/Lake (Status A(1)/NA(2))
+	WPon_A_NA
+Tan_Pon_Lak_Fun_Al_roun_th_year_Stat
+	1
+	0
+	2
+	WPon_Fun
+	Tank/Pond/Lake Functioning All round the year (Status A(1)/NA(2))
+Tan_Pon_Lak_Fun_in_Sum_mon_April_Sep_Stat
+	1
+	0
+	S
+	2
+	Tank/Pond/Lake Functioning in Summer months (April-September) (Status A(1)/NA(2))
+	WPon_Sum
+Other_Stat
+	1
+	Others (Status A(1)/NA(2))
+	2
+	WOth_A_NA
+Other_Fun_Al_roun_th_year_Stat
+	1
+	0
+	2
+	WOth_Fun
+	Others Functioning All round the year (Status A(1)/NA(2))
+Other_Fun_in_Sum_mon_April_Sep_Stat
+	1
+	0
+	2
+	Others Functioning in Summer months (April-September) (Status A(1)/NA(2))
+	WOth_Sum
+Clos_Drain_Stat
+	1
+	Closed Drainage (Status A(1)/NA(2))
+	2
+	S_CDr_A_NA
+Open_Drain_Stat
+	 Open Drainage (Status A(1)/NA(2))
+	1
+	2
+	S_ODr_A_NA
+No_Drain_Stat
+	1
+	0
+	2
+	No  Drainage (Status A(1)/NA(2))
+	S_NDr_A_NA
+Open_Puc_Drain_Cov_wit_Til_Slab_Stat
+	1
+	0
+	2
+	Open Pucca Drainage Covered with Tiles Slabs (Status A(1)/NA(2))
+	S_OPuc_A_NA
+Open_Puc_Drain_Uncov_Stat
+	1
+	0
+	s
+	2
+	S_OPucu_A_NA
+	Open Pucca Drainage Uncovered (Status A(1)/NA(2))
+Open_Kuc_Drain_Stat
+	1
+	0
+	2
+	S_OPuck_A_NA
+	Open Kuccha Drainage (Status A(1)/NA(2))
+Whet_Drain_wat_is_dis_dir_in_wat_bod_or_to_sew_plan_For_Wat_Bod_1_Sew_Plan_2
+	1
+	0
+	2
+	S_Dwat_A_NA
+	Whether Drain water is discharged directly into water bodies or to sewar plant (For Water Bodies-1/Sewar Plants-2)
+Is_th_Ar_Cov_under_Tot_San_Cam_TS_Stat
+	1
+	0
+	2
+	 Is the Area Covered under Total Sanitation Campaign (TSC)? (Status A(1)/NA(2))
+	S_Tsc
+Com_Toil_Com_includ_Bat_for_Gen_Pub_Stat
+	1
+	0
+	2
+	Community Toilet Complex (including Bath) for General Public (Status A(1)/NA(2))
+	S_CTB_A_NA
+Com_Toil_Com_exclud_Bat_for_Gen_Pub_Stat
+	1
+	0
+	2
+	Community Toilet Complex (excluding Bath) for General Public (Status A(1)/NA(2))
+	S_CT_A_NA
+Rur_Prod_Cen_or_San_har_out_avail_near_th_vil_Stat
+	1
+	0
+	2
+	Rural Production Centres or Sanitary hardware outlet availability near the village (Status A(1)/NA(2))
+	S_RPC_A_NA
+Rur_Prod_mar_or_San_har_out_avail_near_th_vil_Stat
+	1
+	0
+	2
+	Rural Production mart or Sanitary hardware outlet availability near the village (Status A(1)/NA(2))
+	S_RSM_A_NA
+Com_was_dis_system_after_hous_to_hous_col_Stat
+	Community waste disposal system after house to house collection (Status A(1)/NA(2))
+	0
+	1
+	2
+	S_CWD_A_NA
+Com_Bio_gas_for_prod_use_Stat
+	1
+	0
+	2
+	Community Bio-gas or recycle of waste for production use (Status A(1)/NA(2))
+	S_CBG_A_NA
+No_System_Gar_on_road_street_Stat
+	1
+	0
+	No System (Garbage on road/street) (Status A(1)/NA(2))
+	2
+	S_CNS_A_NA
+Pos_Offic_Stat
+	1
+	0
+	2
+	PO_A_NA
+	Post Office (Status A(1)/NA(2))
+Sub_Pos_Offic_Stat
+	1
+	0
+	2
+	Sub Post Office (Status A(1)/NA(2))
+	SPO_A_NA
+Pos_An_Tel_Offic_Stat
+	1
+	0
+	2
+	Post And Telegraph Office (Status A(1)/NA(2))
+	PTO_A_NA
+Vil_Pin_Cod_Stat
+	1
+	0
+	2
+	VPIN_A_NA
+	Village Pin Code (Status A(1)/NA(2))
+Dist_Pin_Cod
+	a
+	0
+	c
+	b
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+Tel_lan_Stat
+	1
+	Telephone (landlines) (Status A(1)/NA(2))
+	2
+	0
+	TEL_A_NA
+Pub_Cal_Offic_Mob_PC_Stat
+	1
+	0
+	PCO_A_NA
+	2
+	Public Call Office /Mobile (PCO) (Status A(1)/NA(2))
+Mob_Phon_Cov_Stat
+	1
+	0
+	2
+	MOB_A_NA
+	Mobile Phone Coverage (Status A(1)/NA(2))
+Inter_Caf_Com_Ser_Cen_CS_Stat
+	1
+	0
+	2
+	Internet Cafes / Common Service Centre (CSC) (Status A(1)/NA(2))
+	IC_A_NA
+Priv_Cour_Fac_Stat
+	1
+	0
+	PC_A_NA
+	2
+	Private Courier Facility (Status A(1)/NA(2))
+Pub_Bus_Ser_Stat
+	1
+	0
+	2
+	Public Bus Service (Status A(1)/NA(2))
+	PUB_A_NA
+Priv_Bus_Ser_Stat
+	Private Bus Service (Status A(1)/NA(2))
+	0
+	1
+	22
+	PRB_A_NA
+	2
+Rail_Stn_Stat
+	1
+	0
+	2
+	RS_A_NA
+	Railway Station (Status A(1)/NA(2))
+Aut_Mod_Aut_Stat
+	1
+	0
+	2
+	Auto/Modified Autos (Status A(1)/NA(2))
+	Auto_A_NA
+Tax_Stat
+	1
+	0
+	2
+	Taxi  (Status A(1)/NA(2))
+	Taxi_A_NA
+Van_Stat
+	1
+	0
+	2
+	Vans_A_NA
+	Vans (Status A(1)/NA(2))
+Trac_Stat
+	1
+	0
+	2
+	Trct_A_NA
+	Tractors (Status A(1)/NA(2))
+Dist_Trac
+	a
+	11
+	c
+	b
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+Cy_pul_Ric_man_driv_Stat
+	1
+	0
+	Cycle-pulled Rickshaws   (manual driven) (Status A(1)/NA(2))
+	2
+	Cymd_A_NA
+Dist_Cy_pul_Ric_man_driv
+	a
+	0
+	c
+	b
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+Cy_pul_Ric_mac_driv_Stat
+	Cycle-pulled Rickshaws (machine driven) (Status A(1)/NA(2))
+	0
+	1
+	Cymac_A_NA
+	2
+Dist_Cy_pul_Ric_mac_driv
+	a
+	11
+	c
+	b
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+Car_Driv_by_Anim_Stat
+	1
+	0
+	2
+	Cart_A_NA
+	Carts Drivens by Animals (Status A(1)/NA(2))
+Dist_Car_Driv_by_Anim
+	a
+	c
+	b
+	9
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+Sea_Riv_Fer_Ser_Stat
+	1
+	0
+	2
+	Sea_A_NA
+	Sea/River/Ferry Service (Status A(1)/NA(2))
+Dist_Sea_Riv_Fer_Ser
+	a
+	c
+	b
+	15
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+Nat_Hig_Stat
+	1
+	0
+	2
+	NH_A_NA
+	National Highway (Status A(1)/NA(2))
+Stat_Hig_Stat
+	1
+	0
+	2
+	SH_A_NA
+	State Highway (Status A(1)/NA(2))
+Maj_Dis_Road_Stat
+	1
+	0
+	MD_A_NA
+	2
+	Major District Road (Status A(1)/NA(2))
+Other_Dis_Road_Stat
+	Other District Road (Status A(1)/NA(2))
+	0
+	2
+	OD_A_NA
+	1
+Blac_Top_puc_Road_Stat
+	Black Topped (pucca) Road (Status A(1)/NA(2))
+	0
+	1
+	2
+	BRD_A_NA
+Grav_kuc_Road_Stat
+	1
+	0
+	2
+	Gravel (kuchha) Roads (Status A(1)/NA(2))
+	GR_A_NA
+Wat_Boun_Mac_Stat
+	1
+	0
+	Water Bounded Macadam (Status A(1)/NA(2))
+	2
+	WBM_A_NA
+Al_Weat_Road_Stat
+	1
+	0
+	2
+	AWR_A_NA
+	All Weather Road (Status A(1)/NA(2))
+Nav_Wat_Riv_Can_Stat
+	NW_A_NA
+	1
+	2
+	22
+	0
+	Navigable Waterways (River/Canal) (Status A(1)/NA(2))
+Dist_Nav_Wat_Riv_Can
+	a
+	c
+	b
+	23
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+Foot_Stat
+	1
+	0
+	2
+	Foothpath (Status A(1)/NA(2))
+	FP_A_NA
+Dist_Foot
+	a
+	0
+	c
+	b
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+ATM_Stat
+	1
+	0
+	ATM (Status A(1)/NA(2))
+	2
+	ATM_A_NA
+Com_Ban_Stat
+	1
+	0
+	2
+	ComB_A_NA
+	Commercial Bank (Status A(1)/NA(2))
+Coop_Ban_Stat
+	1
+	0
+	2
+	Cooperative Bank (Status A(1)/NA(2))
+	CopB_A_NA
+Agric_Cred_Soc_Stat
+	1
+	0
+	Agricultural Credit Societies (Status A(1)/NA(2))
+	2
+	Agri_A_NA
+Sel_Hel_Group_SH_Stat
+	1
+	Self - Help Group (SHG) (Status A(1)/NA(2))
+	2
+Pub_Dis_System_PD_Shop_Stat
+	1
+	Public Distribution System (PDS) Shop (Status A(1)/NA(2))
+	2
+Man_Reg_Mar_Stat
+	1
+	3
+	2
+	Mandis/Regular Market (Status A(1)/NA(2))
+Week_Haat_Stat
+	1
+	3
+	2
+	Weekly Haat (Status A(1)/NA(2))
+Agric_Mar_Soc_Stat
+	Agricultural Marketing Society (Status A(1)/NA(2))
+	1
+	2
+	152
+Nut_Cen_IC_Stat
+	1
+	3
+	2
+	Nutritional Centres-ICDS (Status A(1)/NA(2))
+Nut_Cen_Angan_Cen_Stat
+	1
+	3
+	2
+	Nutritional Centres-Anganwadi Centre (Status A(1)/NA(2))
+Nut_Cen_Other_Stat
+	1
+	2
+	Nutritional Centres-Others (Status A(1)/NA(2))
+Dist_Nut_Cen_Other
+	a
+	0
+	c
+	b
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+ASHA_Stat
+	ASHA (Status A(1)/NA(2))
+	1
+	2
+	ASHA (Status A(2)/NA(2))
+Dist_ASHA
+	a
+	0
+	c
+	b
+	(If not available within the village, the distance range  code  of nearest place where  facility is available is given viz;  a for < 5 Kms, b for 5-10 Kms and c  for 10+ kms ).
+Com_Cen_TV_Stat
+	Community Centre with/without TV (Status A(1)/NA(2))
+	1
+	2
+Spor_Fiel_Stat
+	Sports Field (Status A(1)/NA(2))
+	1
+	2
+Spor_Club_Rec_Cen_Stat
+	1
+	2
+	Sports Club/Recreation Centre (Status A(1)/NA(2))
+Cin_Vid_Hal_Stat
+	1
+	Cinema/Video Hall (Status A(1)/NA(2))
+	2
+	3
+Pub_Lib_Stat
+	1
+	Public Library (Status A(1)/NA(2))
+	2
+Pub_Read_Room_Stat
+	1
+	2
+	Public Reading Room (Status A(1)/NA(2))
+Dail_New_Sup_Stat
+	Daily Newspaper Supply (Status A(1)/NA(2))
+	1
+	3
+	2
+	8
+Assem_Pol_Stn_Stat
+	1
+	3
+	2
+	Assembly Polling Station (Status A(1)/NA(2))
+Bir_an_Deat_Reg_Offic_Stat
+	1
+	2
+	Birth and Death Registration Office (Status A(1)/NA(2))
+Pow_Sup_For_Dom_Us_Stat
+	1
+	0
+	2
+	Power Supply For Domestic Use  (Status A(1)/NA(2))
+	P_DUse_A_NA
+Pow_Sup_For_Agric_Us_Stat
+	1
+	0
+	Power Supply For Agriculture Use (Status A(1)/NA(2))
+	2
+	P_AUse_A_NA
+	4
+	16
+Pow_Sup_For_Com_Us_Stat
+	1
+	0
+	2
+	Power Supply For Commercial Use (Status A(1)/NA(2))
+	P_CUse_A_NA
+Pow_Sup_For_Al_User_Stat
+	1
+	0
+	2
+	Power Supply For All Users (Status A(1)/NA(2))
+	P_AlUse_A_NA
