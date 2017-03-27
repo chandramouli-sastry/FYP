@@ -36,7 +36,7 @@ def print_function_aggregator(tree):
     sub_fields_list = list()
     weights_dict = dict()
     maps_dict = dict()
-    new_field = root.lstrip().split(' ')[1]
+    new_field = root.lstrip().split(' ',4)[1]
     for field_subtree in tree[root]:
         field = list(field_subtree.keys())[0].lstrip()
         sub_fields_list.append(field.split(' ')[1])

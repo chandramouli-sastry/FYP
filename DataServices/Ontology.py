@@ -28,6 +28,9 @@ class Ontology:
         self.tree[self.k2i[source]].append([dest,cat])
         pass
 
+    def get_children(self, parent):
+        return self.tree[self.k2i[parent]]
+
     def get_descendants(self,ancestor):
         my_children = self.tree[self.k2i[ancestor]]
         my_descendants = []

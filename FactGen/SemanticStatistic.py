@@ -52,25 +52,27 @@ def perc_filter(l,perc=0.9):
 
 ########### Class ###########
 
-class SimpleStatisticFact:
+class SemanticStatisticFact:
     def __init__(self):
-        self.field = "Near_Vil_Tow_Nam_hav_Prim_School"
+        self.field = "Education"
+        field = self.field
         self.ignore = ["","N.A."]
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
+        self.ontology = pickle.load(open("Resources/ontology.pkl","rb"),encoding="latin1")
+        self.child_fields = self.ontology.get_children(self.field)
+        child_fields = copy.deepcopy(self.child_fields)
         #self.choose_fields()
         print("Initialization Done. Reading from DB...")
         self.db_instance = CensusDB()
-        self.datablock = self.db_instance.conditionRead(fields=[self.field],debug=False)
+        self.datablock = self.db_instance.conditionRead(fields=self.child_fields+[self.field],debug=False)
         print("DB Read Done. Mapping Atomic Fact...")
+        global get_prop
+        def get_prop(obj):
+            return Properties(map(lambda x: obj[x]/obj[field] if field!=0 else 9999, child_fields)).property
+        self.get_prop = get_prop
         self.generate_list()
         print("Computing Metric..")
-        if self.field in numeric_fields:
-            self.metric = (QuartileDeviation.compute(self.list))
-        else:
-            counter = Counter(self.list)
-            l = list((counter.values())) #gets counts of each of the discrete value
-            temp_metric = (QuartileDeviation.compute(l))
-            self.metric = [temp_metric[l.index(counter[i])] for i in self.list]
+        self.metric = (QuartileDeviation.compute(self.list))
         perc_filter(self.metric)
         print("Loading Partitions...")
         self.partitions = json.load(open("Resources/partitions.json"))
@@ -81,12 +83,10 @@ class SimpleStatisticFact:
     def is_similar(self, tuple1, tuple2):
         metric1, atom1, obj1 = tuple1
         metric2, atom2, obj2 = tuple2
-        if self.field in numeric_fields:
-            if 0.9*atom1<=atom2<=1.1*atom1:
-                return True
-        else:
-            return atom1 == atom2
-
+        similar = True
+        for field in self.child_fields:
+            similar = similar and 0.9*obj2[field]<=obj1[field]<=1.1*obj2[field]
+        return similar
 
     def fuzzy_intersection(self):
 
@@ -136,7 +136,7 @@ class SimpleStatisticFact:
                 fact_dict["value_global_local"] = value_global_local
                 fact_dict["partition_field"] = field
                 print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc, len(list_objects),
-                                                                                               self.field,
+                                                                                               self.child_fields,
                                                                                                curr[1])))
                 print("Field :\t",field)
                 l.append(fact_dict)
@@ -224,7 +224,7 @@ class SimpleStatisticFact:
             list_similar.append(new_similar_set)
             perc = similarity_count / float(len(self.datablock.list_dicts))*100
             print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc,similarity_count,
-                                                                            self.field,
+                                                                            self.child_fields,
                                                                         curr[1])))
             f.write("======================\n")
             f.write(pprint.pformat(new_similar_set, indent=4))
@@ -248,5 +248,4 @@ class SimpleStatisticFact:
 
 
     def generate_list(self):
-        self.list = self.datablock.extract(self.field)
-        self.list = list(filter(lambda x:x.strip() not in self.ignore, self.list))
+        self.list = self.datablock.apply(self.get_prop)

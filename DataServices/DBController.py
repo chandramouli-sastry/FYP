@@ -29,6 +29,8 @@ class CensusDB:
         field_dict = {field:1 for field in fields}
         if len(field_dict)>0:
             field_dict["id"] = 1
+            field_dict["Vil_Nam"] = 1
+            field_dict["Stat_Nam"] = 1
         if debug and len(field_dict)>0:
             field_dict["Vil_Nam"] = 1
             field_dict["Stat_Nam"] = 1
