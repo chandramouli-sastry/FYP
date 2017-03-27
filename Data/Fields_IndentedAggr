@@ -299,89 +299,84 @@
         1 Foot_Path sum {}
             1 Foot_Stat sum {"0":0,"1":2,"2":0}
             1 Dist_Foot sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
-
-
-
-ATM_Stat
-Near_Fac_Dis_in_Km
-Com_Ban_Stat
-Dist_Com_Ban
-Coop_Ban_Stat
-Dist_Coop_Ban
-Agric_Cred_Soc_Stat
-Dist_Agric_Cred_Soc
-Sel_Hel_Group_SH_Stat
-Dist_Sel_Hel_Group_SH
-Pub_Dis_System_PD_Shop_Stat
-Dist_Pub_Dis_System_PD_Shop
-Man_Reg_Mar_Stat
-Dist_Man_Reg_Mar
-Week_Haat_Stat
-Dist_Week_Haat
-Agric_Mar_Soc_Stat
-Dist_Agric_Mar_Soc
-Nut_Cen_IC_Stat
-Dist_Nut_Cen_ICDS
-Nut_Cen_Angan_Cen_Stat
-Dist_Nut_Cen_Angan_Cen
-Nut_Cen_Other_Stat
-Dist_Nut_Cen_Other
-ASHA_Stat
-Dist_ASHA
-Com_Cen_TV_Stat
-Dist_Com_Cen_wit_wit_TV
-Spor_Fiel_Stat
-Dist_Spor_Fiel
-Spor_Club_Rec_Cen_Stat
-Dist_Spor_Club_Rec_Cen
-Cin_Vid_Hal_Stat
-Dist_Cin_Vid_Hal
-Pub_Lib_Stat
-Dist_Pub_Lib
-Pub_Read_Room_Stat
-Dist_Pub_Read_Room
-Dail_New_Sup_Stat
-Dist_Dail_New_Sup
-Assem_Pol_Stn_Stat
-Dist_Assem_Pol_Stn
-Bir_an_Deat_Reg_Offic_Stat
-Dist_Bir_an_Deat_Reg_Offic
-Pow_Sup_For_Dom_Us_Stat
-Pow_Sup_For_Dom_Us_Sum_April_Sep_per_day_in_Hour
-Pow_Sup_For_Dom_Us_Win_Oc_Mar_per_day_in_Hour
-Pow_Sup_For_Agric_Us_Stat
-Pow_Sup_For_Agric_Us_Sum_April_Sep_per_day_in_Hour
-Pow_Sup_For_Agric_Us_Win_Oc_Mar_per_day_in_Hour
-Pow_Sup_For_Com_Us_Stat
-Pow_Sup_For_Com_Us_Sum_April_Sep_per_day_in_Hour
-Pow_Sup_For_Com_Us_Win_Oc_Mar_per_day_in_Hour
-Pow_Sup_For_Al_User_Stat
-Pow_Sup_For_Al_User_Sum_April_Sep_per_day_in_Hour
-Pow_Sup_For_Al_User_Win_Oc_Mar_per_day_in_Hour
-Agric_Com_Fir
-Man_Com_Fir
-Han_Com_Fir
-Agric_Com_Sec
-Man_Com_Sec
-Han_Com_Sec
-Agric_Com_Thir
-Man_Com_Thir
-Han_Com_Thir
-For_Ar_in_Hec
-Ar_under_Non_Agric_Uses_in_Hec
-Bar_Un_cul_Lan_Ar_in_Hec
-Per_Pas_an_Other_Graz_Lan_Ar_in_Hec
-Lan_Under_Mis_Tr_Crop_et_Ar_in_Hec
-Cul_Was_Lan_Ar_in_Hec
-Fal_Lan_other_than_Cur_Fal_Ar_in_Hec
-Cur_Fal_Ar_in_Hec
-Net_Ar_Sow_in_Hec
-Tot_Unir_Lan_Ar_in_Hec
-Ar_Irrig_by_Sour_in_Hec
-Can_Ar_in_Hec
-Wel_Tub_Wel_Ar_in_Hec
-Tan_Lak_Ar_in_Hec
-Wat_Ar_in_Hec
-Other_Sour_spec_Ar_in_Hec
-Near_Tow_Nam
-Near_Tow_Dis_from_Vil_in_Km
+1 Banking_Facilities sum {}
+    1 ATM sum {}
+        1 ATM_Stat sum {"0":0,"1":2,"2":0}
+        1 Near_Fac_Dis_in_Km sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Commercial_Bank sum {}
+        1 Com_Ban_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Com_Ban sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Cooperative_Bank sum {}
+        1 Coop_Ban_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Coop_Ban sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Agricultural_Credit_Society sum {}
+        1 Agric_Cred_Soc_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Agric_Cred_Soc sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Self_Help_Group sum {}
+        1 Sel_Hel_Group_SH_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Sel_Hel_Group_SH sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+1 Market_Facilities sum {}
+    1 Public_Distribution_System sum {}
+        1 Pub_Dis_System_PD_Shop_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Pub_Dis_System_PD_Shop sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Mandis_Regular_Market sum {}
+        1 Man_Reg_Mar_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Man_Reg_Mar sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Weekly_Haat sum {}
+        1 Week_Haat_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Week_Haat sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Agricultural_Marketing_Society sum {}
+        1 Agric_Mar_Soc_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Agric_Mar_Soc sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Nutritional_Centres sum {}
+        1 Nut_Cen_IC_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Nut_Cen_ICDS sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+        1 Nut_Cen_Angan_Cen_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Nut_Cen_Angan_Cen sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+        1 Nut_Cen_Other_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Nut_Cen_Other sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Asha sum {}
+        1 ASHA_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_ASHA sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+1 Entertainment sum {}
+    1 Community_Center sum {}
+        1 Com_Cen_TV_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Com_Cen_wit_wit_TV sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Sports_Field sum {}
+        1 Spor_Fiel_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Spor_Fiel sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Sports_Club_Recreational_Center sum {}
+        1 Spor_Club_Rec_Cen_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Spor_Club_Rec_Cen sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Cinema_Hall sum {}
+        1 Cin_Vid_Hal_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Cin_Vid_Hal sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+1 Information_Facilities sum {}
+    1 Library sum {}
+        1 Pub_Lib_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Pub_Lib sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Reading_Room sum {}
+        1 Pub_Read_Room_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Pub_Read_Room sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+    1 Newspaper_Supply sum {}
+        1 Dail_New_Sup_Stat sum {"0":0,"1":2,"2":0}
+        1 Dist_Dail_New_Sup sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+1 Assembly_Polling_Station sum {}
+    1 Assem_Pol_Stn_Stat sum {"0":0,"1":2,"2":0}
+    1 Dist_Assem_Pol_Stn sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+1 Birth_Death_Office sum {}
+    1 Bir_an_Deat_Reg_Offic_Stat sum {"0":0,"1":2,"2":0}
+    1 Dist_Bir_an_Deat_Reg_Offic sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+1 Power_Supply sum {}
+    1 Pow_Sup_For_Dom_Us_Stat sum {"0":0,"1":2,"2":0}
+    1 Pow_Sup_For_Dom_Us_Sum_April_Sep_per_day_in_Hour sum {}
+    1 Pow_Sup_For_Dom_Us_Win_Oc_Mar_per_day_in_Hour sum {}
+    1 Pow_Sup_For_Agric_Us_Stat sum {"0":0,"1":2,"2":0}
+    1 Pow_Sup_For_Agric_Us_Sum_April_Sep_per_day_in_Hour sum {}
+    1 Pow_Sup_For_Agric_Us_Win_Oc_Mar_per_day_in_Hour sum {}
+    1 Pow_Sup_For_Com_Us_Stat sum {"0":0,"1":2,"2":0}
+    1 Pow_Sup_For_Com_Us_Sum_April_Sep_per_day_in_Hour sum {}
+    1 Pow_Sup_For_Com_Us_Win_Oc_Mar_per_day_in_Hour sum {}
+    1 Pow_Sup_For_Al_User_Stat sum {"0":0,"1":2,"2":0}
+    1 Pow_Sup_For_Al_User_Sum_April_Sep_per_day_in_Hour sum {}
+    1 Pow_Sup_For_Al_User_Win_Oc_Mar_per_day_in_Hour sum {}
