@@ -1,7 +1,5 @@
 import pickle
 
-import time
-
 from DataServices import Datum
 from DataServices.DBController import CensusDB
 
@@ -30,8 +28,7 @@ class OntologyBuilder:
         """
         dependent_fields = set(compute_function.dependents)
         if not (dependent_fields < set(self.fields)):
-            remaining = (set(dependent_fields)-set(self.fields))
-            raise Exception("DependencyException : {} not found".format(remaining))
+            raise Exception("DependencyException")
         self.fields.append(new_field)
         self.aggregators.append([new_field, compute_function])
         self.ontology.new_field(new_field)
@@ -49,28 +46,17 @@ class OntologyBuilder:
 
     def buildOntologyandPush(self,cleanDB=False):
         count = 0
-        done = False
         while True:
             new_obj = self.fileReader.next_line()
             if new_obj == False:
                 break
             datum = Datum(new_obj)
             for new_field, aggregator in self.aggregators:
-                result__ = aggregator(datum.__dict__)
-                datum.__dict__[new_field] = result__[0]
-                for key_ in result__[1]:
-                    datum.__dict__[key_ + "_C"] = result__[1][key_]
-                datum.__dict__["id"]=count
-                if not(done):
-                    if len(result__[1])>0:
-                        l = self.ontology.tree[self.ontology.k2i[new_field]]
-                        for ind,val in enumerate(l):
-                            l[ind] = (val[0]+"_C",val[1])
-            done = True
+                datum.__dict__[new_field] = aggregator(datum.__dict__)
             self.data.append(datum)
             count += 1
             if count%10000==0:
-                print((str(count)+" done"))
+                print(str(count)+" done")
         self.dao.writeMultiple(self.data,cleanDB)
 
     def saveOntology(self, file_name):

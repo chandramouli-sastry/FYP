@@ -6,8 +6,9 @@ from collections import Counter
 
 class Properties:
 
-    def __init__(self,list_values):
+    def __init__(self,list_values,discrete = True):
         functions = []
+        self.discrete = discrete
         for i in Properties.__dict__:
             if type(Properties.__dict__[i]) == types.FunctionType and i.startswith("compute"):
                 functions.append(i)
@@ -48,9 +49,12 @@ class Properties:
 
 
     def compute_entropy(self,list_values):
-        list_values = self._discretize(list_values).values()
-        sum_array = sum(list_values)
-        result = sum([i / sum_array * math.log(i / sum_array) for i in list_values if i!=0])
+        if self.discrete:
+            list_values = self._discretize(list_values).values()
+            sum_array = sum(list_values)
+            result = sum([i / sum_array * math.log(i / sum_array) for i in list_values if i!=0])
+        else:
+            result = sum([i*math.log(i) for i in list_values if i!=0])
         return result
 
     def compute_variance(self,list_values):
@@ -59,6 +63,12 @@ class Properties:
         for i in list_values:
             summ += (i-mean)**2
         return summ/float(len(list_values))
+
+    def compute_perplexity(self,list_values):
+        if self.discrete:
+            return 0
+        else:
+            return math.exp(-self.compute_entropy(list_values))
 
     def compute_lorenz_measure(self,list_values):
         #TODO : Implement lorenz measure for list of values.

@@ -1,5 +1,5 @@
 """
-Take only perc of 1 field and compute for all
+Group by perc first, then eliminate by analyzing numbers
 """
 import pickle
 import pprint

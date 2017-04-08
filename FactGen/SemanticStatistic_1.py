@@ -1,5 +1,5 @@
 """
-Take only perc of 1 field and compute for all
+Take property and similarity between perc
 """
 import pickle
 import pprint
@@ -23,7 +23,7 @@ import copy
 def global_local(field, partitions, list_objects_r):
     value_global_local = {}
     try:
-        list_ids = set([(i[2]["id"]) for i in list_objects_r])
+        list_ids = set([(i[-1]["id"]) for i in list_objects_r])
         for value in partitions:
             list_objects = partitions[value]
             count = len(set(list_objects) & list_ids)
@@ -47,7 +47,7 @@ def flatten(partition):
 def get_property(values_list):
     return Properties(values_list).property
 
-def perc_filter(l,perc=0.9):
+def perc_filter(l,perc=0):
     thresh = sorted(list(set(l)))[int(perc*len(set(l)))]
     for ind,val in enumerate(l):
         if val<thresh:
@@ -71,8 +71,8 @@ class SemanticStatisticFact:
         print("DB Read Done. Mapping Atomic Fact...")
         global get_prop
         def get_prop(obj):
-            #return Properties(list(map(lambda x: obj[x]/obj[field] if obj[field]!=0 else 9999, child_fields))).property
-            return obj[child_fields[0]]/obj[field] if obj[field]!=0 else 9999
+            return Properties(list(map(lambda x: obj[x]/obj[field] if obj[field]!=0 else 9999, child_fields)), discrete= False).property
+            #return obj[child_fields[0]]/obj[field] if obj[field]!=0 else 9999
         self.get_prop = get_prop
         self.generate_list()
         print("Computing Metric..")
@@ -85,12 +85,12 @@ class SemanticStatisticFact:
         self.print_facts_augmented_with_similarity()
 
     def is_similar(self, tuple1, tuple2):
+        divide = lambda obj,child_field: obj[child_field]/obj[self.field] if obj[self.field]!=0 else 9999
         metric1, atom_list, atom1, obj1 = tuple1
         metric2, atom_list, atom2, obj2 = tuple2
-        # similar = True
-        # for field in self.child_fields:
-        #     similar = similar and 0.9*obj2[field]<=obj1[field]<=1.1*obj2[field]
-        similar = 0.9*atom2<=atom1<=1.1*atom2
+        similar = True
+        for field in self.child_fields:
+            similar = similar and 0.9*divide(obj2,field)<=divide(obj1,field)<=1.1*divide(obj2,field)
         return similar
 
     def get_statement(self,curr,perc,count):
@@ -101,8 +101,8 @@ class SemanticStatisticFact:
                                                                         0))
         else:
             return ("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc,count,
-                                                                            self.child_fields[0],
-                                                                        atom))
+                                                                            self.child_fields,
+                                                                        atom_list))
 
     def fuzzy_intersection(self):
 
@@ -147,7 +147,7 @@ class SemanticStatisticFact:
             for max_index in max_indices:
                 value_global_local = partitions_perc[max_index]
                 field = args[max_index][0]
-                fact_dict["data"] = [(self.field,(curr[2][self.field])),curr[1]]
+                fact_dict["data"] = [(self.field,(curr[-1][self.field])),curr[1]]
                 fact_dict["perc"] = perc
                 fact_dict["value_global_local"] = value_global_local
                 fact_dict["partition_field"] = field

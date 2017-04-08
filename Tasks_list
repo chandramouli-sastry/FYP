@@ -1,0 +1,12 @@
+Debarati- Natural Language Generation:
+    1. Ratio:
+        * Identify when to tell percentage of villages and when to tell number of villages
+        * Identify dominance of a particular field type in a set of similar villages.
+        * If there is no dominance, there will be a spread across field values. Point that out.
+        * Think of a smart way to point out spread neatly- 20% each of [v1,v2..,] 10% [v1,v2..] ...
+
+    2. Simple Statistic:
+        * Similar points...
+
+    3. Semantic Statistic:
+        * Week of 26th March...

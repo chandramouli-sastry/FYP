@@ -102,7 +102,7 @@ class SimpleStatisticFact:
         #p = Pool(10)
         p = ProcessPoolExecutor(10)
         l = []
-        f = open("Resources/Facts_data.json","w")
+        f = open("Resources/Facts_data_Simple.json","w")
         for list_objects in list_similar:
             fact_dict = {}
             curr = list_objects[0]
@@ -133,14 +133,15 @@ class SimpleStatisticFact:
                 field = args[max_index][0]
                 fact_dict["data"] = [(self.field,(curr[2][self.field])),curr[1]]
                 fact_dict["perc"] = perc
-                fact_dict["value_global_local"] = value_global_local
+                temp_dict = {i: value_global_local[i] for i in value_global_local if
+                             value_global_local[i]["global_perc"]}
+                fact_dict["value_global_local"] = temp_dict
                 fact_dict["partition_field"] = field
                 print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc, len(list_objects),
                                                                                                self.field,
                                                                                                curr[1])))
                 print("Field :\t",field)
                 l.append(fact_dict)
-                temp_dict = {i:value_global_local[i] for i in value_global_local if value_global_local[i]["global_perc"]}
                 pprint.pprint(temp_dict,indent=2)
         f.write(json.dumps(l))
         f.close()
@@ -248,5 +249,6 @@ class SimpleStatisticFact:
 
 
     def generate_list(self):
+        self.datablock.list_dicts = list(filter(lambda x:x[self.field].strip() not in self.ignore,self.datablock.list_dicts))
         self.list = self.datablock.extract(self.field)
-        self.list = list(filter(lambda x:x.strip() not in self.ignore, self.list))
+        #self.list = list(filter(lambda x:x.strip() not in self.ignore, self.list))

@@ -10,7 +10,7 @@ import pickle
 data_file = "Data/full_data.txt"  # The file containing the complete data
 #data_file = "Data/sample_data.txt"  # The file containing the complete data
 indented_factor_file = "Data/Fields_IndentedFactor.txt"  # The indented file for generating factor function calls
-indented_aggregate_file = "Data/sample_aggr.txt"  # The indented file for generating aggregate function calls
+indented_aggregate_file = "Data/Fields_IndentedAggr"  # The indented file for generating aggregate function calls
 
 # Initialize file reader and generate code for building ontology
 fileReader = FileReader(data_file,mapping)
@@ -26,12 +26,12 @@ builder.buildOntologyandPush(cleanDB=True)
 print("DB Populated. Indexing Resources...")
 
 # Update all resources that are needed
-with open("Resources/fields.pkl","w") as f:
+with open("Resources/fields.pkl","wb") as f:
     pickle.dump(ontology.fields,f)
 
-with open("Resources/new_fields.pkl","w") as f:
+with open("Resources/new_fields.pkl","wb") as f:
     pickle.dump(ontology.new_fields,f)
 
-with open("Resources/ontology.pkl","w") as f:
+with open("Resources/ontology.pkl","wb") as f:
     pickle.dump(ontology,f)
 

@@ -24,7 +24,7 @@ def print_functions_factor(tree):
             parts = [list(i.keys())[0] for i in list(categories.values())[0]]
             for i in list(categories.values())[0]:
                 print_functions_factor(i)
-            print(("builder.partOf('{}',{},'{}')".format(set,parts,category)))
+            print("builder.partOf('{}',{},'{}')".format(set,parts,category))
 
 def print_function_aggregator(tree):
     """
@@ -36,7 +36,7 @@ def print_function_aggregator(tree):
     sub_fields_list = list()
     weights_dict = dict()
     maps_dict = dict()
-    new_field = root.lstrip().split(' ',4)[1]
+    new_field = root.lstrip().split(' ')[1]
     for field_subtree in tree[root]:
         field = list(field_subtree.keys())[0].lstrip()
         sub_fields_list.append(field.split(' ')[1])
@@ -44,9 +44,8 @@ def print_function_aggregator(tree):
         maps_dict[field.split(' ')[1]] = eval(field.split(' ')[3])
         print_function_aggregator(field_subtree)
     if len(tree[root])>0:
-        print(("aggregator = create_{}_function({},{},{},'{}')".format(root.split(' ')[2],sub_fields_list,weights_dict,maps_dict,new_field)))
-        print(("builder.aggregate('{}',{})".format(new_field,'aggregator')))
-
+        print("aggregator = create_{}_function({},{},{},'{}')".format(root.split(' ')[2],sub_fields_list,weights_dict,maps_dict,new_field))
+        print("builder.aggregate('{}',{})".format(new_field,'aggregator'))
 
 
 def generate(list_lines,print_functions):

@@ -7,7 +7,7 @@
     1 PrePrimary_School sum {}
         0.6 Gov_Pr_Prim_School_Nur_LK_UK_Num sum {"":0,"N.A.":0}
         0.4 Priv_Pr_Prim_School_Nur_LK_UK_Num sum {"":0,"N.A.":0}
-        0.5 Near_Pr_Prim_School_Nur_LK_UK_Stat_Gov_1_Priv_2 sum {"1":2,"2":1,"":0,"N.A.":0,"E_NA_2":0}
+        0.5 Near_Pr_Prim_School_Nur_LK_UK_Stat_Gov_1_Priv_2 sum {"1":2,"2":1,"":0,"N.A.":0,"E_NA_1":0,"E_NA_2":0}
         0.5 Dist_Pr_Prim_School sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
     1 Middle_School sum {}
         0.6 Gov_Mid_School_Num sum {"":0,"N.A.":0}
@@ -218,7 +218,7 @@
             1 Pos_An_Tel_Offic_Stat sum {"0":0,"1":2,"2":0}
             1 Dist_Pos_An_Tel_Offic sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
         1 Vil_Pin_Cod_Stat sum {"0":0,"1":2,"2":0}
-        1 Dist_PI_Cod sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
+        1 Dist_Pin_Cod sum {"A":3,"a":3,"B":2,"b":2,"C":1,"c":1,"":0,"N.A.":0}
     1 Telephone_Facilities sum {}
         1 Landline_Facility sum {}
             1 Tel_lan_Stat sum {"0":0,"1":2,"2":0}

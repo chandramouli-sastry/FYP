@@ -2,10 +2,10 @@
  * Created by cshamasastry on 2/27/17.
  */
 
-field = "Gram_Pan_Cod";
+field = "Stat_Nam";
 db.dataset.mapReduce(
     function(){
-        var id= this.id;
+        var id= "" + this.id;
         emit(this[field],id);
     },
     function(key,values)
@@ -28,4 +28,7 @@ list of documents:
 db.dataset.aggregate(
    [ { $sample: { size: 20 } },{$project:{"Stat_Nam":1}},{$out:"sampledata"} ]
 )
+id = 0;
+db.dataset.find().forEach(function(collection){collection["id"]=id++;db.dataset_new.insert(collection);if(id%2000==0)print(i);});
+
  */
