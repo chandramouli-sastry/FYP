@@ -20,17 +20,15 @@ def identify_dominance(list_numbers):
         temp_list.append(i)
         if perplexity(temp_list)<(1-perc)*len(temp_list):
             temp_list.pop(-1)
-            list_lists.append(temp_list)
+            list_lists.append((temp_list[0],temp_list[1],sum(temp_list)/len(temp_list)))
             temp_list = [i]
-    list_lists.append(temp_list)
+    list_lists.append((temp_list[0], temp_list[1], sum(temp_list) / len(temp_list)))
     return (list_lists)
 
 def global_local_analysis(global_local_dict):
     pass
 
 
-identify_dominance([30,40,30])
-identify_dominance([30,70])
-identify_dominance([10,12,15,100-12-15-10])
-
-
+# identify_dominance([30,40,30])
+# identify_dominance([30,70])
+# identify_dominance([10,12,15,100-12-15-10])

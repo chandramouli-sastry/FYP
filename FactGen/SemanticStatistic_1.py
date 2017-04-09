@@ -47,11 +47,16 @@ def flatten(partition):
 def get_property(values_list):
     return Properties(values_list).property
 
-def perc_filter(l,perc=0):
+def perc_filter(l,perc=0.9):
     thresh = sorted(list(set(l)))[int(perc*len(set(l)))]
     for ind,val in enumerate(l):
         if val<thresh:
             l[ind] = 0
+    if len(l)- l.count(0)>150:
+        thresh = sorted(list(set(l)),reverse=True)[150]
+        for ind,val in enumerate(l):
+            if val<thresh:
+                l[ind] = 0
 
 ########### Class ###########
 
@@ -100,9 +105,9 @@ class SemanticStatisticFact:
                                                                             self.field,
                                                                         0))
         else:
-            return ("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc,count,
-                                                                            self.child_fields,
-                                                                        atom_list))
+            return ("{} perc(or {} num of villages) of villages have {}".format(perc,count,
+                                                                                {field:value for field,value in zip(self.child_fields,atom_list)}
+                                                                        ))
 
     def fuzzy_intersection(self):
 
@@ -147,7 +152,7 @@ class SemanticStatisticFact:
             for max_index in max_indices:
                 value_global_local = partitions_perc[max_index]
                 field = args[max_index][0]
-                fact_dict["data"] = [(self.field,(curr[-1][self.field])),curr[1]]
+                fact_dict["data"] = [(self.field,self.child_fields),curr[1]]
                 fact_dict["perc"] = perc
                 fact_dict["value_global_local"] = value_global_local
                 fact_dict["partition_field"] = field
