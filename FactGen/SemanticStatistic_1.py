@@ -57,7 +57,7 @@ def perc_filter(l,perc=0):
 
 class SemanticStatisticFact:
     def __init__(self):
-        self.field = "Health"
+        self.field = "Education"
         field = self.field
         self.ignore = ["","N.A."]
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
