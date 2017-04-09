@@ -1,4 +1,5 @@
 import math
+num_villages = 622725
 def perplexity(l):
     s = 0
     d = sum(l)

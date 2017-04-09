@@ -127,33 +127,35 @@ class SemanticStatisticFact:
         for list_objects in list_similar:
             fact_dict = {}
             curr = list_objects[0]
-            args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
-            print(("Args Ready.", len(args)))
-            partitions_perc = []
-            count = 0
-            thresh = 1
-            for arg in args:
-                partitions_perc.append(global_local_multi(arg))
-                # count += 1
-                # perc = count/len(args)*100
-                # if perc>thresh:
-                #     print(perc)
-                #     thresh += 1
-            perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
-            print("Partitions got. Flattening...")
-            flattened = list(map(flatten, partitions_perc))
-            print("Flattening Done. Getting Properties...")
-            properties = list(map(get_property, flattened))
-            interestingnesses = QuartileDeviation.compute(properties)
-            max_indices = [np.argmax(interestingnesses)]#np.argpartition(interestingnesses, -2)[-2:]
-
-            #max_indices[np.argsort(interestingnesses[max_indices])]
-
+            if len(list_objects)!=0:
+                args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
+                print(("Args Ready.", len(args)))
+                partitions_perc = []
+                count = 0
+                thresh = 1
+                for arg in args:
+                    partitions_perc.append(global_local_multi(arg))
+                    # count += 1
+                    # perc = count/len(args)*100
+                    # if perc>thresh:
+                    #     print(perc)
+                    #     thresh += 1
+                perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
+                print("Partitions got. Flattening...")
+                flattened = list(map(flatten, partitions_perc))
+                print("Flattening Done. Getting Properties...")
+                properties = list(map(get_property, flattened))
+                interestingnesses = QuartileDeviation.compute(properties)
+                max_indices = [np.argmax(interestingnesses)]#np.argpartition(interestingnesses, -2)[-2:]
+            else:
+                max_indices = [None]
             for max_index in max_indices:
-                value_global_local = partitions_perc[max_index]
+                value_global_local = partitions_perc[max_index] if max_index!=None else {}
                 field = args[max_index][0]
                 fact_dict["data"] = [(self.field,self.child_fields),curr[1]]
                 fact_dict["perc"] = perc
+                fact_dict["Vil_Nam"] = curr["Vil_Nam"]
+                fact_dict["Stat_Nam"] = curr["Stat_Nam"]
                 fact_dict["value_global_local"] = value_global_local
                 fact_dict["partition_field"] = field
                 print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc, len(list_objects),
