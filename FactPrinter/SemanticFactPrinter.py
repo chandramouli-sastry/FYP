@@ -1,7 +1,7 @@
 import random
 
 from FactPrinter.QuartileCalculation import quartiles, median
-from . import identify_dominance, num_villages
+from . import identify_dominance, num_villages, get_fields_to_print
 
 class SemanticFactPrinter:
     def __init__(self,fact_json,writer):
@@ -13,29 +13,19 @@ class SemanticFactPrinter:
         if value == 1:
             return None
         elif value > quartile3:
-            return "In a whopping {}".format(value)
+            return "In a whopping {} number of villages, ".format(value)
         elif value < quartile1:
-            return "In only about {}".format(value)
+            return "In only about {} villages, ".format(value)
         else:
-            return "In about {}".format(value)
-
-    def get_fields_to_print(self,field_list):
-        max_fields_to_show = 5
-        min_count = 5
-        count = len(field_list)
-        if (count - max_fields_to_show) > min_count or max_fields_to_show<count:
-            to_sample = max_fields_to_show
-        else:
-            to_sample = count - min_count
-        return (", ".join(random.sample(field_list,to_sample)),count-to_sample)
+            return "In about {} villages, ".format(value)
 
 
     def process(self):
-        numbers = [fact["perc"]*num_villages for fact in self.fact_json]
+        numbers = [fact["perc"]/100*num_villages for fact in self.fact_json]
         self.quartiles = quartiles(numbers)
         for fact in self.fact_json:
-            perc_list = map(lambda x:x[1],fact["data"][1])
-            number = fact["perc"] * num_villages
+            perc_list = list(map(lambda x:x[1],fact["data"][1]))
+            number = round(fact["perc"]/100 * num_villages)
             field_list = fact["data"][0][1]
             partitions = identify_dominance(perc_list)
             # {perc:fields}
@@ -43,8 +33,10 @@ class SemanticFactPrinter:
             for index,i in enumerate(perc_list):
                 for start,end,mean in partitions:
                     if start<=i<=end:
-                        perc_fields[mean] = perc_fields.get(mean,[]).append(field_list[index])
+                        perc_fields[mean] = perc_fields.get(mean,[]) + [field_list[index]]
                         break
+            for perc in perc_fields:
+                perc_fields[perc] = sorted(perc_fields[perc],key = lambda x:field_list.index(x))
             """
             Prefix: In a whooping {}... | In only about {}... | In about | In {}, a village in {},
             Content: Maximum 3 numbers;
@@ -63,9 +55,52 @@ class SemanticFactPrinter:
                     each of aa, bb and count-2 others have an equal share of Health.
             """
             vil_name, state_name = fact["Vil_Nam"],fact["Stat_Nam"]
-            prefix = self.prefix_gen(number) if number!=1 else "In {}, a village in {}".format(vil_name,state_name)
+            prefix = self.prefix_gen(number) if number!=1 else "{}, a village in {} is one of its kind with ".format(vil_name,state_name)
+            content = ""
             if len(perc_fields)>=3:
                 highest = max(perc_fields)
-                med = median(perc_fields)
                 lowest = min(perc_fields)
-                "{} of {} is predominated by {}"
+                s = set(perc_fields[highest])|set(perc_fields[lowest])
+                h_fields,h_count = get_fields_to_print(perc_fields[highest])
+                m_fields,m_count = get_fields_to_print([i for i in field_list if i not in s])
+                l_fields,l_count = get_fields_to_print(perc_fields[lowest])
+                if lowest!=0:
+                    content = "{} and {} others predominate {} with each constituting {}%, while {} and {} others each constitute just {}% with a considerable share by {} and {} others.".format(
+                        h_fields,h_count,
+                        fact["data"][0][0],highest,
+                        l_fields,l_count,lowest,
+                        m_fields,m_count
+                    )
+                else:
+                    content = "{} and {} others predominate {} with each constituting {}%, while {} and {} others have zero share, with {} and {} others constituting the remaining.".format(
+                        h_fields, h_count,
+                        fact["data"][0][0], highest,
+                        l_fields, l_count,
+                        m_fields, m_count
+                    )
+            elif len(perc_fields) == 2:
+                highest = max(perc_fields)
+                lowest = min(perc_fields)
+                h_fields, h_count = get_fields_to_print(perc_fields[highest])
+                l_fields, l_count = get_fields_to_print(perc_fields[lowest])
+                if lowest!=0:
+                    content = "{} and {} others predominate {} with each constituting {}%, while {} and {} others each constitute just {}%.".format(
+                        h_fields, h_count,
+                        fact["data"][0][0], highest,
+                        l_fields, l_count, lowest
+                    )
+                else:
+                    content = "{} and {} others predominate {} with each constituting {}%, while {} and {} others have zero share.".format(
+                        h_fields, h_count,
+                        fact["data"][0][0], highest,
+                        l_fields, l_count
+                    )
+            elif len(perc_fields)==1:
+                # there is only 1 field
+                perc = list(perc_fields.keys())[0]
+                fields, count = get_fields_to_print(perc_fields[perc])
+                content = "{} and {} others equally constitute {}.".format(
+                    fields, count,
+                        fact["data"][0][0]
+                    )
+            self.writer.write(prefix+content)

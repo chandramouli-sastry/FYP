@@ -47,7 +47,8 @@ def flatten(partition):
 def get_property(values_list):
     return Properties(values_list).property
 
-def perc_filter(l,perc=0.9):
+def perc_filter(l,perc=0):
+    return
     thresh = sorted(list(set(l)))[int(perc*len(set(l)))]
     for ind,val in enumerate(l):
         if val<thresh:
@@ -62,7 +63,7 @@ def perc_filter(l,perc=0.9):
 
 class SemanticStatisticFact:
     def __init__(self):
-        self.field = "Education"
+        self.field = "Health"
         field = self.field
         self.ignore = ["","N.A."]
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
@@ -76,7 +77,7 @@ class SemanticStatisticFact:
         print("DB Read Done. Mapping Atomic Fact...")
         global get_prop
         def get_prop(obj):
-            return Properties(list(map(lambda x: obj[x]/obj[field] if obj[field]!=0 else 9999, child_fields)), discrete= False).property
+            return Properties(list(map(lambda x: obj[x]/obj[field] if obj[field]!=0 else 9999, child_fields)), discrete= False, ordering=True).property
             #return obj[child_fields[0]]/obj[field] if obj[field]!=0 else 9999
         self.get_prop = get_prop
         self.generate_list()
@@ -127,7 +128,7 @@ class SemanticStatisticFact:
         for list_objects in list_similar:
             fact_dict = {}
             curr = list_objects[0]
-            if len(list_objects)!=0:
+            if len(list_objects)>20:
                 args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
                 print(("Args Ready.", len(args)))
                 partitions_perc = []
@@ -148,22 +149,25 @@ class SemanticStatisticFact:
                 interestingnesses = QuartileDeviation.compute(properties)
                 max_indices = [np.argmax(interestingnesses)]#np.argpartition(interestingnesses, -2)[-2:]
             else:
+                perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
                 max_indices = [None]
             for max_index in max_indices:
                 value_global_local = partitions_perc[max_index] if max_index!=None else {}
-                field = args[max_index][0]
+                field = args[max_index][0] if max_index!=None else None
                 fact_dict["data"] = [(self.field,self.child_fields),curr[1]]
                 fact_dict["perc"] = perc
-                fact_dict["Vil_Nam"] = curr["Vil_Nam"]
-                fact_dict["Stat_Nam"] = curr["Stat_Nam"]
-                fact_dict["value_global_local"] = value_global_local
+                fact_dict["Vil_Nam"] = curr[-1]["Vil_Nam"]
+                fact_dict["Stat_Nam"] = curr[-1]["Stat_Nam"]
+                temp_dict = {i: value_global_local[i] for i in value_global_local if
+                             value_global_local[i]["global_perc"]}
+                fact_dict["value_global_local"] = temp_dict
                 fact_dict["partition_field"] = field
                 print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc, len(list_objects),
                                                                                                self.child_fields,
                                                                                                curr[1])))
                 print("Field :\t",field)
                 l.append(fact_dict)
-                temp_dict = {i:value_global_local[i] for i in value_global_local if value_global_local[i]["global_perc"]}
+
                 pprint.pprint(temp_dict,indent=2)
         f.write(json.dumps(l))
         f.close()

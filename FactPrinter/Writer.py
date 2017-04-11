@@ -3,7 +3,7 @@ class Writer:
     def __init__(self,type):
         self.type = type
         if type=="file":
-            self.obj = open("Out.txt","w")
+            self.obj = open("Out.txt","a")
         elif type=="list":
             self.obj = []
         elif type == "sout":

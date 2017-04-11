@@ -6,7 +6,7 @@ from collections import Counter
 
 class Properties:
 
-    def __init__(self,list_values,discrete = True):
+    def __init__(self,list_values,discrete = True,ordering = False):
         functions = []
         self.discrete = discrete
         for i in Properties.__dict__:
