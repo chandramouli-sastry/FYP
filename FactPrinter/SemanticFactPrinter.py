@@ -20,6 +20,12 @@ class SemanticFactPrinter:
         else:
             return "In about {} villages, ".format(value)
 
+    def generateListOfFieldsContent(self,fields,count):
+        content = fields
+        if count > 0:
+            content += " and {} others".format(count)
+        return content
+
     def process(self):
         numbers = [fact["perc"] / 100 * num_villages for fact in self.fact_json]
         self.quartiles = quartiles(numbers)
@@ -66,42 +72,36 @@ class SemanticFactPrinter:
                 m_fields, m_count = get_fields_to_print([i for i in field_list if i not in s])
                 l_fields, l_count = get_fields_to_print(perc_fields[lowest])
                 if lowest != 0:
-                    content = "{} and {} others predominate {} with each constituting {}%, while {} and {} others each constitute just {}% with a considerable share by {} and {} others.".format(
-                        h_fields, h_count,
-                        fact["data"][0][0], highest,
-                        l_fields, l_count, lowest,
-                        m_fields, m_count
-                    )
+                    content = self.generateListOfFieldsContent(h_fields,h_count)
+                    content += " predominate {} with each constituting {}%, while ".format(fact["data"][0][0], highest)
+                    content += self.generateListOfFieldsContent(l_fields,l_count)
+                    content += " each constitute just {}% with a considerable share by ".format(lowest)
+                    content += self.generateListOfFieldsContent(m_fields, m_count) + "."
                 else:
-                    content = "{} and {} others predominate {} with each constituting {}%, while {} and {} others have zero share, with {} and {} others constituting the remaining.".format(
-                        h_fields, h_count,
-                        fact["data"][0][0], highest,
-                        l_fields, l_count,
-                        m_fields, m_count
-                    )
+                    content = self.generateListOfFieldsContent(h_fields,h_count)
+                    content += " predominate {} with each constituting {}%, while ".format(fact["data"][0][0], highest)
+                    content += self.generateListOfFieldsContent(l_fields, l_count)
+                    content += " have zero share, with "
+                    content += self.generateListOfFieldsContent(m_fields, m_count) + " constituting the remaining."
             elif len(perc_fields) == 2:
                 highest = max(perc_fields)
                 lowest = min(perc_fields)
                 h_fields, h_count = get_fields_to_print(perc_fields[highest])
                 l_fields, l_count = get_fields_to_print(perc_fields[lowest])
                 if lowest != 0:
-                    content = "{} and {} others predominate {} with each constituting {}%, while {} and {} others each constitute just {}%.".format(
-                        h_fields, h_count,
-                        fact["data"][0][0], highest,
-                        l_fields, l_count, lowest
-                    )
+                    content = self.generateListOfFieldsContent(h_fields, h_count)
+                    content += " predominate {} with each constituting {}%, while ".format(fact["data"][0][0], highest)
+                    content += self.generateListOfFieldsContent(l_fields, l_count)
+                    content += " each constitute just {}%.".format(lowest)
                 else:
-                    content = "{} and {} others predominate {} with each constituting {}%, while {} and {} others have zero share.".format(
-                        h_fields, h_count,
-                        fact["data"][0][0], highest,
-                        l_fields, l_count
-                    )
+                    content = self.generateListOfFieldsContent(h_fields, h_count)
+                    content += " predominate {} with each constituting {}%, while ".format(fact["data"][0][0], highest)
+                    content += self.generateListOfFieldsContent(l_fields, l_count)
+                    content += " have zero share."
             elif len(perc_fields) == 1:
                 # there is only 1 field
                 perc = list(perc_fields.keys())[0]
                 fields, count = get_fields_to_print(perc_fields[perc])
-                content = "{} and {} others equally constitute {}.".format(
-                    fields, count,
-                    fact["data"][0][0]
-                )
+                content = self.generateListOfFieldsContent(fields,count)
+                content += " equally constitute {}.".format(fact["data"][0][0])
             self.writer.write(prefix + content)
