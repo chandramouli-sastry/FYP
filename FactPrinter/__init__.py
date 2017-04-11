@@ -2,6 +2,7 @@ import math
 import random
 
 num_villages = 622725
+INF = 9999
 def perplexity(l):
     s = 0
     d = sum(l)
