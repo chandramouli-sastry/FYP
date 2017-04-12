@@ -50,7 +50,17 @@ class RatioFactPrinter:
             vil_name, state_name = fact["Vil_Nam"], fact["Stat_Nam"]
             prefix = self.prefix_gen(number_of_villages) if number_of_villages != 1 else "{}, a village in {} is one of its kind with ".format(
                 vil_name, state_name)
-            #if fact["data"][2]==INF:
-            content = "have ratio between {} and {} equal to {}:{} ".format(fact["data"][0][0], fact["data"][1][0], *self.rationalizeRatio(fact["data"][0][1]/fact["data"][1][1]))
-            content += "with one of them having {} equal to {} and {} equal to {}.".format(*fact["data"][0],*fact["data"][1])
+            if fact["data"][2] == INF:
+                content = "have {} equal to {} ,".format(fact["data"][1][0], 0)
+                content += "with one of them having {} equal to {} and {} equal to {}.".format(*fact["data"][0],
+                                                                                               *fact["data"][1])
+            elif fact["data"][2] == INF**2:
+                content = "have both {} and {} equal to 0 ".format(fact["data"][0][0], fact["data"][1][0])
+            elif fact["perc"]==0:
+                content = "have {} equal to {} ,".format(fact["data"][0][0], 0)
+                content += "with one of them having {} equal to {} and {} equal to {}.".format(*fact["data"][0],
+                                                                                               *fact["data"][1])
+            else:
+                content = "have ratio between {} and {} equal to {}:{} ".format(fact["data"][0][0], fact["data"][1][0], *self.rationalizeRatio(fact["data"][0][1]/fact["data"][1][1]))
+                content += "with one of them having {} equal to {} and {} equal to {}.".format(*fact["data"][0],*fact["data"][1])
             self.writer.write(prefix + content)
