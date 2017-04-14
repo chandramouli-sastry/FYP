@@ -86,7 +86,7 @@
  'Distance to Nutritional Centres-ICDS': 'Dist_Nut_Cen_ICDS',
  'Distance to Nutritional Centres-Others': 'Dist_Nut_Cen_Other',
  'Distance to Other District Road': 'Dist_Other_Dis_Road',
- 'Distance to Others': 'Dist_Other',
+ 'Distance to Others': 'Dist_Others',
  'Distance to Polytechnic': 'Dist_Pol',
  'Distance to Pin Code': 'Dist_Pin_Cod',
  'Distance to Post And Telegraph Office': 'Dist_Pos_An_Tel_Offic',
