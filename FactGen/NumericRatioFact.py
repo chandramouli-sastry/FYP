@@ -49,9 +49,11 @@ def get_property(values_list):
 ########### Class ###########
 
 class NumericRatioFact:
-    def __init__(self):
+    def __init__(self,fields,fileName, debug = False, print_ = False):
         self.graph = pickle.load(open("Resources/graph.pkl","rb"),encoding="latin1")
-        self.fields = ["Tot_Fem_Pop_of_Vil","Tot_Mal_Pop_of_Vil"]
+        self.fields = fields#["Tot_Fem_Pop_of_Vil","Tot_Mal_Pop_of_Vil"]
+        self.fileName = fileName
+        self.print = print_
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
         fields = copy.deepcopy(self.fields)
         #self.choose_fields()
@@ -69,13 +71,13 @@ class NumericRatioFact:
         self.compute_ratio = compute_ratio
         print("Initialization Done. Reading from DB...")
         self.db_instance = CensusDB()
-        self.datablock = self.db_instance.conditionRead(fields=self.fields,debug=False)
+        self.datablock = self.db_instance.conditionRead(fields=self.fields,debug=debug)
         print("DB Read Done. Computing Ratios...")
         self.generate_list()
         print("Computing Metric..")
         self.metric = (QuartileDeviation.compute(self.list))
-        print("Loading Partitions...")
-        self.partitions = json.load(open("Resources/partitions.json"))
+        # print("Loading Partitions...")
+        # self.partitions = json.load(open("Resources/partitions.json"))
         #filtering to get interesting results; sorted by value of interestingness
         self.results = [x for x in sorted(zip(self.metric,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True) if x[0]!=0]
         self.print_facts_augmented_with_similarity()
@@ -96,9 +98,8 @@ class NumericRatioFact:
         #   compute properties of each partition
         #   choose interesting partition(s)
         #   generate facts
+        print("FUZZY INTERSECTION")
         list_similar = copy.deepcopy(self.list_similar)
-
-
         #p = Pool(10)
         p = ProcessPoolExecutor(10)
         l = []
@@ -133,7 +134,8 @@ class NumericRatioFact:
                 value_global_local = partitions_perc[max_index] if max_index!=None else {}
                 field = args[max_index][0] if max_index!=None else None#np.argpartition(interestingnesses, -2)[-2:]
                 fact_dict["data"] = [(self.fields[0],convert(curr[2][self.fields[0]])),(self.fields[1],convert(curr[2][self.fields[1]])),curr[1]]
-                fact_dict["data_1"] = [(self.fields[0],convert(curr[2][self.fields[0]])),(self.fields[1],convert(curr[2][self.fields[1]])),curr[1]]
+                fact_dict["data_low"] = min(list_objects,key=lambda x:x[-1][self.fields[0]])[-1]
+                fact_dict["data_high"] = max(list_objects,key=lambda x:x[-1][self.fields[0]])[-1]
                 fact_dict["perc"] = perc
                 fact_dict["metric"] = max(perc, 100 - perc) * curr[0]
                 temp_dict = {i: value_global_local[i] for i in value_global_local if
@@ -142,19 +144,20 @@ class NumericRatioFact:
                 fact_dict["partition_field"] = field
                 fact_dict["Vil_Nam"] = curr[-1]["Vil_Nam"]
                 fact_dict["Stat_Nam"] = curr[-1]["Stat_Nam"]
-                if curr[1] == self.max:
-                    print( "{} perc of villages have {} {} and {} {}.\n".format(perc,
-                                                                             convert(curr[2][self.fields[0]]), self.fields[0],
-                                                                             convert(curr[2][self.fields[1]]), self.fields[1]))
-                else:
-                    print( "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}.\n".format(
-                        perc,
-                        self.fields[0], self.fields[1],
-                        curr[1], curr[2][self.fields[0]], self.fields[0],
-                        curr[2][self.fields[1]], self.fields[1]))
-                print("Field :\t",field)
                 l.append(fact_dict)
-                pprint.pprint(value_global_local,indent=2)
+                if self.print:
+                    if curr[1] == self.max:
+                        print( "{} perc of villages have {} {} and {} {}.\n".format(perc,
+                                                                                 convert(curr[2][self.fields[0]]), self.fields[0],
+                                                                                 convert(curr[2][self.fields[1]]), self.fields[1]))
+                    else:
+                        print( "{} perc of villages have {} to {} ratio of {} with one of them having {} {} and {} {}.\n".format(
+                            perc,
+                            self.fields[0], self.fields[1],
+                            curr[1], curr[2][self.fields[0]], self.fields[0],
+                            curr[2][self.fields[1]], self.fields[1]))
+                    print("Field :\t",field)
+                    pprint.pprint(value_global_local,indent=2)
         f.write(json.dumps(l))
         f.close()
         print("####DONE####")
@@ -236,7 +239,7 @@ class NumericRatioFact:
                         new_similar_set.append(result)
             list_similar.append(new_similar_set)
             perc = similarity_count / float(len(self.datablock.list_dicts))*100
-            if perc > 0:
+            if perc > 0 and self.print:
                 if curr[1] == self.max:
                     print(("{} perc of villages have {} {} and {} {}".format(perc,
                                                                             curr[2][self.fields[0]], self.fields[0],

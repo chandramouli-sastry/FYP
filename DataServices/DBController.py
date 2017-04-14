@@ -33,6 +33,7 @@ class CensusDB:
         if debug and len(field_dict)>0:
             field_dict["Vil_Nam"] = 1
             field_dict["Stat_Nam"] = 1
+        field_dict["_id"] = 0
         if debug:
             return DataBlock(list(self.coll.find(id_dict,field_dict).limit(250)),"")
         else:

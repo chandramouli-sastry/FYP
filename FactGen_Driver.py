@@ -5,7 +5,7 @@ from Properties.Properties import Properties
 
 from FactGen.NumericRatioFact import NumericRatioFact
 #fact_type = "Ratio"
-fact_type = "Simple"
+fact_type = "Ratio"
 if fact_type == "Ratio":
     num_fact = NumericRatioFact()
     #num_fact.print_facts(number = 30)

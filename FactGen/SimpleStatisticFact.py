@@ -57,15 +57,17 @@ def get_thresh(list_values, perc):
 ########### Class ###########
 
 class SimpleStatisticFact:
-    def __init__(self):
+    def __init__(self,field,fileName,debug=False,print_=False):
         #self.field = "Near_Vil_Tow_Nam_hav_Prim_School"
-        self.field = "Primary_School"
+        self.field = field#"Primary_School"
         self.ignore = ["","N.A.","null"]
+        self.print = print_
+        self.fileName = fileName
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
         #self.choose_fields()
         print("Initialization Done. Reading from DB...")
         self.db_instance = CensusDB()
-        self.datablock = self.db_instance.conditionRead(fields=[self.field],debug=False)
+        self.datablock = self.db_instance.conditionRead(fields=[self.field],debug=debug)
         print("DB Read Done. Mapping Atomic Fact...")
         self.generate_list()
         print("Computing Metric..")
@@ -73,7 +75,7 @@ class SimpleStatisticFact:
         if self.field in numeric_fields:
             self.metric = (QuartileDeviation.compute(self.list))
         elif ontology.get_children(self.field):
-            binarize = lambda x: (x != 9999 and x != 0) * 1
+            binarize = lambda x: (x != 0) * 1
             self.internal = True
             self.metric = [1 for _ in self.list]
             self.list = [binarize(i) for i in self.list]
@@ -106,8 +108,8 @@ class SimpleStatisticFact:
             # temp_metric = (QuartileDeviation.compute(l))
             # self.metric = [temp_metric[l.index(counter[i])] for i in self.list]
         perc_filter(self.metric)
-        print("Loading Partitions...")
-        self.partitions = json.load(open("Resources/partitions.json"))
+        # print("Loading Partitions...")
+        # self.partitions = json.load(open("Resources/partitions.json"))
         #filtering to get interesting results; sorted by value of interestingness
         self.results = [x for x in sorted(zip(self.metric,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True) if x[0]!=0]
         self.print_facts_augmented_with_similarity()
@@ -131,12 +133,13 @@ class SimpleStatisticFact:
         #   compute properties of each partition
         #   choose interesting partition(s)
         #   generate facts
+        print("FUZZY INTERSECTION")
         list_similar = copy.deepcopy(self.list_similar)
-        discrete_fields.remove("Vil_Nam")
+        discrete_fields.remove("Vil_Nam") if "Vil_Nam" in discrete_fields else None
         #p = Pool(10)
         p = ProcessPoolExecutor(10)
         l = []
-        f = open("Resources/Facts_data_Simple.json","w")
+        f = open(self.fileName,"w")
         for list_objects in list_similar:
             fact_dict = {}
             curr = list_objects[0]
@@ -166,7 +169,15 @@ class SimpleStatisticFact:
             for max_index in max_indices:
                 value_global_local = partitions_perc[max_index] if max_index!=None else {}
                 field = args[max_index][0] if max_index!=None else None
-                fact_dict["data"] = [(self.field,(curr[2][self.field])),curr[1]]
+                if self.internal:
+                    fact_dict["internal"] = True
+                    if curr[1]:
+                        fact_dict["data"] = [self.field,"have"]
+                    else:
+                        fact_dict["data"] = [self.field,"have-not"]
+                else:
+                    fact_dict["internal"] = False
+                    fact_dict["data"] = [(self.field,(curr[2][self.field])),curr[1]]
                 fact_dict["perc"] = perc
                 fact_dict["Vil_Nam"] = curr[-1]["Vil_Nam"]
                 fact_dict["Stat_Nam"] = curr[-1]["Stat_Nam"]
@@ -175,12 +186,14 @@ class SimpleStatisticFact:
                              value_global_local[i]["global_perc"]}
                 fact_dict["value_global_local"] = temp_dict
                 fact_dict["partition_field"] = field
-                print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc, len(list_objects),
+                if self.print:
+                    print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc, len(list_objects),
                                                                                                self.field,
                                                                                                curr[1])))
-                print("Field :\t",field)
+                    print("Field :\t",field)
+                    pprint.pprint(temp_dict, indent=2)
                 l.append(fact_dict)
-                pprint.pprint(temp_dict,indent=2)
+
         f.write(json.dumps(l))
         f.close()
         print("####DONE####")
@@ -262,7 +275,8 @@ class SimpleStatisticFact:
                         new_similar_set.append(result)
             list_similar.append(new_similar_set)
             perc = similarity_count / float(num_villages)*100
-            print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc,similarity_count,
+            if self.print:
+                print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc,similarity_count,
                                                                             self.field,
                                                                         curr[1])))
             f.write("======================\n")

@@ -64,9 +64,11 @@ def get_thresh(list_values, perc):
 ########### Class ###########
 
 class SemanticStatisticFact:
-    def __init__(self):
-        self.field = "Education"
+    def __init__(self,field,fileName,debug=False,print_=False):
+        self.field = field
         field = self.field
+        self.fileName = fileName
+        self.print = print_
         self.ignore = ["","N.A.","null"]
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
         self.ontology = pickle.load(open("Resources/ontology.pkl","rb"),encoding="latin1")
@@ -75,7 +77,7 @@ class SemanticStatisticFact:
         #self.choose_fields()
         print("Initialization Done. Reading from DB...")
         self.db_instance = CensusDB()
-        self.datablock = self.db_instance.conditionRead(fields=self.child_fields+[self.field],debug=False)
+        self.datablock = self.db_instance.conditionRead(fields=self.child_fields+[self.field],debug=debug)
         print("DB Read Done. Mapping Atomic Fact...")
         global get_prop
         def get_prop(obj):
@@ -109,14 +111,11 @@ class SemanticStatisticFact:
                 metric[value] = abs(value - quartile + 1) # convert to percentage
             sum_so_far += count
             idx += 1
-        #TODO: change the denominator
-        percentages = {key: counter[key] / len(self.datablock.list_dicts) for key in counter}
+
         self.metric = [metric.get(counter[i], 0) for i in self.list]
         #self.metric = [max(percentages[i],1-percentages[i])* (counter[i]-q1+1 if counter[i]<=q1 else (q3-counter[i]+1 if q3<counter[i] else 0)) for i in self.list]
         #self.metric = (QuartileDeviation.compute(self.list))
         perc_filter(self.metric)
-        print("Loading Partitions...")
-        #self.partitions = json.load(open("Resources/partitions.json"))
         #filtering to get interesting results; sorted by value of interestingness
         self.results = [x for x in sorted(zip(self.metric, self.values_list,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True) if x[0]!=0]
         self.print_facts_augmented_with_similarity()
@@ -147,12 +146,13 @@ class SemanticStatisticFact:
         #   compute properties of each partition
         #   choose interesting partition(s)
         #   generate facts
+        print("FUZZY INTERSECTION")
         list_similar = copy.deepcopy(self.list_similar)
-        discrete_fields.remove("Vil_Nam")
+        discrete_fields.remove("Vil_Nam") if "Vil_Nam" in discrete_fields else None
         #p = Pool(10)
         p = ProcessPoolExecutor(10)
         l = []
-        f = open("Resources/Facts_data_Simple.json","w")
+        f = open(self.fileName,"w")
         for list_objects in list_similar:
             fact_dict = {}
             curr = list_objects[0]
@@ -191,13 +191,13 @@ class SemanticStatisticFact:
                              value_global_local[i]["global_perc"]}
                 fact_dict["value_global_local"] = temp_dict
                 fact_dict["partition_field"] = field
-                print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc, len(list_objects),
-                                                                                               self.child_fields,
-                                                                                               curr[1])))
-                print("Field :\t",field)
                 l.append(fact_dict)
-
-                pprint.pprint(temp_dict,indent=2)
+                if self.print:
+                    print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc, len(list_objects),
+                                                                                                   self.child_fields,
+                                                                                                   curr[1])))
+                    print("Field :\t",field)
+                    pprint.pprint(temp_dict,indent=2)
         f.write(json.dumps(l))
         f.close()
         print("####DONE####")
@@ -232,7 +232,8 @@ class SemanticStatisticFact:
                         new_similar_set.append(result)
             list_similar.append(new_similar_set)
             perc = similarity_count / float(len(self.datablock.list_dicts))*100
-            print(self.get_statement(curr,perc,similarity_count))
+            if self.print:
+                print(self.get_statement(curr,perc,similarity_count))
             f.write("======================\n")
             f.write(pprint.pformat(new_similar_set, indent=4))
             f.write("\n=======================\n")
