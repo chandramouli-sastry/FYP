@@ -1,11 +1,13 @@
 import random
 
-from FactPrinter.GlobalLocalPrinterUtil import GlobalLocalPrinter
-from FactPrinter.QuartileCalculation import quartiles
-from . import num_villages
+from FactPrinter.QuartileCalculation import quartiles, median
+from . import identify_dominance, num_villages, get_fields_to_print
 
+'''
+{"have":[list...], "have-not":[list...], global_local_dict:{}, perc:, count: }
+'''
 
-class SimpleFactPrinter:
+class BinarizedSemanticFactPrinter:
     def __init__(self, fact_json, writer):
         self.fact_json = fact_json
         self.writer = writer
@@ -15,17 +17,35 @@ class SimpleFactPrinter:
         if value == 1:
             return None
         elif value > quartile3:
-            return "In a whopping {} number of villages, ".format(value)
+            return "A whopping {} number of villages have ".format(value)
         elif value < quartile1:
-            return "In only about {} villages, ".format(value)
+            return "Only about {} villages have ".format(value)
         else:
-            return "In about {} villages, ".format(value)
+            return "About {} villages have ".format(value)
+
+    def generateListOfFieldsContent(self,fields,count):
+        content = fields
+        if count > 0:
+            content += " and {} others".format(count)
+        return content
 
     def process(self):
         numbers = [fact["perc"] / 100 * num_villages for fact in self.fact_json]
         self.quartiles = quartiles(numbers)
         for fact in self.fact_json:
-            number_of_villages = round(fact["perc"] / 100 * num_villages)
+            perc_list = list(map(lambda x: x[1], fact["data"][1]))
+            number = round(fact["perc"] / 100 * num_villages)
+            field_list = fact["data"][0][1]
+            partitions = identify_dominance(perc_list)
+            # {perc:fields}
+            perc_fields = {}
+            for index, i in enumerate(perc_list):
+                for start, end, mean in partitions:
+                    if start <= i <= end:
+                        perc_fields[mean] = perc_fields.get(mean, []) + [field_list[index]]
+                        break
+            for perc in perc_fields:
+                perc_fields[perc] = sorted(perc_fields[perc], key=lambda x: field_list.index(x))
             """
             Prefix: In a whooping {}... | In only about {}... | In about | In {}, a village in {},
             Content: Maximum 3 numbers;
@@ -44,12 +64,8 @@ class SimpleFactPrinter:
                     each of aa, bb and count-2 others have an equal share of Health.
             """
             vil_name, state_name = fact["Vil_Nam"], fact["Stat_Nam"]
-            prefix = self.prefix_gen(number_of_villages) if number_of_villages != 1 else "{}, a village in {} is one of its kind with ".format(
+            prefix = self.prefix_gen(number) if number != 1 else "{}, a village in {} is one of its kind having ".format(
                 vil_name, state_name)
-            content = "have {} equal to {}.".format(fact["data"][0][0], fact["data"][0][1])
+            content = "{}".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have"])))
+            content += " and do not have {}.".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have-not"])))
             self.writer.write(prefix + content)
-            global_local_util = GlobalLocalPrinter(fact)
-            self.writer.write(global_local_util.generateLocalSuffix())
-            global_fact = global_local_util.generateGlobalSuffix()
-            if global_fact:
-                self.writer.write(global_fact)
