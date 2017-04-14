@@ -34,7 +34,7 @@ class CensusDB:
             field_dict["Vil_Nam"] = 1
             field_dict["Stat_Nam"] = 1
         if debug:
-            return DataBlock(list(self.coll.find(id_dict,field_dict).limit(25000)),"")
+            return DataBlock(list(self.coll.find(id_dict,field_dict).limit(250)),"")
         else:
             return DataBlock(list(self.coll.find(id_dict,field_dict)),"")
 

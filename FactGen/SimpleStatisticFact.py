@@ -5,6 +5,8 @@ from concurrent.futures import ProcessPoolExecutor
 from concurrent.futures import ThreadPoolExecutor
 import json
 from collections import Counter
+
+from FactPrinter import identify_dominance, num_villages
 from Properties.Properties import Properties
 from collections import Counter
 from multiprocessing import Pool
@@ -12,7 +14,7 @@ import numpy as np
 from DataServices.DBController import CensusDB
 from Metrics import Entropy
 from Metrics import Grubbs
-from Resources import numeric_fields,convert, continuous_fields, discrete_fields
+from Resources import numeric_fields, convert, continuous_fields, discrete_fields, ontology
 from Metrics import QuartileDeviation
 import copy
 
@@ -50,12 +52,15 @@ def perc_filter(l,perc=0.9):
         if val<thresh:
             l[ind] = 0
 
+def get_thresh(list_values, perc):
+    return sorted(list_values)[int(perc * len(list_values))]
 ########### Class ###########
 
 class SimpleStatisticFact:
     def __init__(self):
-        self.field = "Near_Vil_Tow_Nam_hav_Prim_School"
-        self.ignore = ["","N.A."]
+        #self.field = "Near_Vil_Tow_Nam_hav_Prim_School"
+        self.field = "Primary_School"
+        self.ignore = ["","N.A.","null"]
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
         #self.choose_fields()
         print("Initialization Done. Reading from DB...")
@@ -64,13 +69,42 @@ class SimpleStatisticFact:
         print("DB Read Done. Mapping Atomic Fact...")
         self.generate_list()
         print("Computing Metric..")
+        self.internal = False
         if self.field in numeric_fields:
             self.metric = (QuartileDeviation.compute(self.list))
+        elif ontology.get_children(self.field):
+            binarize = lambda x: (x != 9999 and x != 0) * 1
+            self.internal = True
+            self.metric = [1 for _ in self.list]
+            self.list = [binarize(i) for i in self.list]
         else:
-            counter = Counter(self.list)
+            counter = Counter(self.list) # village_name -> count
             l = list((counter.values())) #gets counts of each of the discrete value
-            temp_metric = (QuartileDeviation.compute(l))
-            self.metric = [temp_metric[l.index(counter[i])] for i in self.list]
+            #cluster points in l
+            partitions = identify_dominance(list(set(l)))
+            counter_count = {}
+            for start,end,mean in partitions:
+                count = 0
+                values = []
+                for value in l:
+                    if start<=value<=end:
+                        values.append(value)
+                        count += 1
+                counter_count[mean] = (count,values)
+            x = sorted(counter_count.values())
+            sum_so_far = 0
+            idx = 0
+            metric = {}
+            quartile = sorted(l)[3 * len(l) // 4]
+            while sum_so_far<=150 and idx<len(x):
+                count, values = x[idx]
+                for value in values:
+                    metric[value] = value-quartile + 1#convert to percentage
+                sum_so_far += count
+                idx += 1
+            self.metric = [metric.get(counter[i],0) for i in self.list]
+            # temp_metric = (QuartileDeviation.compute(l))
+            # self.metric = [temp_metric[l.index(counter[i])] for i in self.list]
         perc_filter(self.metric)
         print("Loading Partitions...")
         self.partitions = json.load(open("Resources/partitions.json"))
@@ -106,33 +140,37 @@ class SimpleStatisticFact:
         for list_objects in list_similar:
             fact_dict = {}
             curr = list_objects[0]
-            args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
-            print(("Args Ready.", len(args)))
             partitions_perc = []
-            count = 0
-            thresh = 1
-            for arg in args:
-                partitions_perc.append(global_local_multi(arg))
-                # count += 1
-                # perc = count/len(args)*100
-                # if perc>thresh:
-                #     print(perc)
-                #     thresh += 1
-            perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
-            print("Partitions got. Flattening...")
-            flattened = list(map(flatten, partitions_perc))
-            print("Flattening Done. Getting Properties...")
-            properties = list(map(get_property, flattened))
-            interestingnesses = QuartileDeviation.compute(properties)
-            max_indices = [np.argmax(interestingnesses)]#np.argpartition(interestingnesses, -2)[-2:]
-
-            #max_indices[np.argsort(interestingnesses[max_indices])]
-
+            if len(list_objects)>20:
+                args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
+                print(("Args Ready.", len(args)))
+                count = 0
+                thresh = 1
+                for arg in args:
+                    partitions_perc.append(global_local_multi(arg))
+                    # count += 1
+                    # perc = count/len(args)*100
+                    # if perc>thresh:
+                    #     print(perc)
+                    #     thresh += 1
+                perc = len(list_objects) / float(num_villages) * 100
+                print("Partitions got. Flattening...")
+                flattened = list(map(flatten, partitions_perc))
+                print("Flattening Done. Getting Properties...")
+                properties = list(map(get_property, flattened))
+                interestingnesses = QuartileDeviation.compute(properties)
+                max_indices = [np.argmax(interestingnesses)]#np.argpartition(interestingnesses, -2)[-2:]
+            else:
+                perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
+                max_indices = [None]
             for max_index in max_indices:
-                value_global_local = partitions_perc[max_index]
-                field = args[max_index][0]
+                value_global_local = partitions_perc[max_index] if max_index!=None else {}
+                field = args[max_index][0] if max_index!=None else None
                 fact_dict["data"] = [(self.field,(curr[2][self.field])),curr[1]]
                 fact_dict["perc"] = perc
+                fact_dict["Vil_Nam"] = curr[-1]["Vil_Nam"]
+                fact_dict["Stat_Nam"] = curr[-1]["Stat_Nam"]
+                fact_dict["metric"] = max(perc, 100 - perc) * curr[0]
                 temp_dict = {i: value_global_local[i] for i in value_global_local if
                              value_global_local[i]["global_perc"]}
                 fact_dict["value_global_local"] = temp_dict
@@ -223,7 +261,7 @@ class SimpleStatisticFact:
                         visited_set.add(index)
                         new_similar_set.append(result)
             list_similar.append(new_similar_set)
-            perc = similarity_count / float(len(self.datablock.list_dicts))*100
+            perc = similarity_count / float(num_villages)*100
             print(("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc,similarity_count,
                                                                             self.field,
                                                                         curr[1])))
@@ -249,6 +287,6 @@ class SimpleStatisticFact:
 
 
     def generate_list(self):
-        self.datablock.list_dicts = list(filter(lambda x:x[self.field].strip() not in self.ignore,self.datablock.list_dicts))
+        self.datablock.list_dicts = list(filter(lambda x:(x[self.field].strip() if type(x[self.field])==type("") else x[self.field]) not in self.ignore,self.datablock.list_dicts))
         self.list = self.datablock.extract(self.field)
         #self.list = list(filter(lambda x:x.strip() not in self.ignore, self.list))

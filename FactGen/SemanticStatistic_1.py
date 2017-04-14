@@ -8,6 +8,8 @@ from concurrent.futures import ProcessPoolExecutor
 from concurrent.futures import ThreadPoolExecutor
 import json
 from collections import Counter
+
+from FactPrinter import identify_dominance
 from Properties.Properties import Properties
 from collections import Counter
 from multiprocessing import Pool
@@ -49,21 +51,18 @@ def get_property(values_list):
 
 def perc_filter(l,perc=0):
     return
-    thresh = sorted(list(set(l)))[int(perc*len(set(l)))]
-    for ind,val in enumerate(l):
-        if val<thresh:
-            l[ind] = 0
     if len(l)- l.count(0)>150:
-        thresh = sorted(list(set(l)),reverse=True)[150]
+        thresh = sorted(set(l),reverse=True)[150]
         for ind,val in enumerate(l):
-            if val<thresh:
+            if val<=thresh:
                 l[ind] = 0
+
 
 ########### Class ###########
 
 class SemanticStatisticFact:
     def __init__(self):
-        self.field = "Health"
+        self.field = "Education"
         field = self.field
         self.ignore = ["","N.A."]
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
@@ -82,25 +81,28 @@ class SemanticStatisticFact:
         self.get_prop = get_prop
         self.generate_list()
         print("Computing Metric..")
-        self.metric = (QuartileDeviation.compute(self.list))
+        counter = Counter(self.list)
+        l = list((counter.values()))  # gets counts of each of the discrete value
+        temp_metric = (QuartileDeviation.compute(l))
+        self.metric = [temp_metric[l.index(counter[i])] for i in self.list]
+        #self.metric = (QuartileDeviation.compute(self.list))
         perc_filter(self.metric)
         print("Loading Partitions...")
         self.partitions = json.load(open("Resources/partitions.json"))
         #filtering to get interesting results; sorted by value of interestingness
-        self.results = [x for x in sorted(zip(self.metric,self.values_list,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True) if x[0]!=0]
+        self.results = [x for x in sorted(zip(self.metric,self.field_perc, self.values_list,self.list,self.datablock.list_dicts), key = lambda x: x[0],reverse=True) if x[0]!=0]
         self.print_facts_augmented_with_similarity()
 
     def is_similar(self, tuple1, tuple2):
-        divide = lambda obj,child_field: obj[child_field]/obj[self.field] if obj[self.field]!=0 else 9999
-        metric1, atom_list, atom1, obj1 = tuple1
-        metric2, atom_list, atom2, obj2 = tuple2
+        metric1, field_perc_1, atom_list, atom1, obj1 = tuple1
+        metric2, field_perc_2, atom_list, atom2, obj2 = tuple2
         similar = True
         for field in self.child_fields:
-            similar = similar and 0.9*divide(obj2,field)<=divide(obj1,field)<=1.1*divide(obj2,field)
+            similar = similar and 0.9*field_perc_2[field]<=field_perc_1[field]<=1.1*field_perc_2[field]
         return similar
 
     def get_statement(self,curr,perc,count):
-        metric, atom_list, atom, obj = curr
+        metric, field_perc, atom_list, atom, obj = curr
         if atom==9999:
             return ("{} perc(or {} num of villages) of villages have {} equal to {}".format(perc,count,
                                                                             self.field,
@@ -186,6 +188,7 @@ class SemanticStatisticFact:
         f = open("DEBUG.log","w")
         list_similar = []
         visited_set = set()
+        max_count = 150
         while visited_set != total_set:
             to_visit = total_set-visited_set
             index = list(to_visit)[0]
@@ -203,10 +206,11 @@ class SemanticStatisticFact:
             list_similar.append(new_similar_set)
             perc = similarity_count / float(len(self.datablock.list_dicts))*100
             print(self.get_statement(curr,perc,similarity_count))
-
             f.write("======================\n")
             f.write(pprint.pformat(new_similar_set, indent=4))
             f.write("\n=======================\n")
+            if (len(list_similar) == max_count):
+                break
         f.close()
         self.list_similar = list_similar
 
@@ -228,3 +232,18 @@ class SemanticStatisticFact:
     def generate_list(self):
         self.list = self.datablock.apply(self.get_prop)
         self.values_list = [[(obj[x],obj[x]/obj[self.field] if obj[self.field]!=0 else 9999) for x in self.child_fields] for obj in self.datablock.list_dicts]
+        self.field_perc = []
+        idx = 0
+        field_list = self.child_fields
+        for obj in self.datablock.list_dicts:
+            perc_list = list(map(lambda x:x[1],self.values_list[idx]))
+            partitions = identify_dominance(perc_list)
+            fieldP_dict = {}
+            for index,i in enumerate(perc_list):
+                for start,end,mean in partitions:
+                    if start <= i <= end:
+                        fieldP_dict[field_list[index]] = mean
+                        break
+            self.field_perc.append(fieldP_dict)
+            idx += 1
+

@@ -20,9 +20,9 @@ def compute(array):
     result = list()
     for i in array:
         if i<=Q1_value:
-            result.append(Q1_value-i)
+            result.append((Q1_value+1-i)/Q1_value)
         elif i>=Q2_value:
-            result.append(i-Q2_value)
+            result.append((i-Q2_value+1)/Q2_value)
         else:
             result.append(0)
     return result

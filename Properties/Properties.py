@@ -9,6 +9,9 @@ class Properties:
     def __init__(self,list_values,discrete = True,ordering = False):
         functions = []
         self.discrete = discrete
+        if ordering:
+            self.property = self._compute_order(list_values)
+            return
         for i in Properties.__dict__:
             if type(Properties.__dict__[i]) == types.FunctionType and i.startswith("compute"):
                 functions.append(i)
@@ -17,11 +20,25 @@ class Properties:
             properties.append(Properties.__dict__[func](self,list_values))
         self.property = self.norm(properties)
 
+
     def norm(self,properties):
         return (sum([x**2 for x in properties])) ** 0.5
 
     def _compute_mean(self,list_values):
         return sum(list_values)/float(len(list_values))
+
+    def _compute_order(self,list_values):
+        binarize = lambda x: (x!=9999 and x!=0) * 1
+        a = 2
+        b = 3
+        if len(list_values) == 1:
+            return a*(binarize(list_values[0]))
+        sum_to_point = a+b+1
+        prop = a*binarize(list_values[0])+b*binarize(list_values[1])
+        for ele in list_values[2:]:
+            prop += sum_to_point * binarize(ele)
+            sum_to_point += sum_to_point + 1
+        return prop
 
     def bin_search(self,list_,value):
         low , high = 0, len(list_)

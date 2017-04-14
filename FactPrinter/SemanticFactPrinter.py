@@ -24,9 +24,9 @@ class SemanticFactPrinter:
         numbers = [fact["perc"]/100*num_villages for fact in self.fact_json]
         self.quartiles = quartiles(numbers)
         for fact in self.fact_json:
-            perc_list = list(map(lambda x:x[1],fact["data"][1]))
             number = round(fact["perc"]/100 * num_villages)
             field_list = fact["data"][0][1]
+            perc_list = list(map(lambda field: fact["data"][1][field], field_list))
             partitions = identify_dominance(perc_list)
             # {perc:fields}
             perc_fields = {}

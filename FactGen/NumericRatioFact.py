@@ -5,6 +5,7 @@ from concurrent.futures import ProcessPoolExecutor
 from concurrent.futures import ThreadPoolExecutor
 import json
 
+from FactPrinter import num_villages
 from Properties.Properties import Properties
 from collections import Counter
 from multiprocessing import Pool
@@ -58,10 +59,13 @@ class NumericRatioFact:
         global compute_ratio
         def compute_ratio(object):
             denom = convert(object[fields[1]])
-            if denom == 0:
+            nmr = convert(object[fields[0]])
+            if nmr==0 and denom == 0:
+                return self.max**2
+            elif denom==0:
                 return self.max
             else:
-                return convert(object[fields[0]])/float(denom)
+                return nmr/float(denom)
         self.compute_ratio = compute_ratio
         print("Initialization Done. Reading from DB...")
         self.db_instance = CensusDB()
@@ -102,35 +106,42 @@ class NumericRatioFact:
         for list_objects in list_similar:
             fact_dict = {}
             curr = list_objects[0]
-            args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
-            print(("Args Ready.", len(args)))
             partitions_perc = []
-            count = 0
-            thresh = 1
-            for arg in args:
-                partitions_perc.append(global_local_multi(arg))
-                # count += 1
-                # perc = count/len(args)*100
-                # if perc>thresh:
-                #     print(perc)
-                #     thresh += 1
-            perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
-            print("Partitions got. Flattening...")
-            flattened = list(map(flatten, partitions_perc))
-            print("Flattening Done. Getting Properties...")
-            properties = list(map(get_property, flattened))
-            interestingnesses = QuartileDeviation.compute(properties)
-            max_indices = [np.argmax(interestingnesses)]#np.argpartition(interestingnesses, -2)[-2:]
-
-            #max_indices[np.argsort(interestingnesses[max_indices])]
-
+            if len(list_objects)>20:
+                args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
+                print(("Args Ready.", len(args)))
+                count = 0
+                thresh = 1
+                for arg in args:
+                    partitions_perc.append(global_local_multi(arg))
+                    # count += 1
+                    # perc = count/len(args)*100
+                    # if perc>thresh:
+                    #     print(perc)
+                    #     thresh += 1
+                perc = len(list_objects) / float(num_villages) * 100
+                print("Partitions got. Flattening...")
+                flattened = list(map(flatten, partitions_perc))
+                print("Flattening Done. Getting Properties...")
+                properties = list(map(get_property, flattened))
+                interestingnesses = QuartileDeviation.compute(properties)
+                max_indices = [np.argmax(interestingnesses)]#np.argpartition(interestingnesses, -2)[-2:]
+            else:
+                perc = len(list_objects) / float(len(self.datablock.list_dicts)) * 100
+                max_indices = [None]
             for max_index in max_indices:
-                value_global_local = partitions_perc[max_index]
-                field = args[max_index][0]
+                value_global_local = partitions_perc[max_index] if max_index!=None else {}
+                field = args[max_index][0] if max_index!=None else None#np.argpartition(interestingnesses, -2)[-2:]
                 fact_dict["data"] = [(self.fields[0],convert(curr[2][self.fields[0]])),(self.fields[1],convert(curr[2][self.fields[1]])),curr[1]]
+                fact_dict["data_1"] = [(self.fields[0],convert(curr[2][self.fields[0]])),(self.fields[1],convert(curr[2][self.fields[1]])),curr[1]]
                 fact_dict["perc"] = perc
-                fact_dict["value_global_local"] = value_global_local
+                fact_dict["metric"] = max(perc, 100 - perc) * curr[0]
+                temp_dict = {i: value_global_local[i] for i in value_global_local if
+                             value_global_local[i]["global_perc"]}
+                fact_dict["value_global_local"] = temp_dict
                 fact_dict["partition_field"] = field
+                fact_dict["Vil_Nam"] = curr[-1]["Vil_Nam"]
+                fact_dict["Stat_Nam"] = curr[-1]["Stat_Nam"]
                 if curr[1] == self.max:
                     print( "{} perc of villages have {} {} and {} {}.\n".format(perc,
                                                                              convert(curr[2][self.fields[0]]), self.fields[0],

@@ -5,7 +5,7 @@ from Properties.Properties import Properties
 
 from FactGen.NumericRatioFact import NumericRatioFact
 #fact_type = "Ratio"
-fact_type = "Semantic"
+fact_type = "Simple"
 if fact_type == "Ratio":
     num_fact = NumericRatioFact()
     #num_fact.print_facts(number = 30)
@@ -18,5 +18,9 @@ elif fact_type == "Simple":
     simple.fuzzy_intersection()
 elif fact_type == "Semantic":
     from FactGen.SemanticStatistic_1 import SemanticStatisticFact
+    semantic = SemanticStatisticFact()
+    semantic.fuzzy_intersection()
+elif fact_type == "Semantic_Binary":
+    from FactGen.SemanticStatistic_binary import SemanticStatisticFact
     semantic = SemanticStatisticFact()
     semantic.fuzzy_intersection()
