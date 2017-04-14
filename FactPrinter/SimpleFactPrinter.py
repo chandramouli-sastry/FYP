@@ -1,5 +1,6 @@
 import random
 
+from FactPrinter.GlobalLocalPrinterUtil import GlobalLocalPrinter
 from FactPrinter.QuartileCalculation import quartiles
 from . import num_villages
 
@@ -47,3 +48,8 @@ class SimpleFactPrinter:
                 vil_name, state_name)
             content = "have {} equal to {}.".format(fact["data"][0][0], fact["data"][0][1])
             self.writer.write(prefix + content)
+            global_local_util = GlobalLocalPrinter(fact)
+            self.writer.write(global_local_util.generateLocalSuffix())
+            global_fact = global_local_util.generateGlobalSuffix()
+            if global_fact:
+                self.writer.write(global_fact)
