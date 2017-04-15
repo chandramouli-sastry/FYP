@@ -47,9 +47,9 @@ def gen_ratio():
     count = 0
     thresh = 1
     for score,field_1,field_2 in field_pairs:
-        path = "JSONS/Semantic/Fact_{}_{}.json".format(field_1,field_2)
+        path = "JSONS/Ratio/Fact_{}_{}.json".format(field_1,field_2)
         print("==========================================================================================")
-        s = NumericRatioFact(field=[field_1,field_2], fileName=path, debug=DEBUG)
+        s = NumericRatioFact(fields=[field_1,field_2], fileName=path, debug=DEBUG)
         s.partitions = partitions
         s.fuzzy_intersection()
         print("==========================================================================================")
@@ -59,6 +59,6 @@ def gen_ratio():
             print("{}% completed".format(perc))
             thresh += 1
 
-gen_simple()
-gen_semantic()
+#gen_simple()
+#gen_semantic()
 gen_ratio()

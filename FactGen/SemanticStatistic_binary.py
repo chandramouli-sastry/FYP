@@ -182,9 +182,14 @@ class SemanticStatisticFact:
             for max_index in max_indices:
                 value_global_local = partitions_perc[max_index] if max_index!=None else {}
                 field = args[max_index][0] if max_index!=None else None
-                fact_dict["data"] = [(self.field,self.child_fields),curr[1]]
+                metric, atom_list, atom, obj = curr
+                binarize = lambda x: (x != 9999 and x != 0) * 1
+                have, have_not = [field for field,value in zip(self.child_fields,atom_list) if binarize(value[1])],[field for field,value in zip(self.child_fields,atom_list) if not(binarize(value[1]))]
+                fact_dict["data"] = [(self.field,self.child_fields)]
+                fact_dict["have"] = have
+                fact_dict["have_not"] = have_not
                 fact_dict["perc"] = perc
-                fact_dict["metric"] = max(perc,100-perc) * curr[0]
+                fact_dict["metric"] = max(perc,100-perc) * metric
                 fact_dict["Vil_Nam"] = curr[-1]["Vil_Nam"]
                 fact_dict["Stat_Nam"] = curr[-1]["Stat_Nam"]
                 temp_dict = {i: value_global_local[i] for i in value_global_local if

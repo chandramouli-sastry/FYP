@@ -103,7 +103,7 @@ class NumericRatioFact:
         #p = Pool(10)
         p = ProcessPoolExecutor(10)
         l = []
-        f = open("Resources/Facts_data_Simple.json","w")
+        f = open(self.fileName,"w")
         for list_objects in list_similar:
             fact_dict = {}
             curr = list_objects[0]
