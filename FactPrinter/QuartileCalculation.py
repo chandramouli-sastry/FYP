@@ -150,7 +150,7 @@ def stdDevOfLengths(L):
 	for i in L:
 		strLen.append(len(i))
 
-	return stdDev(strLen)
+	return std(strLen)
 
 
 # === Measures of range ===

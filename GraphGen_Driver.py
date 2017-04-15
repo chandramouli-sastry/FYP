@@ -19,7 +19,13 @@ else:
 field_pairs = list(graph.top_percentile_graph_ds.keys())
 values = [graph.get_value(x[0],x[1]) for x in field_pairs]
 zipped = list(zip(field_pairs, values))
-sorted = sorted(zipped,key = lambda x:x[-1], reverse=True)
-for fields,value in sorted:
+sorted_ = sorted(zipped,key = lambda x:x[-1], reverse=True)
+s = set()
+for fields,value in sorted_:
     if fields[0] in continuous_fields and fields[1] in continuous_fields:
-        print((fields,value))
+        s.add(tuple(sorted(fields)))
+l = [(graph.get_value(i,j),i,j) for i,j in s]
+print(sorted(l,reverse=True))
+for i,j,k in sorted(l,reverse=True):
+    print(i,j,k)
+
