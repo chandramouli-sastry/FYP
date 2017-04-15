@@ -4,6 +4,8 @@ from . import identify_dominance, get_fields_to_print
 class GlobalLocalPrinter:
     def __init__(self,fact_json):
         self.fact_json = fact_json
+        self.convertToPercentage("global_perc")
+        self.convertToPercentage("local_perc")
 
     def generateCountSuffixes(self):
         pass
@@ -136,4 +138,8 @@ class GlobalLocalPrinter:
                 "partition_field"], fields)
 
         return content
+
+    def convertToPercentage(self, type):
+        for value in self.fact_json["value_global_local"]:
+            self.fact_json["value_global_local"][value][type] *= 100
 
