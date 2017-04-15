@@ -47,7 +47,7 @@ def gen_ratio():
     count = 0
     thresh = 1
     for score,field_1,field_2 in field_pairs:
-        path = "JSONS/Ratio/Fact_{}_{}.json".format(field_1,field_2)
+        path = "JSONS/Ratio/Fact@{}@{}.json".format(field_1,field_2)
         print("==========================================================================================")
         s = NumericRatioFact(fields=[field_1,field_2], fileName=path, debug=DEBUG)
         s.partitions = partitions
