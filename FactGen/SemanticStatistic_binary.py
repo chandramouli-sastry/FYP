@@ -63,6 +63,13 @@ def get_thresh(list_values, perc):
 
 ########### Class ###########
 
+def correct(x):
+    if x.endswith("_C"):
+        while x.endswith("_C"):
+            x = x[:-2]
+        x = x + "_C"
+    return x
+
 class SemanticStatisticFact:
     def __init__(self,field,fileName,debug=False,print_=False):
         self.field = field
@@ -72,7 +79,7 @@ class SemanticStatisticFact:
         self.ignore = ["","N.A.","null"]
         #self.fields = ["Hos_Allop_Num","Hos_Allop_Doc_Tot_Stren_Num"]
         self.ontology = pickle.load(open("Resources/ontology.pkl","rb"),encoding="latin1")
-        self.child_fields = list(map(lambda x:x[0],self.ontology.get_children(self.field)))
+        self.child_fields = list(map(lambda x:correct(x[0]),self.ontology.get_children(self.field)))
         child_fields = copy.deepcopy(self.child_fields)
         #self.choose_fields()
         print("Initialization Done. Reading from DB...")

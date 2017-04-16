@@ -32,8 +32,16 @@ class SimpleFactPrinter:
             prefix = self.prefix_gen(number_of_villages) if number_of_villages != 1 else "{}, a village in {} is one of its kind with ".format(
                 vil_name, state_name)
             content = "have {} equal to {}.".format(fact["data"][0][0], fact["data"][0][1])
-            self.writer.write(prefix + content)
-            self.callGlobalLocal(fact)
+            if self.writer.type == "list":
+                global_local_util = GlobalLocalPrinter(fact)
+                self.writer.write([
+                    prefix + content,
+                    global_local_util.generateLocalSuffix(),
+                    global_local_util.generateGlobalSuffix()
+                ])
+            else:
+                self.writer.write(prefix + content)
+                self.callGlobalLocal(fact)
 
     def binarizedProcess(self, fact):
         numbers = [fact["perc"] / 100 * num_villages for fact in self.fact_json]
@@ -53,8 +61,16 @@ class SimpleFactPrinter:
                 content = "because it has {}.".format(fact["data"][0])
             else:
                 content = "because it does not have {}.".format(fact["data"][0])
-        self.writer.write(prefix + content)
-        self.callGlobalLocal(fact)
+        if self.writer.type == "list":
+            global_local_util = GlobalLocalPrinter(fact)
+            self.writer.write([
+                prefix+content,
+                global_local_util.generateLocalSuffix(),
+                global_local_util.generateGlobalSuffix()
+            ])
+        else:
+            self.writer.write(prefix + content)
+            self.callGlobalLocal(fact)
 
     def callGlobalLocal(self, fact):
         global_local_util = GlobalLocalPrinter(fact)

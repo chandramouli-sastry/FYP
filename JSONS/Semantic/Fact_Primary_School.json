@@ -1,0 +1,584 @@
+[
+  {
+    "data": [
+      [
+        "Primary_School",
+        [
+          "Priv_Prim_School_Num_C",
+          "Near_Prim_School_Gov_1_Priv_2_C",
+          "Gov_Prim_School_Num_C",
+          "Dist_Prim_School_C"
+        ]
+      ]
+    ],
+    "have": [
+      "Gov_Prim_School_Num_C"
+    ],
+    "have_not": [
+      "Priv_Prim_School_Num_C",
+      "Near_Prim_School_Gov_1_Priv_2_C",
+      "Dist_Prim_School_C"
+    ],
+    "perc": 63.17861014091293,
+    "metric": 19258040.764542937,
+    "Vil_Nam": "Keran",
+    "Stat_Nam": "JAMMU & KASHMIR",
+    "value_global_local": {
+      "": {
+        "global_perc": 0.7553150641800959,
+        "local_perc": 0.9999949164906502
+      },
+      "CURCHOREM-CACORA": {
+        "global_perc": 0.4,
+        "local_perc": 5.083509349844572e-06
+      }
+    },
+    "partition_field": "Near_Vil_Tow_Nam_hav_Prim_School"
+  },
+  {
+    "data": [
+      [
+        "Primary_School",
+        [
+          "Priv_Prim_School_Num_C",
+          "Near_Prim_School_Gov_1_Priv_2_C",
+          "Gov_Prim_School_Num_C",
+          "Dist_Prim_School_C"
+        ]
+      ]
+    ],
+    "have": [
+      "Priv_Prim_School_Num_C",
+      "Gov_Prim_School_Num_C"
+    ],
+    "have_not": [
+      "Near_Prim_School_Gov_1_Priv_2_C",
+      "Dist_Prim_School_C"
+    ],
+    "perc": 12.181460516279257,
+    "metric": 1119949.8340358906,
+    "Vil_Nam": "Chittigidda",
+    "Stat_Nam": "ANDHRA PRADESH",
+    "value_global_local": {
+      "": {
+        "global_perc": 0.14563295051816355,
+        "local_perc": 1.0
+      }
+    },
+    "partition_field": "Near_Vil_Tow_Nam_hav_Prim_School"
+  },
+  {
+    "data": [
+      [
+        "Primary_School",
+        [
+          "Priv_Prim_School_Num_C",
+          "Near_Prim_School_Gov_1_Priv_2_C",
+          "Gov_Prim_School_Num_C",
+          "Dist_Prim_School_C"
+        ]
+      ]
+    ],
+    "have": [
+      "Near_Prim_School_Gov_1_Priv_2_C",
+      "Dist_Prim_School_C"
+    ],
+    "have_not": [
+      "Priv_Prim_School_Num_C",
+      "Gov_Prim_School_Num_C"
+    ],
+    "perc": 14.229555582319644,
+    "metric": 85.77044441768035,
+    "Vil_Nam": "Muqam Shrif Dar",
+    "Stat_Nam": "JAMMU & KASHMIR",
+    "value_global_local": {
+      "ANDAMAN & NICOBAR ISLANDS": {
+        "global_perc": 0.218018018018018,
+        "local_perc": 0.001365518953628782
+      },
+      "ANDHRA PRADESH": {
+        "global_perc": 0.04179856115107913,
+        "local_perc": 0.013113496067079709
+      },
+      "ASSAM": {
+        "global_perc": 0.0883500663004357,
+        "local_perc": 0.026317274379027436
+      },
+      "Arunachal Pradesh": {
+        "global_perc": 0.48523886205045624,
+        "local_perc": 0.03060568101025832
+      },
+      "BIHAR": {
+        "global_perc": 0.1392343004858047,
+        "local_perc": 0.07051043324192256
+      },
+      "CHHATTISGARH": {
+        "global_perc": 0.03373745403955083,
+        "local_perc": 0.007662705533173083
+      },
+      "DAMAN & DIU": {
+        "global_perc": 0.10526315789473684,
+        "local_perc": 2.257056121700466e-05
+      },
+      "Dadra & Nagar Haveli": {
+        "global_perc": 0.03076923076923077,
+        "local_perc": 2.257056121700466e-05
+      },
+      "GOA": {
+        "global_perc": 0.15568862275449102,
+        "local_perc": 0.0005868345916421212
+      },
+      "HARYANA": {
+        "global_perc": 0.05306241777517907,
+        "local_perc": 0.004096556860886346
+      },
+      "HIMACHAL PRADESH": {
+        "global_perc": 0.375543740937651,
+        "local_perc": 0.0876866303280631
+      },
+      "JAMMU & KASHMIR": {
+        "global_perc": 0.09171371890737066,
+        "local_perc": 0.0067824536457099
+      },
+      "JHARKHAND": {
+        "global_perc": 0.16222139902451072,
+        "local_perc": 0.059304149597679746
+      },
+      "KARNATAKA": {
+        "global_perc": 0.10722563053851397,
+        "local_perc": 0.035503492794348335
+      },
+      "KERALA": {
+        "global_perc": 0.0137524557956778,
+        "local_perc": 0.00015799392851903262
+      },
+      "LAKSHADWEEP": {
+        "global_perc": 0.09523809523809523,
+        "local_perc": 2.257056121700466e-05
+      },
+      "MADHYA PRADESH": {
+        "global_perc": 0.06456842066918018,
+        "local_perc": 0.04000631975714076
+      },
+      "MANIPUR": {
+        "global_perc": 0.3382409918636188,
+        "local_perc": 0.009852049971222535
+      },
+      "MIZORAM": {
+        "global_perc": 0.014457831325301205,
+        "local_perc": 0.00013542336730202795
+      },
+      "Maharashtra": {
+        "global_perc": 0.034535669300354975,
+        "local_perc": 0.017018203157621516
+      },
+      "Meghalaya": {
+        "global_perc": 0.19081737096066675,
+        "local_perc": 0.014727291194095542
+      },
+      "NAGALAND": {
+        "global_perc": 0.11484593837535013,
+        "local_perc": 0.0018507860197943822
+      },
+      "NCT OF DELHI": {
+        "global_perc": 0.08928571428571429,
+        "local_perc": 0.0001128528060850233
+      },
+      "ODISHA": {
+        "global_perc": 0.16068052930056712,
+        "local_perc": 0.09304713861710172
+      },
+      "Punjab": {
+        "global_perc": 0.10945075908115412,
+        "local_perc": 0.015539831397907709
+      },
+      "RAJASTHAN": {
+        "global_perc": 0.30126253581661894,
+        "local_perc": 0.15187730642922437
+      },
+      "SIKKIM": {
+        "global_perc": 0.1286031042128603,
+        "local_perc": 0.0006545462752931352
+      },
+      "TRIPURA": {
+        "global_perc": 0.024,
+        "local_perc": 0.00023699089277854894
+      },
+      "Tamil Nadu": {
+        "global_perc": 0.0824206771387446,
+        "local_perc": 0.01486271456139757
+      },
+      "UTTAR PRADESH": {
+        "global_perc": 0.15600239758742765,
+        "local_perc": 0.18797891909582332
+      },
+      "UTTARAKHAND": {
+        "global_perc": 0.30631810873578275,
+        "local_perc": 0.058051483450135985
+      },
+      "West Bengal": {
+        "global_perc": 0.11079616092296982,
+        "local_perc": 0.050287210391486384
+      }
+    },
+    "partition_field": "Stat_Nam"
+  },
+  {
+    "data": [
+      [
+        "Primary_School",
+        [
+          "Priv_Prim_School_Num_C",
+          "Near_Prim_School_Gov_1_Priv_2_C",
+          "Gov_Prim_School_Num_C",
+          "Dist_Prim_School_C"
+        ]
+      ]
+    ],
+    "have": [
+      "Near_Prim_School_Gov_1_Priv_2_C",
+      "Gov_Prim_School_Num_C",
+      "Dist_Prim_School_C"
+    ],
+    "have_not": [
+      "Priv_Prim_School_Num_C"
+    ],
+    "perc": 0.00016058452768075794,
+    "metric": 8860885.770765588,
+    "Vil_Nam": "Lam Pur",
+    "Stat_Nam": "NCT OF DELHI",
+    "value_global_local": {},
+    "partition_field": null
+  },
+  {
+    "data": [
+      [
+        "Primary_School",
+        [
+          "Priv_Prim_School_Num_C",
+          "Near_Prim_School_Gov_1_Priv_2_C",
+          "Gov_Prim_School_Num_C",
+          "Dist_Prim_School_C"
+        ]
+      ]
+    ],
+    "have": [
+      "Dist_Prim_School_C"
+    ],
+    "have_not": [
+      "Priv_Prim_School_Num_C",
+      "Near_Prim_School_Gov_1_Priv_2_C",
+      "Gov_Prim_School_Num_C"
+    ],
+    "perc": 0.11546027540246498,
+    "metric": 8778952.0809346,
+    "Vil_Nam": "Mandlana",
+    "Stat_Nam": "JAMMU & KASHMIR",
+    "value_global_local": {
+      "Arunachal Pradesh": {
+        "global_perc": 0.003757380568974772,
+        "local_perc": 0.02920723226703755
+      },
+      "CHHATTISGARH": {
+        "global_perc": 0.0008943654973665905,
+        "local_perc": 0.025034770514603615
+      },
+      "JAMMU & KASHMIR": {
+        "global_perc": 0.0003052037234854265,
+        "local_perc": 0.0027816411682892906
+      },
+      "JHARKHAND": {
+        "global_perc": 0.0017287151941717603,
+        "local_perc": 0.07788595271210014
+      },
+      "MANIPUR": {
+        "global_perc": 0.0003874467260751647,
+        "local_perc": 0.0013908205841446453
+      },
+      "MIZORAM": {
+        "global_perc": 0.0012048192771084338,
+        "local_perc": 0.0013908205841446453
+      },
+      "UTTAR PRADESH": {
+        "global_perc": 0.0028658662221139977,
+        "local_perc": 0.42559109874826145
+      },
+      "West Bengal": {
+        "global_perc": 0.007807449400765826,
+        "local_perc": 0.43671766342141866
+      }
+    },
+    "partition_field": "Stat_Nam"
+  },
+  {
+    "data": [
+      [
+        "Primary_School",
+        [
+          "Priv_Prim_School_Num_C",
+          "Near_Prim_School_Gov_1_Priv_2_C",
+          "Gov_Prim_School_Num_C",
+          "Dist_Prim_School_C"
+        ]
+      ]
+    ],
+    "have": [
+      "Near_Prim_School_Gov_1_Priv_2_C"
+    ],
+    "have_not": [
+      "Priv_Prim_School_Num_C",
+      "Gov_Prim_School_Num_C",
+      "Dist_Prim_School_C"
+    ],
+    "perc": 0.9381348107109879,
+    "metric": 8199152.457987073,
+    "Vil_Nam": "Majra",
+    "Stat_Nam": "JAMMU & KASHMIR",
+    "value_global_local": {
+      "ANDAMAN & NICOBAR ISLANDS": {
+        "global_perc": 0.0018018018018018018,
+        "local_perc": 0.00017117425539198904
+      },
+      "Arunachal Pradesh": {
+        "global_perc": 0.015745213812846662,
+        "local_perc": 0.015063334474495036
+      },
+      "CHHATTISGARH": {
+        "global_perc": 0.0017390440226572592,
+        "local_perc": 0.005991098938719616
+      },
+      "HARYANA": {
+        "global_perc": 0.00029235491887151,
+        "local_perc": 0.00034234851078397807
+      },
+      "HIMACHAL PRADESH": {
+        "global_perc": 0.0008216529724504591,
+        "local_perc": 0.002909962341663814
+      },
+      "JAMMU & KASHMIR": {
+        "global_perc": 0.0003052037234854265,
+        "local_perc": 0.00034234851078397807
+      },
+      "JHARKHAND": {
+        "global_perc": 0.0004321787985429401,
+        "local_perc": 0.002396439575487847
+      },
+      "MADHYA PRADESH": {
+        "global_perc": 0.012931898074786442,
+        "local_perc": 0.12153372132831222
+      },
+      "MANIPUR": {
+        "global_perc": 0.001162340178225494,
+        "local_perc": 0.0005135227661759672
+      },
+      "MIZORAM": {
+        "global_perc": 0.0012048192771084338,
+        "local_perc": 0.00017117425539198904
+      },
+      "Meghalaya": {
+        "global_perc": 0.0016084222839596433,
+        "local_perc": 0.0018829168093118796
+      },
+      "NAGALAND": {
+        "global_perc": 0.0014005602240896359,
+        "local_perc": 0.00034234851078397807
+      },
+      "NCT OF DELHI": {
+        "global_perc": 0.008928571428571428,
+        "local_perc": 0.00017117425539198904
+      },
+      "UTTAR PRADESH": {
+        "global_perc": 0.04537621518347163,
+        "local_perc": 0.829339267374187
+      },
+      "West Bengal": {
+        "global_perc": 0.0027350937391217864,
+        "local_perc": 0.018829168093118794
+      }
+    },
+    "partition_field": "Stat_Nam"
+  },
+  {
+    "data": [
+      [
+        "Primary_School",
+        [
+          "Priv_Prim_School_Num_C",
+          "Near_Prim_School_Gov_1_Priv_2_C",
+          "Gov_Prim_School_Num_C",
+          "Dist_Prim_School_C"
+        ]
+      ]
+    ],
+    "have": [
+      "Priv_Prim_School_Num_C"
+    ],
+    "have_not": [
+      "Near_Prim_School_Gov_1_Priv_2_C",
+      "Gov_Prim_School_Num_C",
+      "Dist_Prim_School_C"
+    ],
+    "perc": 1.3045887028784777,
+    "metric": 7943598.873660123,
+    "Vil_Nam": "Darel",
+    "Stat_Nam": "JAMMU & KASHMIR",
+    "value_global_local": {
+      "": {
+        "global_perc": 0.015596742423369772,
+        "local_perc": 1.0
+      }
+    },
+    "partition_field": "Near_Vil_Tow_Nam_hav_Prim_School"
+  },
+  {
+    "data": [
+      [
+        "Primary_School",
+        [
+          "Priv_Prim_School_Num_C",
+          "Near_Prim_School_Gov_1_Priv_2_C",
+          "Gov_Prim_School_Num_C",
+          "Dist_Prim_School_C"
+        ]
+      ]
+    ],
+    "have": [],
+    "have_not": [
+      "Priv_Prim_School_Num_C",
+      "Near_Prim_School_Gov_1_Priv_2_C",
+      "Gov_Prim_School_Num_C",
+      "Dist_Prim_School_C"
+    ],
+    "perc": 8.052029386968565,
+    "metric": 3537054.533542093,
+    "Vil_Nam": "Bore",
+    "Stat_Nam": "JAMMU & KASHMIR",
+    "value_global_local": {
+      "": {
+        "global_perc": 1.0,
+        "local_perc": 3.988672171034263e-05
+      },
+      "ANDAMAN & NICOBAR ISLANDS": {
+        "global_perc": 0.3675675675675676,
+        "local_perc": 0.004068445614454948
+      },
+      "ANDHRA PRADESH": {
+        "global_perc": 0.05446043165467626,
+        "local_perc": 0.03019424833472937
+      },
+      "ASSAM": {
+        "global_perc": 0.03875734040537981,
+        "local_perc": 0.020402058154840252
+      },
+      "Arunachal Pradesh": {
+        "global_perc": 0.10001789228842368,
+        "local_perc": 0.011148338718040765
+      },
+      "BIHAR": {
+        "global_perc": 0.1292730757231359,
+        "local_perc": 0.11569143632084879
+      },
+      "CHHATTISGARH": {
+        "global_perc": 0.03135247937990659,
+        "local_perc": 0.012584260699613098
+      },
+      "GOA": {
+        "global_perc": 0.041916167664670656,
+        "local_perc": 0.0002792070519723984
+      },
+      "HARYANA": {
+        "global_perc": 0.029089314427715247,
+        "local_perc": 0.003968728810179092
+      },
+      "HIMACHAL PRADESH": {
+        "global_perc": 0.13571773803769938,
+        "local_perc": 0.05600095728132105
+      },
+      "JAMMU & KASHMIR": {
+        "global_perc": 0.03830306729742103,
+        "local_perc": 0.005005783574648
+      },
+      "JHARKHAND": {
+        "global_perc": 0.10758165092301043,
+        "local_perc": 0.06950261258027203
+      },
+      "KARNATAKA": {
+        "global_perc": 0.06622358554873892,
+        "local_perc": 0.038749950141597864
+      },
+      "KERALA": {
+        "global_perc": 0.0009823182711198428,
+        "local_perc": 1.9943360855171314e-05
+      },
+      "LAKSHADWEEP": {
+        "global_perc": 0.7142857142857143,
+        "local_perc": 0.0002991504128275697
+      },
+      "MADHYA PRADESH": {
+        "global_perc": 0.05416826038649983,
+        "local_perc": 0.059311555183279484
+      },
+      "MANIPUR": {
+        "global_perc": 0.0263463773731112,
+        "local_perc": 0.0013561485381516493
+      },
+      "MIZORAM": {
+        "global_perc": 0.18674698795180722,
+        "local_perc": 0.0030912209325515538
+      },
+      "Maharashtra": {
+        "global_perc": 0.061971830985915494,
+        "local_perc": 0.05396673447409357
+      },
+      "Meghalaya": {
+        "global_perc": 0.05556367890042404,
+        "local_perc": 0.007578477124965099
+      },
+      "NAGALAND": {
+        "global_perc": 0.0196078431372549,
+        "local_perc": 0.0005584141039447968
+      },
+      "NCT OF DELHI": {
+        "global_perc": 0.08035714285714286,
+        "local_perc": 0.00017949024769654183
+      },
+      "ODISHA": {
+        "global_perc": 0.07085923645080194,
+        "local_perc": 0.07251406006940289
+      },
+      "Punjab": {
+        "global_perc": 0.0328272792305858,
+        "local_perc": 0.008236608033185752
+      },
+      "RAJASTHAN": {
+        "global_perc": 0.03151862464183381,
+        "local_perc": 0.02808025208408121
+      },
+      "SIKKIM": {
+        "global_perc": 0.057649667405764965,
+        "local_perc": 0.0005185273822344541
+      },
+      "TRIPURA": {
+        "global_perc": 0.013714285714285714,
+        "local_perc": 0.00023932033026205577
+      },
+      "Tamil Nadu": {
+        "global_perc": 0.05820138932348708,
+        "local_perc": 0.018547325595309323
+      },
+      "UTTAR PRADESH": {
+        "global_perc": 0.1382171689737202,
+        "local_perc": 0.29432411950061826
+      },
+      "UTTARAKHAND": {
+        "global_perc": 0.062466503900434706,
+        "local_perc": 0.020920585537074706
+      },
+      "West Bengal": {
+        "global_perc": 0.07807449400765826,
+        "local_perc": 0.06262215308523793
+      }
+    },
+    "partition_field": "Stat_Nam"
+  }
+]

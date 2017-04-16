@@ -9,6 +9,7 @@ try:
     if "" in fields:
         fields.remove("")
     new_fields = pickle.load(open("Resources/new_fields.pkl","rb"))
+    new_fields.remove("Other")
     numeric_fields = pickle.load(open("Resources/numeric_fields.pkl","rb"))
     non_numeric_fields = pickle.load(open("Resources/non_numeric_fields.pkl","rb"))
     continuous_fields = pickle.load(open("Resources/continuous_fields.pkl","rb"))

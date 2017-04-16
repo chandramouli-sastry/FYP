@@ -65,6 +65,7 @@ class OntologyBuilder:
                     if len(result__[1])>0:
                         l = self.ontology.tree[self.ontology.k2i[new_field]]
                         for ind,val in enumerate(l):
+                            #TODO it keeps appending _C more than once... check...
                             l[ind] = (val[0]+"_C",val[1])
             done = True
             self.data.append(datum)

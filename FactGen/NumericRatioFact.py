@@ -13,7 +13,7 @@ import numpy as np
 from DataServices.DBController import CensusDB
 from Metrics import Entropy
 from Metrics import Grubbs
-from Resources import numeric_fields,convert, continuous_fields, discrete_fields
+from Resources import numeric_fields, continuous_fields, discrete_fields
 from Metrics import QuartileDeviation
 import copy
 
@@ -45,6 +45,14 @@ def flatten(partition):
 def get_property(values_list):
     return Properties(values_list).property
 
+def convert(x):
+    if x.strip() == "":
+        return 0
+    else:
+        try:
+            return float(x)
+        except Exception as e:
+            return 0
 
 ########### Class ###########
 

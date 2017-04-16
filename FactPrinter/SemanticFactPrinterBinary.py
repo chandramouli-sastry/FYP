@@ -1,5 +1,6 @@
 import random
 
+from FactPrinter.GlobalLocalPrinterUtil import GlobalLocalPrinter
 from FactPrinter.QuartileCalculation import quartiles, median
 from . import identify_dominance, num_villages, get_fields_to_print
 
@@ -33,19 +34,19 @@ class BinarizedSemanticFactPrinter:
         numbers = [fact["perc"] / 100 * num_villages for fact in self.fact_json]
         self.quartiles = quartiles(numbers)
         for fact in self.fact_json:
-            perc_list = list(map(lambda x: x[1], fact["data"][1]))
+            # perc_list = list(map(lambda x: x[1], fact["data"][1]))
             number = round(fact["perc"] / 100 * num_villages)
-            field_list = fact["data"][0][1]
-            partitions = identify_dominance(perc_list)
-            # {perc:fields}
-            perc_fields = {}
-            for index, i in enumerate(perc_list):
-                for start, end, mean in partitions:
-                    if start <= i <= end:
-                        perc_fields[mean] = perc_fields.get(mean, []) + [field_list[index]]
-                        break
-            for perc in perc_fields:
-                perc_fields[perc] = sorted(perc_fields[perc], key=lambda x: field_list.index(x))
+            # field_list = fact["data"][0][1]
+            # partitions = identify_dominance(perc_list)
+            # # {perc:fields}
+            # perc_fields = {}
+            # for index, i in enumerate(perc_list):
+            #     for start, end, mean in partitions:
+            #         if start <= i <= end:
+            #             perc_fields[mean] = perc_fields.get(mean, []) + [field_list[index]]
+            #             break
+            # for perc in perc_fields:
+            #     perc_fields[perc] = sorted(perc_fields[perc], key=lambda x: field_list.index(x))
             """
             Prefix: In a whooping {}... | In only about {}... | In about | In {}, a village in {},
             Content: Maximum 3 numbers;
@@ -66,6 +67,15 @@ class BinarizedSemanticFactPrinter:
             vil_name, state_name = fact["Vil_Nam"], fact["Stat_Nam"]
             prefix = self.prefix_gen(number) if number != 1 else "{}, a village in {} is one of its kind having ".format(
                 vil_name, state_name)
-            content = "{}".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have"])))
-            content += " and do not have {}.".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have-not"])))
-            self.writer.write(prefix + content)
+            content = "{}".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have"],binarize=True)))
+            content += " and do not have {}.".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have_not"],binarize=True)))
+            if self.writer.type == "list":
+                global_local_util = GlobalLocalPrinter(fact)
+                self.writer.write([
+                    prefix + content,
+                    global_local_util.generateLocalSuffix(),
+                    global_local_util.generateGlobalSuffix()
+                ])
+            else:
+                self.writer.write(prefix + content)
+                self.callGlobalLocal(fact)

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script-->
+</head>
+<style>
+    html, body, #container {
+        height: 100%;
+        margin:0;
+        padding:0;
+    }
+    body
+    {
+        background-color: floralwhite;
+    }
+    body > #content {
+        max-height: 100%;
+    }
+    #footer {
+        clear: both;
+        position: relative;
+        z-index: 10;
+        height: 5em;
+        margin-top: -5em;
+    }
+    #content
+    {
+        padding-bottom: 5em;
+    }
+    .list-group{
+        overflow: hidden;
+        overflow-y: scroll;
+        overflow-x: scroll;
+    }
+    .fact{
+        border-left: .55rem solid aqua;
+    }
+    .fact_list
+    {
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+    p{
+        word-wrap: break-word;
+
+    }
+    .clickable:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+</style>
+<script>
+    function getFactList(optionName, arg,callback) {
+        if (optionName == "simple")
+            $.get("simple_fact",{"field":arg},callback);
+        else if(optionName=="semantic")
+            $.get("semantic_fact",{"field":arg},callback);
+        else if(optionName=="ratio")
+            $.get("ratio_fact",{"field":arg},callback);
+
+    }
+    function setFactTypes(element,list,factElement, type)
+    {
+        p = element;
+        element.style.height = (0.6*document.getElementById('content_top').offsetHeight)+"px";
+        for(let i of list)
+        {
+            let new_ele = document.createElement("button");
+            new_ele.className = "list-group-item";
+            new_ele.innerText = i;
+            new_ele.setAttribute("fact_element", factElement);
+            new_ele.onclick = function(){
+              getFactList(type, i, function(fact_list){
+                  var newFacts = [];
+                  for(let fact of fact_list)
+                  {
+                      let new_fact = newFact(fact);
+                      newFacts.push(new_fact);
+                  }
+                  setFacts(factElement,newFacts);
+              })
+            };
+            element.appendChild(new_ele);
+        }
+    }
+    function setFacts(element,list)
+    {
+        $(element).empty();
+        for(let ele of list)
+        {
+            element.appendChild(ele);
+        }
+    }
+    function getList(optionName,callback) {
+        if (optionName == "simple")
+            $.get("simple_list",{},callback);
+        else if(optionName=="semantic")
+            $.get("semantic_list",{},callback);
+        else if(optionName=="ratio")
+            $.get("ratio_list",{},callback);
+    }
+
+    function newFact(fact_list)
+    {
+        /*
+            fact_list: [fact, local, global] -> local and global are optional
+        */
+        var fact_new = fact_template.cloneNode(true);
+        fact_new.style.display = "block";
+        var fact = fact_new.getElementsByClassName("fact")[0];
+        var innerDiv = fact_new.getElementsByTagName("div")[0];
+        var global = fact_new.getElementsByClassName("global")[0];
+        var local = fact_new.getElementsByClassName("local")[0];
+        fact.innerHTML = fact_list[0];
+        if(fact_list[1]||fact_list[2])
+        {
+            local.innerHTML = fact_list[1];
+            global.innerHTML = fact_list[2]==false? "": fact_list[2];
+            fact.className = "clickable";
+            fact.setAttribute("clicked","false");
+            fact.onclick = function()
+            {
+                if(fact.getAttribute("clicked")=="true")
+                {
+                    $(innerDiv).slideUp(1000);
+                    fact.setAttribute("clicked","false");
+                }
+                else
+                {
+                    $(innerDiv).slideDown(1000);
+                    fact.setAttribute("clicked","true");
+                }
+            }
+        }
+        return fact_new;
+    }
+
+
+    function init()
+    {
+        var options = document.getElementsByName("option");
+        fact_template = document.getElementsByName("fact_template")[0];
+        for(let ele of options)
+        {
+            console.log(ele.id);
+            getList(ele.id, function(list){
+                let listElement = ele.getElementsByClassName("list-group")[0];
+                let factListElement = ele.getElementsByClassName("fact_list")[0];
+                setFactTypes(listElement,list,factListElement,ele.id);
+                factListElement.style.height = (0.645*document.getElementById('content_top').offsetHeight)+"px";
+            });
+        }
+    }
+</script>
+<body onload="init()">
+<img src="Images/kanoe.png" align="left" class="img-rounded" alt="Cinque Terre" width="105" height="105"/>
+<div id="content" class="container" style="height:inherit">
+    <center><h2>Rural India - An Interestingness Analysis</h2></center>
+
+    <div class="row" id="content_top" style="max-height:90%;min-height:90%;">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Data and Ontology</a></li>
+            <li><a data-toggle="tab" href="#simple">Simple Statistic</a></li>
+            <li><a data-toggle="tab" href="#semantic">Semantic Statistic</a></li>
+            <li><a data-toggle="tab" href="#ratio">Compositional Statistic</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>HOME</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div id="simple" class="tab-pane fade" name="option">
+                <div class="container">
+                    <div class="col-md-2">
+                        <br>
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <center><h3>Fields</h3></center>
+                            </div>
+                            <div class="panel panel-body" >
+                                <div class="list-group" name="list">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <br>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <center><h3>Facts</h3></center>
+                            </div>
+                            <div class="panel panel-body fact_list">
+                                <div class="list-group" name="list">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="semantic" class="tab-pane fade" name="option">
+                <div class="container">
+                    <div class="col-md-2">
+                        <br>
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <center><h3>Fields</h3></center>
+                            </div>
+                            <div class="panel panel-body" >
+                                <div class="list-group" name="list">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <br>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <center><h3>Facts</h3></center>
+                            </div>
+                            <div class="panel panel-body fact_list">
+                                <div class="list-group" name="list">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ratio" class="tab-pane fade" name="option">
+                <div class="container">
+                    <div class="col-md-2">
+                        <br>
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <center><h3>Fields</h3></center>
+                            </div>
+                            <div class="panel panel-body">
+                                <div class="list-group" name="list">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <br>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <center><h3>Facts</h3></center>
+                            </div>
+                            <div class="panel panel-body fact_list">
+                                <div class="list-group" name="list">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: none" class="fact" name="fact_template">
+        <p class="text text-left fact" name="fact"></p>
+        <div name="additional" style="display:none">
+            <p class="text text-indented local" name = "local">
+            </p>
+            <p class="text text-indented global" name = "global">
+            </p>
+        </div>
+    </div>
+    <div id="content_bottom" class="row">
+        <div id="footer">
+            <!--figure class="figure">
+                <img src="Images/kavi.png" align="left" class="figure-img img-fluid rounded" alt="Cinque Terre" width="50" height="50"></figure><br>
+                <figcaption class="figure-caption text-center">Dr. Kavi Mahesh.</figcaption>
+            </figure>
+            <<figure class="figure">
+                <img src="Images/channa.png" align="left" class="figure-img img-fluid rounded" alt="Cinque Terre" width="50" height="50">
+                <figcaption class="figure-caption">Mr. Channa Bankapur.</figcaption>
+            </figure>
+            <figure class="figure">
+                <img src="Images/mouli.png" align="right" class="figure-img img-fluid rounded" alt="Cinque Terre" width="50" height="50">
+                <figcaption class="figure-caption">Chandramouli Shama Sastry.</figcaption>
+            </figure>
+            <figure class="figure">
+                <img src="Images/darsh.png" align="right" class="figure-img img-fluid rounded" alt="Cinque Terre" width="50" height="50">
+                <figcaption class="figure-caption">Darshan Siddesh Jagaluru.</figcaption>
+            </figure>
+            <figure class="figure">
+                <img src="Images/deb.png"  align="right" class="figure-img img-fluid rounded" alt="Cinque Terre" width="50" height="50">
+                <figcaption class="figure-caption">Debarati Das.</figcaption>
+            </figure>-->
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

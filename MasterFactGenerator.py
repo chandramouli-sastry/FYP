@@ -1,4 +1,5 @@
 import json
+import os
 
 from FactGen.NumericRatioFact import NumericRatioFact
 from FactGen.SimpleStatisticFact import SimpleStatisticFact
@@ -6,7 +7,7 @@ from Resources import discrete_fields, new_fields
 from FactGen.SemanticStatistic_binary import SemanticStatisticFact
 print("Loading Partitions...")
 partitions = json.load(open("Resources/partitions.json"))
-DEBUG = True
+DEBUG = False
 
 def gen_simple():
     fields = discrete_fields + new_fields
@@ -14,11 +15,13 @@ def gen_simple():
     thresh = 1
     for field in fields:
         path = "JSONS/Simple/Fact_{}.json".format(field)
-        print("==========================================================================================")
-        s = SimpleStatisticFact(field=field,fileName=path,debug=DEBUG)
-        s.partitions = partitions
-        s.fuzzy_intersection()
-        print("==========================================================================================")
+        print(field)
+        if not (os.path.isfile(path)):
+            print("==========================================================================================")
+            s = SimpleStatisticFact(field=field,fileName=path,debug=DEBUG)
+            s.partitions = partitions
+            s.fuzzy_intersection()
+            print("==========================================================================================")
         count += 1
         perc = count/len(fields)*100
         if perc>thresh:
@@ -31,11 +34,13 @@ def gen_semantic():
     thresh = 1
     for field in fields:
         path = "JSONS/Semantic/Fact_{}.json".format(field)
-        print("==========================================================================================")
-        s = SemanticStatisticFact(field=field, fileName=path, debug=DEBUG)
-        s.partitions = partitions
-        s.fuzzy_intersection()
-        print("==========================================================================================")
+        print(field)
+        if not(os.path.isfile(path)):
+            print("==========================================================================================")
+            s = SemanticStatisticFact(field=field, fileName=path, debug=DEBUG)
+            s.partitions = partitions
+            s.fuzzy_intersection()
+            print("==========================================================================================")
         count += 1
         perc = count / len(fields) * 100
         if perc > thresh:
@@ -47,12 +52,14 @@ def gen_ratio():
     count = 0
     thresh = 1
     for score,field_1,field_2 in field_pairs:
-        path = "JSONS/Ratio/Fact_{}_{}.json".format(field_1,field_2)
-        print("==========================================================================================")
-        s = NumericRatioFact(fields=[field_1,field_2], fileName=path, debug=DEBUG)
-        s.partitions = partitions
-        s.fuzzy_intersection()
-        print("==========================================================================================")
+        path = "JSONS/Ratio/Fact@{}@{}.json".format(field_1,field_2)
+        print(field_1,field_2)
+        if not (os.path.isfile(path)):
+            print("==========================================================================================")
+            s = NumericRatioFact(fields=[field_1,field_2], fileName=path, debug=DEBUG)
+            s.partitions = partitions
+            s.fuzzy_intersection()
+            print("==========================================================================================")
         count += 1
         perc = count / len(field_pairs) * 100
         if perc > thresh:
@@ -60,5 +67,5 @@ def gen_ratio():
             thresh += 1
 
 #gen_simple()
-#gen_semantic()
-gen_ratio()
+gen_semantic()
+#gen_ratio()

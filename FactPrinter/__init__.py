@@ -1,6 +1,6 @@
 import math
 import random
-
+printer_mapping = eval(open("../FactPrinter/printer_mapping").read())
 num_villages = 622725
 INF = 9999
 def perplexity(l):
@@ -19,6 +19,8 @@ def identify_dominance(list_numbers):
     :return: {"similarity" : which numbers are dominant and the percentages to use, "contrast" : dominant vs others}
     """
     l = sorted(list_numbers)
+    if l==[]:
+        return []
     list_lists = []
     temp_list = []
     perc = 0.05
@@ -31,18 +33,10 @@ def identify_dominance(list_numbers):
     list_lists.append((temp_list[0], temp_list[-1], sum(temp_list) / len(temp_list)))
     return (list_lists)
 
-def get_fields_to_print(field_list):
-    max_fields_to_show = 5
-    min_count = 5
-    count = len(field_list)
-    if (count - max_fields_to_show) > min_count:
-        to_sample = max_fields_to_show
-    elif  count<max_fields_to_show:
-        to_sample = count
-    else:
-        to_sample = count - min_count
-    #return (", ".join(random.sample(field_list,to_sample)),count-to_sample)
-    return (", ".join(field_list[:to_sample]),count-to_sample)
+
+def print_binarize(param):
+    return param.replace("Number of","").replace("Distance to","").replace("Total Strength","").replace("Nearest","Nearby").strip()
+
 
 def global_local_analysis(field_name, global_local_dict):
     global_local_dict = {i: global_local_dict[i] for i in global_local_dict if
@@ -52,6 +46,28 @@ def global_local_analysis(field_name, global_local_dict):
         return "in_place","having {} equal to {}".format(field_name,partition_value)
     else:
         pass
+def correct(x):
+    if x.endswith("_C"):
+        while x.endswith("_C"):
+            x = x[:-2]
+    return x
+
+def get_fields_to_print(field_list,binarize=False):
+    max_fields_to_show = 5
+    min_count = 5
+    if not(binarize):
+        field_list = list(set([printer_mapping.get(correct(i),i) for i in field_list]))
+    else:
+        field_list = list(set([print_binarize(printer_mapping.get(correct(i),correct(i))) for i in field_list]))
+    count = len(field_list)
+    if (count - max_fields_to_show) > min_count:
+        to_sample = max_fields_to_show
+    elif  count<=max_fields_to_show:
+        to_sample = count
+    else:
+        to_sample = count - min_count
+    #return (", ".join(random.sample(field_list,to_sample)),count-to_sample)
+    return (", ".join(field_list[:to_sample]),count-to_sample)
 
 
 identify_dominance([30,40,30])

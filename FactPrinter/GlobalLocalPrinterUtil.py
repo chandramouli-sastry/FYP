@@ -39,6 +39,7 @@ class GlobalLocalPrinter:
             if max(global_perc_fields)<5:
                 return False
 
+        content = ""
         if len(global_perc_fields) >= 3:
             highest = max(global_perc_fields)
             lowest = min(global_perc_fields)
@@ -50,7 +51,7 @@ class GlobalLocalPrinter:
             h_fields, h_count = get_fields_to_print(global_perc_fields[highest])
             m_fields, m_count = get_fields_to_print([i for i in global_partitioned_field_values if i not in s])
             l_fields, l_count = get_fields_to_print(global_perc_fields[lowest])
-            content = " a whooping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print, self.fact_json["partition_field"], h_fields)
+            content = " a whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print, self.fact_json["partition_field"], h_fields)
             content += " while approximately {}% of villages with {} equal to {} show this trend".format(medium_perc_to_print, self.fact_json["partition_field"], m_fields)
             if lowest != 0:
                 content += " and only {}% of villages with {} equal to {} show this trend".format(lowest_perc_to_print, self.fact_json["partition_field"], l_fields)
@@ -62,7 +63,7 @@ class GlobalLocalPrinter:
             l_fields, l_count = get_fields_to_print(global_perc_fields[lowest])
             highest_perc_to_print = highest * len(global_perc_fields[highest])
             lowest_perc_to_print = lowest * len(global_perc_fields[lowest])
-            content = " a whooping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print,
+            content = " a whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   h_fields)
@@ -90,8 +91,7 @@ class GlobalLocalPrinter:
         # prefix = self.prefix_gen(number) if number != 1 else "{}, a village in {} is one of its kind with ".format(
         #     vil_name, state_name)
         # content = ""
-
-
+        content = ""
         if len(local_perc_fields) >= 3:
             highest = max(local_perc_fields)
             lowest = min(local_perc_fields)
@@ -100,7 +100,7 @@ class GlobalLocalPrinter:
             h_fields, h_count = get_fields_to_print(local_perc_fields[highest])
             m_fields, m_count = get_fields_to_print([i for i in local_partitioned_field_values if i not in s])
             l_fields, l_count = get_fields_to_print(local_perc_fields[lowest])
-            content = " a whooping {}% of villages showing this trend have {} equal to {} ,".format(highest,
+            content = " a whopping {}% of villages showing this trend have {} equal to {} ,".format(highest,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   h_fields)
@@ -119,7 +119,7 @@ class GlobalLocalPrinter:
             lowest = min(local_perc_fields)
             h_fields, h_count = get_fields_to_print(local_perc_fields[highest])
             l_fields, l_count = get_fields_to_print(local_perc_fields[lowest])
-            content = " a whooping {}% of villages showing this trend have {} equal to {},".format(highest,
+            content = " a whopping {}% of villages showing this trend have {} equal to {},".format(highest,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   h_fields)
