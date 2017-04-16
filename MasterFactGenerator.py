@@ -60,6 +60,12 @@ def gen_ratio():
             s.partitions = partitions
             s.fuzzy_intersection()
             print("==========================================================================================")
+        path = "JSONS/Ratio/Fact@{}@{}.json".format(field_1,field_2)
+        print("==========================================================================================")
+        s = NumericRatioFact(fields=[field_1,field_2], fileName=path, debug=DEBUG)
+        s.partitions = partitions
+        s.fuzzy_intersection()
+        print("==========================================================================================")
         count += 1
         perc = count / len(field_pairs) * 100
         if perc > thresh:
