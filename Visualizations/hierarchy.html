@@ -19,11 +19,32 @@
         table {
             width:800px;
         }
+        h1{
+            text-align: center;
+        }
+
+        #page {
+            margin-left: 200px;
+        }
+        #maincontent {
+            float: right;
+            width: 100%;
+            background-color: #F0F0F0;
+        }
+        #menuleftcontent{
+            float: left;
+            width: 200px;
+            margin-left: -200px;
+            background-color: #CCCCCC;
+        }
+        #clearingdiv {
+            clear: both;
+        }
     </style>
 </head>
 
 <body>
-
+<!--
 <h1>Hierarchical Layout</h1>
 The hierarchical layout can now be controlled without the use of physics. This is much quicker. The options for this are: <br /><br />
 
@@ -55,8 +76,8 @@ The hierarchical layout can now be controlled without the use of physics. This i
         <td>When true, the parents nodes will be centered again after the the layout algorithm has been finished.</td>
     </tr>
 </table>
-<br /><br />
-Play with the settings below the network and see how the layout changes!
+-->
+<h1>Ontology Visualization</h1>
 
 <div id="network"></div>
 <script src="graph.js"></script>
@@ -74,7 +95,7 @@ Play with the settings below the network and see how the layout changes!
                 sortMethod: "directed"
             }
         },
-        interaction: {dragNodes :false},
+        interaction: {dragNodes :true},
         physics: {
             enabled: false
         },

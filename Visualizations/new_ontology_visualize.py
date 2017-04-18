@@ -42,14 +42,14 @@ def generate_json(relationship_dict,index_map_dict):
         parent=rel_no
         count=0
         required_nodes.add(rel_no)
-        for child in relationship_dict[rel_no]:
-            temp_dict=dict()
-            temp_dict["from"] = rel_no
-            temp_dict["to"] = child
-            required_nodes.add(child)
-            #temp_dict["id"]="e"+str(count)
-            count+=1
-            edges.append(temp_dict)
+        if relationship_dict[rel_no]:
+            for child in relationship_dict[rel_no]:
+                temp_dict=dict()
+                temp_dict["from"] = rel_no
+                temp_dict["to"] = child
+                required_nodes.add(child)
+                count+=1
+                edges.append(temp_dict)
 
     nodes = []
     for index in required_nodes:
@@ -61,19 +61,46 @@ def generate_json(relationship_dict,index_map_dict):
         nodes.append(temp_dict)
     return nodes,edges
 
+def map_parents_to_children(parent,children_set,index_map_label_dict,relationship_dict):
+    parent_index = index_map_label_dict[parent]
+    relationship_dict[parent_index] = []
+    if children_set:
+        #only if this set isnt empty
+        for child in children_set:
+            child_index=index_map_label_dict[child]
+            relationship_dict[parent_index].append(child_index)
+    return relationship_dict
 
-def dfs(start,root_count):
+
+def retrieve_relationships(start,index_map_label_dict,relationship_dict):
     visited, stack = set(), [start]
     while stack:
         vertex = stack.pop()
         if vertex not in visited:
             visited.add(vertex)
             children= set(map(lambda x:correct(x[0]),pickle_object.get_children(correct(vertex))))
-            print("For parent ",vertex," Children : ",children)
-            print ()
+            #update relationships between parent and its children
+            relationship_dict=map_parents_to_children(vertex,children,index_map_label_dict,relationship_dict)
+            print("Mapping parent ", vertex, " to Children : ", children)
             # new nodes are added to the start of stack
             stack = list(children - visited) + stack
-    return visited
+    return relationship_dict
+
+def retrieve_connections(start,root_count,used_set,index_map_label_dict):
+    visited, stack = set(), [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            root_count+=1
+            #Update the dictionary which maps nodes to their indexes
+            index_map_label_dict[vertex] = root_count
+            print("Vertex --> ",vertex,"--",root_count)
+            used_set.add(root_count)
+            visited.add(vertex)
+            children= set(map(lambda x:correct(x[0]),pickle_object.get_children(correct(vertex))))
+            # new nodes are added to the start of stack
+            stack = list(children - visited) + stack
+    return root_count
 
 #----------------------------------------------------
 def main_func():
@@ -99,70 +126,39 @@ def main_func():
 
     # ***************** connection between main root and roots ************************************
 
-    main_root=-1
+    used_set = set()
+
     relationship_dict=dict() # tells parent index : [child index1, child index 2...]
-    relationship_dict[main_root]=[]
-    
+
     index_map_label_dict=dict() # maps the content : index
-    index_map_label_dict['Root']=main_root
-    
-    root_count=0
-    used_set = set() # indicates indices used
-    used_set.add(main_root)
-    # the relationships formed here dont matter - we wont plot them (redundant code)
+
     for node in hasChild:
         if not(hasParent[node]) and hasChild[node]:
             roots.append(node)
-            index_map_label_dict[node]=root_count
-            used_set.add(root_count)
-            relationship_dict[main_root].append(root_count)
-            root_count+=1
-
-    print("Relationships formed till now -->(Not ncessary) ")
-    print(relationship_dict)
-
 
     # ***************** Sub Tree Logic ************************************
     graph_json = {}
     root_count=0
+    graph_json={}
     for every_root in roots:
         print("*******************************")
         print ("ROOT --",every_root)
         relationship_dict = {}
         print ("*******************************")
-        print(dfs(every_root,root_count))
-
-
-    """
-    #here we shouldnt use the same index again
-    graph_json = {}
-    for root in roots:
-        relationship_dict = {}
-        root_index=index_map_label_dict[root]
-        children=pickle_object.get_children(root)
-        relationship_dict[root_index]=[]
-        print ("For Root ",root,"Children are -- ",children)
-        print ("************",root_index)
-    
-        for child in children:
-            #get a random index here for the child item
-            #root_count=return_randomindex(used_set,roots_values)
-            root_count+=1
-            print(child,root_count)
-            #add this index to used_set
-            used_set.add(root_count)
-            # add Field : index of field to the dictionary
-            index_map_label_dict[get_field_value(child)] = root_count
-            #To the parent add the child
-            relationship_dict[root_index].append(root_count)
-            print (relationship_dict[root_index])
-    #print(index_map_label_dict)
+        #establish connections
+        root_count=retrieve_connections(every_root,root_count,used_set,index_map_label_dict)
+        relationship_dict=retrieve_relationships(every_root,index_map_label_dict,relationship_dict)
+        """
+        print("Relationship dict modified")
+        for key in relationship_dict:
+            print(key, relationship_dict[key])
+        print()
+        """
         real_index_label = {index_map_label_dict[i]: i for i in index_map_label_dict}
-        n,e = generate_json(relationship_dict,real_index_label)
-    
-        graph_json[root] = {"nodes":n,"edges":e}
-    with open("graph.js","w") as f:
-        f.write("graph="+json.dumps(graph_json))
-    """
+        n, e = generate_json(relationship_dict, real_index_label)
+        graph_json[every_root] = {"nodes": n, "edges": e}
+        with open("graph.js", "w") as f:
+            f.write("graph=" + json.dumps(graph_json))
+        print ("Graph.js written!")
 
 main_func()
