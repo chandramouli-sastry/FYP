@@ -18,11 +18,11 @@ class BinarizedSemanticFactPrinter:
         if value == 1:
             return None
         elif value > quartile3:
-            return "A whopping {} number of villages have ".format(value)
+            return "A whopping {} number of villages ".format(value)
         elif value < quartile1:
-            return "Only about {} villages have ".format(value)
+            return "Only about {} villages ".format(value)
         else:
-            return "About {} villages have ".format(value)
+            return "About {} villages ".format(value)
 
     def generateListOfFieldsContent(self,fields,count):
         content = fields
@@ -65,10 +65,19 @@ class BinarizedSemanticFactPrinter:
                     each of aa, bb and count-2 others have an equal share of Health.
             """
             vil_name, state_name = fact["Vil_Nam"], fact["Stat_Nam"]
-            prefix = self.prefix_gen(number) if number != 1 else "{}, a village in {} is one of its kind having ".format(
-                vil_name, state_name)
-            content = "{}".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have"],binarize=True)))
-            content += " and do not have {}.".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have_not"],binarize=True)))
+            if number != 1:
+                prefix = self.prefix_gen(number)
+                content = "have {} ".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have"], binarize=True))) if fact["have"] else ""
+                content += " and " if fact["have"] and fact["have_not"] else " "
+                content += " do not have {}.".format(self.generateListOfFieldsContent(*get_fields_to_print(fact["have_not"], binarize=True))) if fact["have_not"] else ""
+            else:
+                prefix = "{}, a village in {} is one of its kind which  ".format(vil_name, state_name)
+                content = "has {}".format(
+                    self.generateListOfFieldsContent(*get_fields_to_print(fact["have"], binarize=True))) if fact["have"] else ""
+                content += " and " if fact["have"] and fact["have_not"] else " "
+                content += " does not have {}.".format(
+                    self.generateListOfFieldsContent(*get_fields_to_print(fact["have_not"], binarize=True))) if fact["have_not"] else ""
+
             if self.writer.type == "list":
                 global_local_util = GlobalLocalPrinter(fact)
                 self.writer.write([fact["metric"],
