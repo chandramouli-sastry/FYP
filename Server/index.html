@@ -8,7 +8,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="Images/graph.js"></script>
+    <script type="text/javascript" src="Images/vis.min.js"></script>
+    <link href="Images/vis-network.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="Images/bootstrap-vertical-menu.css">
     <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script-->
+    <!-- Bootstrap Vertical Nav -->
+    <script src="Images/bootstrap.min.js"></script>
+    <script src="Images/graph.js"></script>
+
 </head>
 <style>
     html, body, #container {
@@ -57,6 +65,42 @@
     }
 </style>
 <script>
+
+    function displayGraph(link){
+        console.log(link.innerHTML);
+        var root= link.innerHTML;
+        console.log(root);
+        
+        var data = graph[root];
+
+        // create a network
+        
+        var container = document.getElementById('network');
+        
+        var options = {
+          
+            layout: {
+                hierarchical: {
+                    direction: "UD",
+                    sortMethod: "directed"
+                }
+            },
+            nodes:{
+                color:{
+                        border: '#e92aa0',
+                        background: '#ffb2e5',
+                        }
+            },
+            interaction: {dragNodes :true},
+            physics: {
+                enabled: false
+            }
+        };
+        
+        var network = new vis.Network(container, data);
+        network.setOptions(options);
+    }
+
     function getFactList(optionName, arg,callback) {
         if (optionName == "simple")
             $.get("simple_fact",{"field":arg},callback);
@@ -157,6 +201,10 @@
                 factListElement.style.height = (0.645*document.getElementById('content_top').offsetHeight)+"px";
             });
         }
+        let deb_element = document.getElementById("debarati");
+        deb_element.style.height = (0.6*document.getElementById('content_top').offsetHeight)+"px";
+        let factListElement = document.getElementById("network");
+        factListElement.style.height = (0.645*document.getElementById('content_top').offsetHeight)+"px";
     }
 </script>
 <body onload="init()">
@@ -166,15 +214,89 @@
 
     <div class="row" id="content_top" style="max-height:90%;min-height:90%;">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Data and Ontology</a></li>
+            <li class="active"><a data-toggle="tab" href="#home">Ontology Visualization</a></li>
             <li><a data-toggle="tab" href="#simple">Simple Statistic</a></li>
             <li><a data-toggle="tab" href="#semantic">Semantic Statistic</a></li>
             <li><a data-toggle="tab" href="#ratio">Compositional Statistic</a></li>
         </ul>
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
-                <h3>HOME</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="container">
+                    <div class="col-md-3 col-lg-2">
+                        <br>
+
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <center><h3>Fields</h3></center>
+                            </div>
+                            <div class="panel panel-body" >
+                                <div class="list-group" name="list" id="debarati">
+                                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" value = "Sanity" id="san" onclick="displayGraph(this)">Sanity</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Education" id="san" onclick="displayGraph(this)">Education</a>
+                                            
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Tot_Pop_of_Vil" id="san" onclick="displayGraph(this)">Tot_Pop_of_Vil</a>
+                                            
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Birth_Death_Office" id="san" onclick="displayGraph(this)">Birth_Death_Office</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Banking_Facilities" id="san" onclick="displayGraph(this)">Banking_Facilities</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Entertainment" id="san" onclick="displayGraph(this)">Entertainment</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Information_Facilities" id="san" onclick="displayGraph(this)">Information_Facilities</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Transportation_Facilities" id="san" onclick="displayGraph(this)">Transportation_Facilities</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Communication_Facilities" id="san" onclick="displayGraph(this)">Communication_Facilities</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Assembly_Polling_Station" id="san" onclick="displayGraph(this)">Assembly_Polling_Station</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Water_Facility" id="san" onclick="displayGraph(this)">Water_Facility</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Health" id="san" onclick="displayGraph(this)">Health</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Market_Facilities" id="san" onclick="displayGraph(this)">Market_Facilities</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class ="nav-link" href="#" value = "Power_Supply" id="san" onclick="displayGraph(this)">Power_Supply</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-9 col-lg-10">
+                        <br>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <center><h3>Ontology</h3></center>
+                            </div>
+                            <div class="panel panel-body" id="network">
+                                <div class="list-group" name="list">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div id="simple" class="tab-pane fade" name="option">
                 <div class="container">

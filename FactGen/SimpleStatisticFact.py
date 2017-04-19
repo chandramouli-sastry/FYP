@@ -14,7 +14,8 @@ import numpy as np
 from DataServices.DBController import CensusDB
 from Metrics import Entropy
 from Metrics import Grubbs
-from Resources import numeric_fields, convert, continuous_fields, discrete_fields, ontology
+from Resources import numeric_fields, continuous_fields, discrete_fields, ontology
+from FactGen.NumericRatioFact import convert
 from Metrics import QuartileDeviation
 import copy
 
@@ -72,7 +73,8 @@ class SimpleStatisticFact:
         self.generate_list()
         print("Computing Metric..")
         self.internal = False
-        if self.field in numeric_fields:
+        if self.field in continuous_fields:
+            self.list = list(map(convert, self.list))
             self.metric = (QuartileDeviation.compute(self.list))
         elif ontology.get_children(self.field):
             binarize = lambda x: (x != 0) * 1
@@ -117,8 +119,8 @@ class SimpleStatisticFact:
     def is_similar(self, tuple1, tuple2):
         metric1, atom1, obj1 = tuple1
         metric2, atom2, obj2 = tuple2
-        if self.field in numeric_fields:
-            if 0.9*atom1<=atom2<=1.1*atom1:
+        if self.field in continuous_fields:
+            if 0.9*(atom1)<=atom2<=1.1*(atom1):
                 return True
         else:
             return atom1 == atom2

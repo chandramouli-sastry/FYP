@@ -19,9 +19,9 @@ def compute(array):
     Q1_value,Q2_value = compute_Q1_Q2(array)
     result = list()
     for i in array:
-        if i<=Q1_value:
-            result.append((Q1_value+1-i)/Q1_value)
-        elif i>=Q2_value:
+        if i<=Q1_value and Q1_value!=0:
+            result.append((Q1_value+1-i)/Q1_value)#Q1_value cant be zero unless all values are equal..all values are equal and zero...so, ok
+        elif i>=Q2_value and Q2_value!=0:
             result.append((i-Q2_value+1)/Q2_value)
         else:
             result.append(0)

@@ -54,7 +54,7 @@ def convert(x):
         except Exception as e:
             return 0
 
-########### Class ###########
+########### Class ###########..do u think we must have put try except and kept the program running?
 
 class NumericRatioFact:
     def __init__(self,fields,fileName, debug = False, print_ = False):

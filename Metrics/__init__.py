@@ -43,7 +43,7 @@ class Metric:
         self.compute_func = module.compute
 
     def quantify(self,values):
-        set_values = list(zip(set(values),list(range(len(set(values))))))
+        set_values = list(zip(set(values),list(range(1,1+len(set(values))))))#?
         map = {i:v for i,v in set_values}
         new_values = [map[i] for i in values]
         return new_values
