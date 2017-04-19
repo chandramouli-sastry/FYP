@@ -11,6 +11,14 @@ from FactPrinter.Writer import Writer
 
 app = Flask(__name__, static_folder='Images', template_folder=".", static_path= '/Images')
 
+
+def get_metric(fileName):
+    obj = json.load(open(fileName))
+    if len(obj)>0:
+        return max(obj,key=lambda x: x["metric"])["metric"]
+    else:
+        return -100
+
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -21,8 +29,8 @@ def get_semantic():
     list_names = []
     for name in list_jsons:
         if "Fact_" in name:
-            list_names.append(name.split("Fact_")[1].replace(".json",""))
-    return jsonify(list_names)
+            list_names.append((get_metric("../JSONS/Semantic/"+name),name.split("Fact_")[1].replace(".json","")))
+    return jsonify(list(map(lambda x:x[1],sorted(list_names,reverse=True))))
 
 @app.route("/semantic_fact")
 def get_semantic_fact():
@@ -34,14 +42,15 @@ def get_semantic_fact():
     printer.process()
     return jsonify(writer.obj)
 
+
 @app.route("/simple_list")
 def get_simple():
-    list_jsons = os.listdir("../JSONS/Simple")
+    list_jsons = os.listdir("../JSONS/Simple/")
     list_names = []
     for name in list_jsons:
         if "Fact_" in name:
-            list_names.append(name.split("Fact_")[1].replace(".json",""))
-    return jsonify(list_names)
+            list_names.append((get_metric("../JSONS/Simple/"+name),name.split("Fact_")[1].replace(".json","")))
+    return jsonify(list(map(lambda x: x[1], sorted(list_names, reverse=True))))
 
 @app.route("/simple_fact")
 def get_simple_fact():
@@ -59,8 +68,8 @@ def get_ratio():
     list_names = []
     for name in list_jsons:
         if "Fact@" in name:
-            list_names.append(name.split("Fact@")[1].replace(".json",""))
-    return jsonify(list_names)
+            list_names.append((get_metric("../JSONS/Ratio/"+name),name.split("Fact@")[1].replace(".json","")))
+    return jsonify(list(map(lambda x:x[1],sorted(list_names,reverse=True))))
 
 @app.route("/ratio_fact")
 def get_ratio_fact():

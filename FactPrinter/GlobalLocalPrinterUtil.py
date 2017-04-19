@@ -1,4 +1,4 @@
-from . import identify_dominance, get_fields_to_print
+from . import identify_dominance, get_fields_to_print, printer_mapping
 
 
 class GlobalLocalPrinter:
@@ -31,6 +31,30 @@ class GlobalLocalPrinter:
 
         return perc_fields
 
+    def get_main_content(self,field_name,value):
+        if field_name.endswith("_Stat"):
+            p = printer_mapping.get(field_name, field_name)
+            if p.startswith("Number of"):
+                p = p[len("Number of") + 1:].strip()
+            p = p + "Status "
+            x = value
+            x = {'1': 'Available', '2': 'Not Available', '0': 'Not Available'}.get(x, x)
+            content = "{} equal to {}.".format(p, x)
+        elif field_name.startswith("Dist_"):
+            p = printer_mapping.get(field_name, field_name)
+            x = value.lower()
+            x = {'a': "0-5 KM", 'b': '5-10 KM', 'c': 'more than 10 KM'}.get(x, x)
+            content = "{} equal to {}".format(p, x)
+        elif field_name.endswith("Gov_1_Priv_2"):
+            p = printer_mapping.get(field_name, field_name)
+            x = value
+            x = {'1': 'Government Facility', '2': 'Private Facility'}.get(x, x)
+            content = "{} equal to {}".format(p, x)
+        else:
+            p = printer_mapping.get(field_name,field_name)
+            content = "{} equal to {}.".format(p, value)
+        return content
+
     def generateGlobalSuffix(self):
         global_partitioned_field_values, global_perc_list = self.extractPercList("global_perc")
         global_perc_fields = self.partition_perc_list(global_partitioned_field_values,global_perc_list)
@@ -51,7 +75,8 @@ class GlobalLocalPrinter:
             h_fields, h_count = get_fields_to_print(global_perc_fields[highest])
             m_fields, m_count = get_fields_to_print([i for i in global_partitioned_field_values if i not in s])
             l_fields, l_count = get_fields_to_print(global_perc_fields[lowest])
-            content = " a whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print, self.fact_json["partition_field"], h_fields)
+            self.fact_json["partition_field"] = printer_mapping.get(self.fact_json["partition_field"],self.fact_json["partition_field"])
+            content = " A whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print, self.fact_json["partition_field"], h_fields)
             content += " while approximately {}% of villages with {} equal to {} show this trend".format(medium_perc_to_print, self.fact_json["partition_field"], m_fields)
             if lowest != 0:
                 content += " and only {}% of villages with {} equal to {} show this trend".format(lowest_perc_to_print, self.fact_json["partition_field"], l_fields)
@@ -63,7 +88,7 @@ class GlobalLocalPrinter:
             l_fields, l_count = get_fields_to_print(global_perc_fields[lowest])
             highest_perc_to_print = highest * len(global_perc_fields[highest])
             lowest_perc_to_print = lowest * len(global_perc_fields[lowest])
-            content = " a whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print,
+            content = " A whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   h_fields)
@@ -91,6 +116,8 @@ class GlobalLocalPrinter:
         # prefix = self.prefix_gen(number) if number != 1 else "{}, a village in {} is one of its kind with ".format(
         #     vil_name, state_name)
         # content = ""
+        self.fact_json["partition_field"] = printer_mapping.get(self.fact_json["partition_field"],
+                                                                self.fact_json["partition_field"])
         content = ""
         if len(local_perc_fields) >= 3:
             highest = max(local_perc_fields)
@@ -100,7 +127,7 @@ class GlobalLocalPrinter:
             h_fields, h_count = get_fields_to_print(local_perc_fields[highest])
             m_fields, m_count = get_fields_to_print([i for i in local_partitioned_field_values if i not in s])
             l_fields, l_count = get_fields_to_print(local_perc_fields[lowest])
-            content = " a whopping {}% of villages showing this trend have {} equal to {} ,".format(highest,
+            content = " A whopping {}% of villages showing this trend have {} equal to {} ,".format(highest,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   h_fields)
@@ -119,7 +146,7 @@ class GlobalLocalPrinter:
             lowest = min(local_perc_fields)
             h_fields, h_count = get_fields_to_print(local_perc_fields[highest])
             l_fields, l_count = get_fields_to_print(local_perc_fields[lowest])
-            content = " a whopping {}% of villages showing this trend have {} equal to {},".format(highest,
+            content = " A whopping {}% of villages showing this trend have {} equal to {},".format(highest,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   h_fields)
