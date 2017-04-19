@@ -96,7 +96,7 @@ class RatioFactPrinter:
                                                                                                          fact["data"][0][0]])
             if self.writer.type == "list":
                 global_local_util = GlobalLocalPrinter(fact)
-                self.writer.write([
+                self.writer.write([fact["metric"],
                     (prefix + content).replace(fact["data"][1][0],field1).replace(fact["data"][1][0],field2),
                     global_local_util.generateLocalSuffix(),
                     global_local_util.generateGlobalSuffix()

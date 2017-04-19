@@ -118,11 +118,11 @@
         var innerDiv = fact_new.getElementsByTagName("div")[0];
         var global = fact_new.getElementsByClassName("global")[0];
         var local = fact_new.getElementsByClassName("local")[0];
-        fact.innerHTML = fact_list[0];
-        if(fact_list[1]||fact_list[2])
+        fact.innerHTML = fact_list[1];
+        if(fact_list[2]||fact_list[3])
         {
-            local.innerHTML = fact_list[1];
-            global.innerHTML = fact_list[2]==false? "": fact_list[2];
+            local.innerHTML = fact_list[2];
+            global.innerHTML = fact_list[3]==false? "": fact_list[3];
             fact.className = "clickable";
             fact.setAttribute("clicked","false");
             fact.onclick = function()

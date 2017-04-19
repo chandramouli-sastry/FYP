@@ -23,7 +23,11 @@ class SimpleFactPrinter:
 
     def process(self):
         numbers = [fact["perc"] / 100 * num_villages for fact in self.fact_json]
-        self.quartiles = quartiles(numbers)
+        if len(numbers)>1:
+            self.quartiles = quartiles(numbers)
+        else:
+            self.quartiles = numbers[0], numbers[-1]
+
         for fact in self.fact_json:
             if fact["internal"]:
                 self.binarizedProcess(fact)
@@ -34,7 +38,7 @@ class SimpleFactPrinter:
             content = "have {} equal to {}.".format(fact["data"][0][0], fact["data"][0][1])
             if self.writer.type == "list":
                 global_local_util = GlobalLocalPrinter(fact)
-                self.writer.write([
+                self.writer.write([fact["metric"],
                     prefix + content,
                     global_local_util.generateLocalSuffix(),
                     global_local_util.generateGlobalSuffix()
@@ -63,7 +67,7 @@ class SimpleFactPrinter:
                 content = "because it does not have {}.".format(fact["data"][0])
         if self.writer.type == "list":
             global_local_util = GlobalLocalPrinter(fact)
-            self.writer.write([
+            self.writer.write([fact["metric"],
                 prefix+content,
                 global_local_util.generateLocalSuffix(),
                 global_local_util.generateGlobalSuffix()

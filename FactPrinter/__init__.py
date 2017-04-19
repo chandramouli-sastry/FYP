@@ -1,6 +1,9 @@
 import math
 import random
-printer_mapping = eval(open("../FactPrinter/printer_mapping").read())
+try:
+    printer_mapping = eval(open("../FactPrinter/printer_mapping").read())
+except Exception as e:
+    printer_mapping = eval(open("FactPrinter/printer_mapping").read())
 num_villages = 622725
 INF = 9999
 def perplexity(l):
