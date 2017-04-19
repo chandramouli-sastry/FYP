@@ -80,7 +80,7 @@ class BinarizedSemanticFactPrinter:
 
             if self.writer.type == "list":
                 global_local_util = GlobalLocalPrinter(fact)
-                self.writer.write([
+                self.writer.write([fact["metric"],
                     prefix + content,
                     global_local_util.generateLocalSuffix(),
                     global_local_util.generateGlobalSuffix()
