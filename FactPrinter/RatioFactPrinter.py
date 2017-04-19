@@ -23,7 +23,7 @@ class RatioFactPrinter:
             return "In about {} villages, ".format(value)
 
     def rationalizeRatio(self, ratio):
-        _fraction = Fraction.from_float(ratio).limit_denominator(1000)
+        _fraction = Fraction.from_float(ratio).limit_denominator(10)
         return _fraction._numerator,_fraction._denominator
 
     def process(self):

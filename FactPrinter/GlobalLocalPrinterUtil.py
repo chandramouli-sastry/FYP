@@ -44,10 +44,10 @@ class GlobalLocalPrinter:
             highest = max(global_perc_fields)
             lowest = min(global_perc_fields)
             s = set(global_perc_fields[highest]) | set(global_perc_fields[lowest])
-            medium = (sum(global_perc_list)-highest-lowest)/len(global_perc_list)
-            highest_perc_to_print = highest*len(global_perc_fields[highest])
-            lowest_perc_to_print = lowest*len(global_perc_fields[lowest])
-            medium_perc_to_print = 100-highest_perc_to_print-lowest_perc_to_print
+            medium = (sum(global_perc_list)-highest-lowest)/(len(global_perc_list)-2)
+            highest_perc_to_print = highest
+            lowest_perc_to_print = lowest
+            medium_perc_to_print = medium
             h_fields, h_count = get_fields_to_print(global_perc_fields[highest])
             m_fields, m_count = get_fields_to_print([i for i in global_partitioned_field_values if i not in s])
             l_fields, l_count = get_fields_to_print(global_perc_fields[lowest])
@@ -61,8 +61,8 @@ class GlobalLocalPrinter:
             lowest = min(global_perc_fields)
             h_fields, h_count = get_fields_to_print(global_perc_fields[highest])
             l_fields, l_count = get_fields_to_print(global_perc_fields[lowest])
-            highest_perc_to_print = highest * len(global_perc_fields[highest])
-            lowest_perc_to_print = lowest * len(global_perc_fields[lowest])
+            highest_perc_to_print = highest
+            lowest_perc_to_print = lowest
             content = " a whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
@@ -77,7 +77,7 @@ class GlobalLocalPrinter:
             # there is only 1 field
             perc = list(global_perc_fields.keys())[0]
             fields, count = get_fields_to_print(global_perc_fields[perc])
-            perc_to_print = perc * len(global_perc_fields[perc])
+            perc_to_print = perc
             content = " approximately {}% of villages with {} equal to {} show this trend.".format(perc, self.fact_json["partition_field"], fields)
 
         return content
