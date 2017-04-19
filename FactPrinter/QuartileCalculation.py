@@ -170,6 +170,8 @@ def quartiles(dataPoints):
 	Returns:
 		the first and the last quarter in the sorted list, a tuple of float or int
 	"""
+	if len(dataPoints) == 1:
+		return dataPoints[0],dataPoints[0]
 	if not dataPoints:
 		raise StatsError('no data points passed')
 

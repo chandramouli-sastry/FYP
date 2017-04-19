@@ -1,4 +1,3 @@
-from . import identify_dominance, get_fields_to_print
 from . import identify_dominance, get_fields_to_print, printer_mapping
 
 
@@ -87,9 +86,15 @@ class GlobalLocalPrinter:
             lowest = min(global_perc_fields)
             h_fields, h_count = get_fields_to_print(global_perc_fields[highest])
             l_fields, l_count = get_fields_to_print(global_perc_fields[lowest])
+<<<<<<< HEAD
+            highest_perc_to_print = highest * len(global_perc_fields[highest])
+            lowest_perc_to_print = lowest * len(global_perc_fields[lowest])
+            content = " A whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print,
+=======
             highest_perc_to_print = highest
             lowest_perc_to_print = lowest
-            content = "A whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print,
+            content = " a whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print,
+>>>>>>> b575440b521e95f638c75e5b9d11b716e12554f5
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   h_fields)
@@ -124,7 +129,7 @@ class GlobalLocalPrinter:
             highest = max(local_perc_fields)
             lowest = min(local_perc_fields)
             s = set(local_perc_fields[highest]) | set(local_perc_fields[lowest])
-            medium = (sum(local_perc_list) - highest - lowest)# / (len(local_perc_list) - 2)
+            medium = (sum(local_perc_list) - highest - lowest) / (len(local_perc_list) - 2)
             h_fields, h_count = get_fields_to_print(local_perc_fields[highest])
             m_fields, m_count = get_fields_to_print([i for i in local_partitioned_field_values if i not in s])
             l_fields, l_count = get_fields_to_print(local_perc_fields[lowest])

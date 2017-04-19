@@ -52,52 +52,51 @@ class RatioFactPrinter:
             """
             field1, field2 = printer_mapping.get(fact["data"][1][0],fact["data"][1][0]),printer_mapping.get(fact["data"][0][0],fact["data"][0][0])
             vil_name, state_name = fact["Vil_Nam"], fact["Stat_Nam"]
-            prefix = self.prefix_gen(number_of_villages) if number_of_villages != 1 else "{}, a village in {} is one of its kind with ".format(
+            prefix = self.prefix_gen(number_of_villages) if number_of_villages != 1 else "{}, a village in {} is one of its kind  ".format(
                 vil_name, state_name)
             if fact["data"][2] == INF:
-                content = "have {} equal to {} ,".format(fact["data"][1][0], 0)
-                content += "with one of them having {} equal to {} and {} equal to {};".format(fact["data"][1][0],fact["data_low"][fact["data"][1][0]],
+                content = "{} {} equal to {} ,".format("" if number_of_villages!=1 else "having", fact["data"][1][0], 0)
+                fact["data"][1][0], fact["data"][0][0] = fact["data"][0][0], fact["data"][1][0]
+                content += "with one of them having {} equal to {} and {} equal to {}".format(fact["data"][1][0],fact["data_low"][fact["data"][1][0]],
                                                                                                fact["data"][0][0],fact["data_low"][fact["data"][0][0]])
-                content += "while another one of them has {} equal to {} and {} equal to {}.".format(fact["data"][1][0],fact["data_high"][fact["data"][1][0]],
-                                                                                               fact["data"][0][0],fact["data_high"][fact["data"][0][0]])
+                content += "; while another one of them has {} equal to {} and {} equal to {}.".format(fact["data"][1][0],fact["data_high"][fact["data"][1][0]],
+                                                                                               fact["data"][0][0],fact["data_high"][fact["data"][0][0]]) if number_of_villages != 1 else "."
                 
             elif fact["data"][2] == INF**2:
-                content = "have both {} and {} equal to 0 ".format(fact["data"][0][0], fact["data"][1][0])
-            elif fact["perc"]==0:
-                content = "have {} equal to {} ,".format(fact["data"][0][0], 0)
-                content += "with one of them having {} equal to {} and {} equal to {};".format(fact["data"][1][0],
+                content = "{} both {} and {} equal to 0 ".format("" if number_of_villages!=1 else "having",fact["data"][0][0], fact["data"][1][0])
+            elif fact["data"][2]==0:
+                content = "{} {} equal to {} ,".format("" if number_of_villages!=1 else "having",fact["data"][0][0], 0)
+                fact["data"][1][0], fact["data"][0][0] = fact["data"][0][0], fact["data"][1][0]
+                content += "with one of them having {} equal to {} and {} equal to {}".format(fact["data"][1][0],
                                                                                                fact["data_low"][
                                                                                                    fact["data"][1][0]],
                                                                                                fact["data"][0][0],
                                                                                                fact["data_low"][
                                                                                                    fact["data"][0][0]])
-                content += "while another one of them has {} equal to {} and {} equal to {}.".format(fact["data"][1][0],
+                content += "; while another one of them has {} equal to {} and {} equal to {}.".format(fact["data"][1][0],
                                                                                                      fact["data_high"][
                                                                                                          fact["data"][
                                                                                                              1][0]],
                                                                                                      fact["data"][0][0],
                                                                                                      fact["data_high"][
                                                                                                          fact["data"][
-                                                                                                             1][1]])
+                                                                                                             0][0]]) if number_of_villages != 1 else "."
             else:
-                content = "have ratio between {} and {} equal to {}:{} ".format(fact["data"][0][0], fact["data"][1][0], *self.rationalizeRatio(fact["data"][0][1]/fact["data"][1][1]))
-                content += "with one of them having {} equal to {} and {} equal to {};".format(fact["data"][1][0],
-                                                                                               fact["data_low"][
-                                                                                                   fact["data"][1][0]],
+                high = list(map(float,(fact["data_high"][fact["data"][0][0]],fact["data_high"][fact["data"][1][0]])))
+                low = list(map(float,(fact["data_low"][fact["data"][0][0]],fact["data_low"][fact["data"][1][0]])))
+                ratio = round((((high[0]/high[1]) + (low[0]/low[1]))/2),2)
+
+                content = "{} ratio between {} and {} equal to {} ".format("" if number_of_villages!=1 else "having", fact["data"][0][0], fact["data"][1][0], ratio)
+                fact["data"][1][0], fact["data"][0][0] = fact["data"][0][0], fact["data"][1][0]
+                content += "with one of them having {} equal to {} and {} equal to {}".format(fact["data"][1][0],
+                                                                                               fact["data_low"][fact["data"][1][0]],
                                                                                                fact["data"][0][0],
-                                                                                               fact["data_low"][
-                                                                                                   fact["data"][0][0]])
-                content += "while another one of them has {} equal to {} and {} equal to {}.".format(fact["data"][1][0],
-                                                                                                     fact["data_high"][
-                                                                                                         fact["data"][
-                                                                                                             1][0]],
-                                                                                                     fact["data"][0][0],
-                                                                                                     fact["data_high"][
-                                                                                                         fact["data"][0][0]])
+                                                                                               fact["data_low"][fact["data"][0][0]])
+                content += "; while another one of them has {} equal to {} and {} equal to {}.".format(fact["data"][1][0],fact["data_high"][fact["data"][1][0]],fact["data"][0][0],fact["data_high"][fact["data"][0][0]]) if number_of_villages != 1 else "."
             if self.writer.type == "list":
                 global_local_util = GlobalLocalPrinter(fact)
                 self.writer.write([fact["metric"],
-                    (prefix + content).replace(fact["data"][1][0],field1).replace(fact["data"][1][0],field2),
+                    (prefix + content).replace(fact["data"][1][0],field2).replace(fact["data"][0][0],field1),
                     global_local_util.generateLocalSuffix(),
                     global_local_util.generateGlobalSuffix()
                 ])

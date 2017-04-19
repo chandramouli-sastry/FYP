@@ -75,32 +75,33 @@ writer_simple = Writer(type="list")
 writer_semantic = Writer(type="list")
 writer_ratio = Writer(type="list")
 gen_simple(writer_simple)
-gen_semantic(writer_semantic)
-gen_ratio(writer_ratio)
+# gen_semantic(writer_semantic)
+# gen_ratio(writer_ratio)
+
 # gen_simple(writer)
 # gen_semantic(writer)
 # gen_ratio(writer)
 with open("facts_simple.json","w") as f:
     json.dump(writer_simple.obj,f)
 
-with open("facts_semantic.json","w") as f:
-    json.dump(writer_semantic.obj,f)
+# with open("facts_semantic.json","w") as f:
+#     json.dump(writer_semantic.obj,f)
+#
+# with open("facts_ratio.json","w") as f:
+#     json.dump(writer_ratio.obj,f)
+#
+# with open("facts_all.json","w") as f:
+#     json.dump(writer_simple.obj+writer_semantic.obj+writer_ratio.obj,f)
+#
+# l=sorted(writer.obj,reverse=True)
+# print(len(writer.obj),"Facts Generated")
 
-with open("facts_ratio.json","w") as f:
-    json.dump(writer_ratio.obj,f)
-
-with open("facts_all.json","w") as f:
-    json.dump(writer_simple.obj+writer_semantic.obj+writer_ratio.obj,f)
-
-l=sorted(writer.obj,reverse=True)
-print(len(writer.obj),"Facts Generated")
-
-for start in range(0,300,100):
-    print("====================")
-    for fact in l[start:start+100]:
-        print(fact[1])
-        print("\t",fact[2])
-        print("\t",fact[3])
+# for start in range(0,300,100):
+#     print("====================")
+#     for fact in l[start:start+100]:
+#         print(fact[1])
+#         print("\t",fact[2])
+#         print("\t",fact[3])
 
 
 def process(file_name):
@@ -110,3 +111,5 @@ def process(file_name):
         print(i[1])
         print("\t",i[2])
         print("\t",i[3])
+
+process("facts_simple.json")

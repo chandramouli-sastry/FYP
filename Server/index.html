@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="Images/graph.js"></script>
-    <script type="text/javascript" src="Images/vis.min.js"></script>
-    <link href="Images/vis-network.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="Images/bootstrap-vertical-menu.css">
-    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script-->
-    <!-- Bootstrap Vertical Nav -->
+    <link rel="stylesheet" type="text/css" href="Images/bootstrap.min.css">
+    <script src="Images/jquery.min.js"></script>
     <script src="Images/bootstrap.min.js"></script>
+    <link href="Images/vis-network.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="Images/vis.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="Images/bootstrap-vertical-menu.css">
+
+    <script src="Images/graph.js"></script>
+
+    <script src="Images/d3.v3.js"></script>
     <script src="Images/graph.js"></script>
 
 </head>
@@ -48,7 +48,7 @@
         overflow-x: scroll;
     }
     .fact{
-        border-left: .55rem solid aqua;
+        border-left: .55rem solid;
     }
     .fact_list
     {
@@ -58,6 +58,14 @@
     p{
         word-wrap: break-word;
 
+    }
+    .local
+    {
+        text-indent: 50px;
+    }
+    .global
+    {
+        text-indent: 50px;
     }
     .clickable:hover{
         cursor: pointer;
@@ -122,11 +130,18 @@
             new_ele.setAttribute("fact_element", factElement);
             new_ele.onclick = function(){
               getFactList(type, i, function(fact_list){
+                var length = fact_list.length;
+                color = d3.scale.linear().domain([1,length])
+                        .interpolate(d3.interpolateHcl)
+                        .range([d3.rgb("#007AFF"), d3.rgb('#FFF500')]);
                   var newFacts = [];
+                  var index = 0;
                   for(let fact of fact_list)
                   {
                       let new_fact = newFact(fact);
+                      new_fact.style.borderLeftColor = color(index);
                       newFacts.push(new_fact);
+                      index += 1;
                   }
                   setFacts(factElement,newFacts);
               })

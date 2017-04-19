@@ -38,7 +38,7 @@ def identify_dominance(list_numbers):
 
 
 def print_binarize(param):
-    return param.replace("Number of","").replace("Distance to","").replace("Total Strength","").replace("Nearest","Nearby").strip()
+    return param.replace("Number of","").replace("Distance to","").replace("Total Strength","").replace("Nearest","Nearby").replace("Distance","").strip()
 
 
 def global_local_analysis(field_name, global_local_dict):
