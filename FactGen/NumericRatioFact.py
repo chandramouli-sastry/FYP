@@ -117,7 +117,7 @@ class NumericRatioFact:
             curr = list_objects[0]
             partitions_perc = []
             if len(list_objects)>20:
-                args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
+                args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions and field not in self.fields]
                 print(("Args Ready.", len(args)))
                 count = 0
                 thresh = 1

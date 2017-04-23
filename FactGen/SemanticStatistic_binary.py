@@ -164,7 +164,7 @@ class SemanticStatisticFact:
             fact_dict = {}
             curr = list_objects[0]
             if len(list_objects)>20:
-                args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions]
+                args = [(field,self.partitions[field],list_objects) for field in discrete_fields if field in self.partitions and field not in self.child_fields]
                 print(("Args Ready.", len(args)))
                 partitions_perc = []
                 count = 0
