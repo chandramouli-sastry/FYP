@@ -1,1 +1,1 @@
-[{"internal": false, "data": [["Nat_Hig_Stat", "2"], "2"], "perc": 87.26323818700068, "Vil_Nam": "Keran", "Stat_Nam": "JAMMU & KASHMIR", "metric": 87.26323818700068, "value_global_local": {"2": {"global_perc": 1.0, "local_perc": 1.0}}, "partition_field": "Nat_Hig_Stat"}]
+[{"internal": false, "data": [["Nat_Hig_Stat", "2"], "2"], "perc": 87.26323818700068, "Vil_Nam": "Keran", "Stat_Nam": "JAMMU & KASHMIR", "metric": 87.26323818700068, "value_global_local": {"null": {"global_perc": 0.8726323818700068, "local_perc": 1.0}}, "partition_field": "Dist_Other"}]

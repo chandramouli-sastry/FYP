@@ -1,1 +1,1 @@
-[{"internal": false, "data": [["ATM_Stat", "2"], "2"], "perc": 90.77008310249307, "Vil_Nam": "Keran", "Stat_Nam": "JAMMU & KASHMIR", "metric": 90.77008310249307, "value_global_local": {"2": {"global_perc": 1.0, "local_perc": 1.0}}, "partition_field": "ATM_Stat"}]
+[{"internal": false, "data": [["ATM_Stat", "2"], "2"], "perc": 90.77008310249307, "Vil_Nam": "Keran", "Stat_Nam": "JAMMU & KASHMIR", "metric": 90.77008310249307, "value_global_local": {"null": {"global_perc": 0.9077008310249307, "local_perc": 1.0}}, "partition_field": "Dist_Other"}]
