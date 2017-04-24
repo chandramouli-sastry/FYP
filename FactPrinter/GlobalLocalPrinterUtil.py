@@ -11,6 +11,12 @@ class GlobalLocalPrinter:
     def generateCountSuffixes(self):
         pass
 
+    def generateListOfFieldsContent(self,fields,count):
+        content = fields
+        if count > 0:
+            content += " and {} others".format(count)
+        return content
+
     def extractPercList(self,type):
         partitioned_field_value_list = list()
         perc_list = list()
@@ -77,10 +83,10 @@ class GlobalLocalPrinter:
             m_fields, m_count = get_fields_to_print([i for i in global_partitioned_field_values if i not in s])
             l_fields, l_count = get_fields_to_print(global_perc_fields[lowest])
             self.fact_json["partition_field"] = printer_mapping.get(self.fact_json["partition_field"],self.fact_json["partition_field"])
-            content = " A whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print, self.fact_json["partition_field"], h_fields)
-            content += " while approximately {}% of villages with {} equal to {} show this trend".format(medium_perc_to_print, self.fact_json["partition_field"], m_fields)
+            content = " A whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print, self.fact_json["partition_field"], self.generateListOfFieldsContent(h_fields,h_count))
+            content += " while approximately {}% of villages with {} equal to {} show this trend".format(medium_perc_to_print, self.fact_json["partition_field"], self.generateListOfFieldsContent(m_fields,m_count))
             if lowest != 0:
-                content += " and only {}% of villages with {} equal to {} show this trend".format(lowest_perc_to_print, self.fact_json["partition_field"], l_fields)
+                content += " and only {}% of villages with {} equal to {} show this trend".format(lowest_perc_to_print, self.fact_json["partition_field"], self.generateListOfFieldsContent(l_fields,l_count))
             content += "."
         elif len(global_perc_fields) == 2:
             highest = max(global_perc_fields)
@@ -92,12 +98,14 @@ class GlobalLocalPrinter:
             content = "A whopping {}% of villages having {} equal to {} show this trend,".format(highest_perc_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
-                                                                                                  h_fields)
+                                                                                                 self.generateListOfFieldsContent(
+                                                                                                     h_fields, h_count))
             if lowest != 0:
                 content += " and only {}% of villages with {} equal to {} show this trend".format(lowest_perc_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
-                                                                                                  l_fields)
+                                                                                                  self.generateListOfFieldsContent(
+                                                                                                      l_fields, l_count))
             content += "."
         elif len(global_perc_fields) == 1:
             # there is only 1 field
@@ -133,7 +141,9 @@ class GlobalLocalPrinter:
             content = " A whopping {}% of villages showing this trend have {} equal to {} ,".format(highest_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
-                                                                                                  h_fields)
+                                                                                                    self.generateListOfFieldsContent(
+                                                                                                        h_fields,
+                                                                                                        h_count))
             content += " while approximately {}% of villages showing this trend have {} equal to {}".format(medium,
                                                                                                          self.fact_json[
                                                                                                              "partition_field"],
@@ -142,7 +152,9 @@ class GlobalLocalPrinter:
                 content += " and only {}% of villages showing this trend have {} equal to {}".format(lowest_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
-                                                                                                  l_fields)
+                                                                                                     self.generateListOfFieldsContent(
+                                                                                                         l_fields,
+                                                                                                         l_count))
             content += "."
         elif len(local_perc_fields) == 2:
             highest = max(local_perc_fields)
@@ -154,12 +166,14 @@ class GlobalLocalPrinter:
             content = " A whopping {}% of villages showing this trend have {} equal to {},".format(highest_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
-                                                                                                  h_fields)
+                                                                                                   self.generateListOfFieldsContent(h_fields,h_count))
             if lowest != 0:
                 content += " and only {}% of villages showing this trend have {} equal to {} ".format(lowest_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
-                                                                                                  l_fields)
+                                                                                                      self.generateListOfFieldsContent(
+                                                                                                          l_fields,
+                                                                                                          l_count))
             content += "."
         elif len(local_perc_fields) == 1:
             # there is only 1 field
@@ -167,7 +181,7 @@ class GlobalLocalPrinter:
             fields, count = get_fields_to_print(local_perc_fields[perc])
             avg = sum(local_perc_list) / len(local_perc_list)
             content = " approximately {}% of villages showing this trend have {} equal to {} .".format(avg, self.fact_json[
-                "partition_field"], fields)
+                "partition_field"], self.generateListOfFieldsContent(fields,count))
 
         return content
 
