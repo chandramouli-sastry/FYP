@@ -13,7 +13,9 @@ def gen_simple():
     fields = discrete_fields + new_fields
     count = 0
     thresh = 1
-    for field in fields:
+    if "Dist_Other" in fields:
+        fields.remove("Dist_Other")
+    for field in fields[:len(fields)//2]:
         path = "JSONS/Simple/Fact_{}.json".format(field)
         print(field)
         if not (os.path.isfile(path)):
@@ -72,6 +74,6 @@ def gen_ratio():
             print("{}% completed".format(perc))
             thresh += 1
 
-#gen_simple()
-gen_semantic()
+gen_simple()
+#gen_semantic()
 #gen_ratio()
