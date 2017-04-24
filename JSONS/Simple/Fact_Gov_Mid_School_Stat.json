@@ -1,1 +1,1 @@
-[{"internal": false, "data": [["Gov_Mid_School_Stat", "2"], "2"], "perc": 53.34634068007548, "Vil_Nam": "Bore", "Stat_Nam": "JAMMU & KASHMIR", "metric": 53.34634068007548, "value_global_local": {"2": {"global_perc": 1.0, "local_perc": 1.0}}, "partition_field": "Gov_Mid_School_Stat"}]
+[{"internal": false, "data": [["Gov_Mid_School_Stat", "2"], "2"], "perc": 53.34634068007548, "Vil_Nam": "Bore", "Stat_Nam": "JAMMU & KASHMIR", "metric": 53.34634068007548, "value_global_local": {"null": {"global_perc": 0.5334634068007548, "local_perc": 1.0}}, "partition_field": "Dist_Other"}]

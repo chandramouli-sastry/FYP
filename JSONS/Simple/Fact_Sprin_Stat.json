@@ -1,1 +1,1 @@
-[{"internal": false, "data": [["Sprin_Stat", "2"], "2"], "perc": 85.9135252318439, "Vil_Nam": "Bore", "Stat_Nam": "JAMMU & KASHMIR", "metric": 85.9135252318439, "value_global_local": {"2": {"global_perc": 1.0, "local_perc": 1.0}}, "partition_field": "Sprin_Stat"}]
+[{"internal": false, "data": [["Sprin_Stat", "2"], "2"], "perc": 85.9135252318439, "Vil_Nam": "Bore", "Stat_Nam": "JAMMU & KASHMIR", "metric": 85.9135252318439, "value_global_local": {"null": {"global_perc": 0.8591352523184391, "local_perc": 1.0}}, "partition_field": "Dist_Other"}]
