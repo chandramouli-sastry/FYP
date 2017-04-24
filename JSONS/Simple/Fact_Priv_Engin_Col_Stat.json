@@ -1,1 +1,1 @@
-[{"internal": false, "data": [["Priv_Engin_Col_Stat", "2"], "2"], "perc": 92.87197398530651, "Vil_Nam": "Bore", "Stat_Nam": "JAMMU & KASHMIR", "metric": 92.87197398530651, "value_global_local": {"2": {"global_perc": 1.0, "local_perc": 1.0}}, "partition_field": "Priv_Engin_Col_Stat"}]
+[{"internal": false, "data": [["Priv_Engin_Col_Stat", "2"], "2"], "perc": 92.87197398530651, "Vil_Nam": "Bore", "Stat_Nam": "JAMMU & KASHMIR", "metric": 92.87197398530651, "value_global_local": {"null": {"global_perc": 0.9287197398530651, "local_perc": 1.0}}, "partition_field": "Dist_Other"}]
