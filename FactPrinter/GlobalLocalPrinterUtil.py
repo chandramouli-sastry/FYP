@@ -123,12 +123,14 @@ class GlobalLocalPrinter:
         if len(local_perc_fields) >= 3:
             highest = max(local_perc_fields)
             lowest = min(local_perc_fields)
+            highest_to_print = highest * len(local_perc_fields[highest])
+            lowest_to_print = lowest * len(local_perc_fields[lowest])
             s = set(local_perc_fields[highest]) | set(local_perc_fields[lowest])
-            medium = (sum(local_perc_list) - highest - lowest)# / (len(local_perc_list) - 2)
+            medium = (100 - highest_to_print - lowest_to_print)# / (len(local_perc_list) - 2)
             h_fields, h_count = get_fields_to_print(local_perc_fields[highest])
             m_fields, m_count = get_fields_to_print([i for i in local_partitioned_field_values if i not in s])
             l_fields, l_count = get_fields_to_print(local_perc_fields[lowest])
-            content = " A whopping {}% of villages showing this trend have {} equal to {} ,".format(highest,
+            content = " A whopping {}% of villages showing this trend have {} equal to {} ,".format(highest_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   h_fields)
@@ -137,7 +139,7 @@ class GlobalLocalPrinter:
                                                                                                              "partition_field"],
                                                                                                          m_fields)
             if lowest != 0:
-                content += " and only {}% of villages showing this trend have {} equal to {}".format(lowest,
+                content += " and only {}% of villages showing this trend have {} equal to {}".format(lowest_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   l_fields)
@@ -145,14 +147,16 @@ class GlobalLocalPrinter:
         elif len(local_perc_fields) == 2:
             highest = max(local_perc_fields)
             lowest = min(local_perc_fields)
+            highest_to_print = highest * len(local_perc_fields[highest])
+            lowest_to_print = lowest * len(local_perc_fields[lowest])
             h_fields, h_count = get_fields_to_print(local_perc_fields[highest])
             l_fields, l_count = get_fields_to_print(local_perc_fields[lowest])
-            content = " A whopping {}% of villages showing this trend have {} equal to {},".format(highest,
+            content = " A whopping {}% of villages showing this trend have {} equal to {},".format(highest_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   h_fields)
             if lowest != 0:
-                content += " and only {}% of villages showing this trend have {} equal to {} ".format(lowest,
+                content += " and only {}% of villages showing this trend have {} equal to {} ".format(lowest_to_print,
                                                                                                   self.fact_json[
                                                                                                       "partition_field"],
                                                                                                   l_fields)

@@ -31,6 +31,7 @@ class SimpleFactPrinter:
         for fact in self.fact_json:
             if fact["internal"]:
                 self.binarizedProcess(fact)
+                continue
             number_of_villages = round(fact["perc"] / 100 * num_villages)
             vil_name, state_name = fact["Vil_Nam"], fact["Stat_Nam"]
             prefix = self.prefix_gen(number_of_villages) if number_of_villages != 1 else "{}, a village in {} is one of its kind having".format(

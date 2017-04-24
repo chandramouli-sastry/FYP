@@ -48,7 +48,7 @@ def get_simple():
     list_jsons = os.listdir("../JSONS/Simple/")
     list_names = []
     for name in list_jsons:
-        if "Fact_" in name:
+        if "Fact_" in name and name.endswith(".json"):
             list_names.append((get_metric("../JSONS/Simple/"+name),name.split("Fact_")[1].replace(".json","")))
     return jsonify(list(map(lambda x: x[1], sorted(list_names, reverse=True))))
 
